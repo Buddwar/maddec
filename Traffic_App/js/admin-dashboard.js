@@ -142,19 +142,23 @@ let currentSettings = {
     /*Hämta ut organisation som ska visas genom att 
     plocka ut orgnr ifrån URL och sedan göra ett anrop till 
     get_single_org*/
-
-    let response = await fetch('https://bergstrom.pythonanywhere.com/get_single_organisation', {
-      method: 'POST',//Metoden är POST eftersom vi vill skicka data dit
-      headers: {
-          //Datan som skickas behöver vara som json
-          'Content-Type': 'application/json',
-      },
-      credentials: 'same-origin'
-  });
-    let jsonResult = await response.json();
-    //Använd resultatet till något
-    console.log('Organisationen man får ut', jsonResult);
-  }
+    try{
+        let response = await fetch('https://bergstrom.pythonanywhere.com/get_single_organisation', {
+          method: 'POST',//Metoden är POST eftersom vi vill skicka data dit
+          headers: {
+              //Datan som skickas behöver vara som json
+              'Content-Type': 'application/json',
+          },
+          credentials: 'same-origin'
+      });
+        let jsonResult = await response.json();
+        //Använd resultatet till något
+        console.log('Organisationen man får ut', jsonResult);
+      }
+      catch(error){
+        console.log(error);
+      }
+    }
 
   //Anropa funktionen och skicka in den data som behövs(en dict kanske)
   async function update_organisation(data){
