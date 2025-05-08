@@ -156,7 +156,7 @@ let currentSettings = {
       });
         let jsonResult = await response.json();
         //Använd resultatet till något
-        //console.log('Organisationen man får ut', jsonResult['Data']);
+        console.log('Organisationen man får ut', jsonResult['Data']);
         /*if (!jsonResult['Success']){
           window.location.href = `admin-login.html`;
         }*/
