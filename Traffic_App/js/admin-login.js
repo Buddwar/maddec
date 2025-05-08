@@ -33,6 +33,7 @@ async function login(orgnr, passw){
             //Datan som skickas behöver vara som json
             'Content-Type': 'application/json'
         },
+        credentials: 'include',
         //O vi stoppar in vår dictionary beståendes av orgnr och lösenord
         body: JSON.stringify(org_credentials)
     });
