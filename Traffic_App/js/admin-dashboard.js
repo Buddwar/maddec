@@ -200,4 +200,7 @@ let currentSettings = {
   });
     let jsonResult = await response.json();
     console.log(jsonResult);
+    if (jsonResult['Success']){
+      window.location.href = `admin-login.html`;
+    }
   }
