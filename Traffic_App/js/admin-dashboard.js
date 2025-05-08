@@ -157,7 +157,12 @@ let currentSettings = {
       if(response.ok){
         let jsonResult = await response.json();
         //Använd resultatet till något
-        console.log('Organisationen man får ut', jsonResult);
+        if (jsonResult['Data']){
+          console.log('Organisationen man får ut', jsonResult['Data']);
+        }
+        if (jsonResult['Message']){
+          console.log('Organisationen man får ut', jsonResult['Message']);
+        }
         if (!jsonResult['Success']){
           window.location.href = `admin-login.html`;
         }
