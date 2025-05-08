@@ -1,0 +1,94 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dagspressutgivarna AB</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" integrity="sha384-tViUnnbYAV00FLIhhi3v/dWt3Jxw4gZQcNoSCxCIFNJVCx7/D55/wXsrNIRANwdD" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<!--Laddar in alla organisationer som redan finns-->
+<body onload="getExistingOrganisations()">
+
+    <h1>Dagspressutgivarna AB <i class="bi bi-person-circle"></i></h1>
+<div class="outer_container">
+    <form>
+        <div class="form_container border">
+            <div class="inner_container">
+                <h2>Uppgifter</h2>
+                <div>
+                    <label for="orgnr">Organisationsnummer</label><br>
+                    <input type="text" id="orgnr" value="1234567891"><br>
+                </div>
+                <div>
+                    <label for="email">E-postadress</label><br>
+                    <input type="email" id="email" value="h23anber@du.se"><br>
+                </div>
+                <div>
+                    <label for="passw">Lösenord</label><br>
+                    <input type="password" id="passw" value="hunter2"><br>
+                </div>
+                <div>
+                    <label for="orgname">Namn på organisation</label><br>
+                    <input type="text" id="orgname" value="Aftonbladet"><br>
+                </div>
+            </div>
+            <div class="inner_container">
+                <h2>Priser <i class="bi bi-tag"></i></h2>
+                <div>
+                    <label for="weekly">Pris - Veckovis</label><br>
+                    <input type="text" id="weekly" value="30"><br>
+                </div>
+                <div>
+                    <label for="monthly">Pris - Månadsvis</label><br>
+                    <input type="text" id="monthly" value="60"><br>
+                </div>
+                <div>
+                    <label for="yearly">Pris - Årligen</label><br>
+                    <input type="text" id="yearly" value="90"><br>
+                </div>
+            </div>
+            <div class="inner_container">
+                <h2>Textutseende</h2>
+                <div>
+                    <label for="fontstyle">Teckensnitt</label><br>
+                    <select name="fontstyle" id="fontstyle">
+                        <option value="Times New Roman">Times New Roman</option>
+                        <option value="Arial">Arial</option>
+                        <option value="Calibri">Calibri</option>
+                        <option value="Helvetica">Helvetica</option>
+                      </select>
+                </div>
+                <div>
+                    <label for="fontsize">Teckenstorlek</label><br>
+                    <input type="text" id="fontsize" value="12"><br>
+                </div>
+            </div>
+            <div>
+                <h2>Färger</h2>
+                <div>
+                    <label for="primarycolor">Primärfärg</label><br>
+                    <input type="color" id="primarycolor" value="#7FFFD4"><br>
+                </div>
+                <div>
+                    <label for="secondarycolor">Sekundärfärg</label><br>
+                    <input type="color" id="secondarycolor" value="#F0F8FF"><br>
+                </div>
+            </div>
+                <p class="error_message" id="error_message">Errors</p>
+            <div class="button_container">
+                <button type="button" onclick="createOrganisation()">Skapa företag</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="company_container border">
+        <h2>Organisationer <i class="bi bi-building"></i></h2>
+        <ul class="list-group" id="company_list">
+        </ul>
+    </div>
+</div>
+
+    <script src="main.js"></script>
+</body>
+</html>

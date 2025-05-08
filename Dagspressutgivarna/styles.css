@@ -1,0 +1,88 @@
+body{
+    margin: 1rem;
+    padding: 0;
+    background-color: rgb(247, 246, 246);
+    color: rgb(58, 58, 58);
+    font-size: 1.2rem;
+    font-family: "Times New Roman", Times, serif;
+}
+.outer_container{
+    display: grid;
+    grid-template-columns: auto;
+    grid-gap: 1rem;
+    text-align: center;
+}
+.form_container,
+.company_container{
+    display: grid;
+    grid-template-columns: auto;
+    grid-gap: 1rem;
+    text-align: center;
+    background: linear-gradient(45deg,rgb(139, 222, 255) 0%, rgb(163, 244, 253) 50%, rgb(255, 255, 255) 100%);
+    box-shadow: -10px 5px 10px rgba(0,0,0,0.3);
+    border-radius: .3rem;
+    padding: 1rem;
+}
+.inner_container{
+    display: grid;
+    grid-template-columns: auto;
+}
+h1,
+.button_container{
+    text-align: center;
+    margin-block: 2rem;
+}
+.error_message{
+    visibility: hidden;
+    color: red;
+    width: 50%;
+    margin: 0 auto;
+}
+ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+button{
+    border-radius: .4rem;
+    padding: .5rem;
+    background-color: white;
+}
+input,
+select{
+    margin-bottom: 1rem;
+}
+.no_border_button{
+    border-style: none;
+}
+.list_element{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+}
+
+@media(min-width: 1065px){
+    .form_container{
+        grid-template-columns: auto auto;
+    }
+    .outer_container{
+        display: grid;
+        grid-template-columns: auto auto;
+        align-items: start;
+    }
+    input:not([type="color"]),
+    select{
+        width: 100%;
+    }
+}
+
+@media (min-width: 1300px){
+    input:not([type="color"]),
+    select{
+        width: auto;
+    }
+    .form_container,
+    .outer_container{
+        margin: 0 auto;
+        width: 90%;
+    }
+}
