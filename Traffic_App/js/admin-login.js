@@ -10,7 +10,7 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
 
     if (result['Success']){
         // Redirect to admin dashboard after successful login
-        window.location.href = `admin-dashboard.html?orgnr=${encodeURIComponent(username)}`;
+        window.location.href = `admin-dashboard.html`;
     }
     else{
         console.log(result['Message']);
