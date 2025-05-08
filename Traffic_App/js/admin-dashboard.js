@@ -149,7 +149,10 @@ let currentSettings = {
               //Datan som skickas behöver vara som json
               'Content-Type': 'application/json',
           },
-          credentials: 'include'
+          credentials: 'same-origin',
+          body: JSON.stringify({
+            orgnr: sessionStorage.getItem('orgnr')
+          })
       });
         let jsonResult = await response.json();
         //Använd resultatet till något
