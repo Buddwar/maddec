@@ -149,7 +149,7 @@ let currentSettings = {
               //Datan som skickas behöver vara som json
               'Content-Type': 'application/json',
           },
-          credentials: 'same-origin'
+          credentials: 'include'
       });
         let jsonResult = await response.json();
         //Använd resultatet till något
