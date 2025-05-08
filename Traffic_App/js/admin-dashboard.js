@@ -155,12 +155,12 @@ let currentSettings = {
           })
       });
       if(response.ok){
-        let jsonResult = await response.text();
+        let jsonResult = await response.json();
         //Använd resultatet till något
         console.log('Organisationen man får ut', jsonResult);
-        /*if (!jsonResult['Success']){
+        if (!jsonResult['Success']){
           window.location.href = `admin-login.html`;
-        }*/
+        }
       }
     }
 
