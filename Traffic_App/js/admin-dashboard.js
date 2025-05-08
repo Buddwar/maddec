@@ -139,13 +139,14 @@ let currentSettings = {
   
 
   async function load_organisation(){
-    /*Hämta ut organisation som ska visas genom att 
-    plocka ut orgnr ifrån URL och sedan göra ett anrop till 
-    get_single_org*/
+    /*Här vill vi hämta den organisation som ska visas
+    baserat på om företaget har lyckats logga in
+    
+    denna route använder sig av organisationsnumret och det är något som sparades
+    undan när organisationen genomförde en lyckad inloggning*/
         let response = await fetch('https://bergstrom.pythonanywhere.com/get_single_organisation', {
-          method: 'POST',//Metoden är POST eftersom vi vill skicka data dit
+          method: 'POST',
           headers: {
-              //Datan som skickas behöver vara som json
               'Content-Type': 'application/json',
           },//Här skickar med vår sessionscookie från serversidan
           //o det är ju då för att kontrollera VEM det är som är inloggad
