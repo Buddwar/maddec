@@ -154,13 +154,14 @@ let currentSettings = {
             orgnr: sessionStorage.getItem('orgnr')
           })
       });
-        let jsonResult = await response.json();
+      if(response.ok){
+        let jsonResult = await response.text();
         //Använd resultatet till något
-        console.log('Organisationen man får ut', jsonResult['Data']);
-        console.log('Organisationen man får ut', jsonResult['Message']);
+        console.log('Organisationen man får ut', jsonResult);
         /*if (!jsonResult['Success']){
           window.location.href = `admin-login.html`;
         }*/
+      }
     }
 
   //Anropa funktionen och skicka in den data som behövs(en dict kanske)
