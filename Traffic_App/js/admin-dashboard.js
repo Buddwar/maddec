@@ -148,7 +148,8 @@ let currentSettings = {
           headers: {
               //Datan som skickas behöver vara som json
               'Content-Type': 'application/json',
-          },
+          },//Här skickar med vår sessionscookie från serversidan
+          //o det är ju då för att kontrollera VEM det är som är inloggad
           credentials: 'include',
           body: JSON.stringify({
             orgnr: sessionStorage.getItem('orgnr')
@@ -157,6 +158,9 @@ let currentSettings = {
         let jsonResult = await response.json();
         //Använd resultatet till något
         console.log('Organisationen man får ut', jsonResult);
+        if (!jsonResult['Success']){
+          window.location.href = `admin-login.html`;
+        }
       }
       catch(error){
         console.log(error);
