@@ -43,3 +43,5 @@ async function login(orgnr, passw){
     const jsonResult = await response.json();
     return jsonResult;
 }
+
+async

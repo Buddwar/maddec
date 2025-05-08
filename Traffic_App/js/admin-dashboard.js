@@ -188,3 +188,16 @@ let currentSettings = {
     let jsonResult = await response.json();
     console.log(jsonResult);
   }
+
+  async function logout_organisation(){
+
+    let response = await fetch('https://bergstrom.pythonanywhere.com/logout_organisation', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      credentials: 'include'
+  });
+    let jsonResult = await response.json();
+    console.log(jsonResult);
+  }
