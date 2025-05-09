@@ -134,7 +134,7 @@ let currentSettings = {
   window.addEventListener('load', () => {
     updatePreview();
     load_organisation();
-    load_organisation();
+    //load_organisation();
     update_organisation();
   });
   
@@ -175,11 +175,9 @@ let currentSettings = {
   async function update_organisation(data){
     //Exempel data på sådant som kan uppdateras för organisationer
     //OBS organisationsnumret går inte att uppdatera utan det är endast resterande värden
-    orgnr = sessionStorage.getItem('orgnr'); //<---------------------HÄR ÄR ORGNR NULL
-    console.log('Session Storage:', orgnr);
 
     data = {
-      'orgnr': sessionStorage.getItem('orgnr'),
+      orgnr: sessionStorage.getItem('orgnr'),
       'weekly': 90,
       'monthly': 60,
       'yearly': 15000,
@@ -195,7 +193,7 @@ let currentSettings = {
             'Content-Type': 'application/json',
         },
         credentials: 'include',
-        body: JSON.stringify(data)
+        body: JSON.stringify({data})
     });
 
     let jsonResult = await response.json();
