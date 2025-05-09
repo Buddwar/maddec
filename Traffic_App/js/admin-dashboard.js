@@ -134,8 +134,8 @@ let currentSettings = {
   window.addEventListener('load', () => {
     updatePreview();
     load_organisation();
-    //load_organisation();
-    update_organisation();
+    update_organisation();//<----tar emot en dict
+    load_organisation();
   });
   
 
@@ -173,9 +173,7 @@ let currentSettings = {
 
   //Anropa funktionen och skicka in den data som behövs(dict)
   async function update_organisation(data){
-    //Exempel data på sådant som kan uppdateras för organisationer
-    //OBS organisationsnumret går inte att uppdatera utan det är endast resterande värden
-
+    //Det här är den typen av data som kan uppdateras för organisationer
     data = {
       'weekly': 90,
       'monthly': 60,
@@ -202,6 +200,8 @@ let currentSettings = {
   }
   
 
+  /*Utloggning för organisationer, en egen route där vi rensar
+  sessionsvariabeln hos Flask */
   async function logout_organisation(){
 
     let response = await fetch('https://bergstrom.pythonanywhere.com/logout_organisation', {
@@ -213,7 +213,7 @@ let currentSettings = {
   });
     let jsonResult = await response.json();
     console.log(jsonResult);
-    if (jsonResult['Success']){
-      window.location.href = `admin-login.html`;
+    if (jsonResult['Success']){//Kontroll att vi lyckades logga ut
+      window.location.href = `admin-login.html`;//Dirigera om användaren till login-sidan
     }
   }

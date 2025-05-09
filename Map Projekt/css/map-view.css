@@ -1,0 +1,150 @@
+#map {
+    height: 100vh;
+    width: 100%;
+  }
+
+  body {
+    margin: 0;
+  }
+
+  /* Test för stil på popup gällade situationer, detta är fortfarande under test och utveckling */
+
+  /* Här gäller endast severitytext, alltså påverkan, av situationer */
+  /* Stil på popup för mycket stor påverkan */
+  .severity-very-high {
+    background-color: rgb(153, 0, 0); /* Röd bakgrund för påverkan, här ska det va röd för mkt stor och orange för stor påverkan */
+    padding: .8rem;
+    border-radius: 5px;
+    color: #ffffff; /* Vit text för påverkan */
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    font-size: large;
+  }
+
+  /* Stil på popup för stor påverkan */ 
+  .severity-high {
+    background-color: rgb(171, 79, 9); /* Orange bakgrund för påverkan, här ska det va röd för mkt stor och orange för stor påverkan */
+    padding: .8rem;
+    border-radius: 5px;
+    color: #ffffff; /* Vit text för påverkan */
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    font-size: large;
+  }
+
+  .popup-roadname {
+    font-size: medium;
+  }
+
+  /* Här är ett test för grön bakgrund, om condition är normalt, etc.
+     Detta kommer ändras så om det är 2 (Något dåligt) ska gul färg visas, exempelvis */
+  .condition-normal {
+    background-color: rgb(13, 115, 13);
+    padding: .5rem;
+    border-radius: 5px;
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    font-size: large;
+  }
+
+  /* När condition är Något dåligt (2 i ConditionCode) visas gul bakgrund */
+  .condition-medium {
+    background-color: rgb(204, 204, 27);
+    padding: .5rem;
+    border-radius: 5px;
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    font-size: large;
+  }
+
+  /* När condition är Dåligt (3 i ConditionCode) visas orange bakgrund */
+  .condition-bad {
+    background-color: rgb(171, 79, 9);
+    padding: .5rem;
+    border-radius: 5px;
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    font-size: large;
+  }
+
+  /* När condition är väldigt dåligt (4 i ConditionCode) visas röd bakgrund */
+  .condition-very-bad {
+    background-color: rgb(153, 0, 0);
+    padding: .5rem;
+    border-radius: 5px;
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    font-size: large;
+  }
+  
+  /* Popup för väglag, polylines */
+  .condition-popup .leaflet-popup-content-wrapper {
+    background-color: #fff5f5; 
+    color: #0f0f0f;
+    border-radius: 10px;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+  }
+
+  /* Test stil för popup, där hela popupen ändras gällande situationer */
+  .situation-popup .leaflet-popup-content-wrapper {
+    background-color: #fff5f5; 
+    color: #0f0f0f;
+    border-radius: 10px;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+  }
+
+  /* Popup för kameror, där hela popupen ändras i nuläget */
+  .camera-popup .leaflet-popup-content-wrapper {
+    background-color: #fff5f5; /* Ljusblå bakgrund */
+    color: #003366; /* Mörkblå text */
+    border-radius: 10px;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+  }
+ 
+  /* Stil för kameranamn inuti popup */
+  .popup-cameraname {
+    background-color: #88bef4;
+    padding: .5rem;
+    border-radius: 5px;
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    font-size: large;
+  }
+
+  /* Stil för vägnamn på väglags-popup */
+  .popup-condition-roadname {
+    font-size: medium;
+  }
+
+  /* Följande kodrader är ENDAST test för responsiviteten på popupsen */
+  .leaflet-popup-content {
+    max-width: 90vw;
+    padding: 10px;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    font-size: 0.95rem;
+  }  
+  
+  @media (max-width: 600px) {
+    .leaflet-popup-content {
+      font-size: 0.85rem;
+      padding: 8px;
+      max-width: 95vw;
+    }
+  }
+
+.leaflet-popup-content-wrapper {
+  max-width: 95vw;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+}
