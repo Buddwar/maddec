@@ -177,7 +177,6 @@ let currentSettings = {
     //OBS organisationsnumret går inte att uppdatera utan det är endast resterande värden
 
     data = {
-      orgnr: sessionStorage.getItem('orgnr'),
       'weekly': 90,
       'monthly': 60,
       'yearly': 15000,
