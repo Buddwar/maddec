@@ -373,9 +373,9 @@ async function create_subscriber(data){
 
     let response = await fetch('https://bergstrom.pythonanywhere.com/create_user', {
     method: 'POST',
-    headers: {
+    headers: {//formatet på det som ska skickas över till databasen
         'Content-Type': 'application/json',
-    },
+    },//Det här är vad vi skickar(en dict)
     body: JSON.stringify(data)
     });
     let jsonResult = await response.json();
