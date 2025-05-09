@@ -174,6 +174,9 @@ let currentSettings = {
   async function update_organisation(data){
     //Exempel data på sådant som kan uppdateras för organisationer
     //OBS organisationsnumret går inte att uppdatera utan det är endast resterande värden
+    orgnr = sessionStorage.getItem('orgnr');
+    console.log('Session Storage:', orgnr);
+
     data = {
       'orgnr': sessionStorage.getItem('orgnr'),
       'weekly': 90,
@@ -184,6 +187,7 @@ let currentSettings = {
       'fontstyle': 'Times New Roman',
       'fontsize': '12'
   }
+    console.log(data);
       let response = await fetch('https://bergstrom.pythonanywhere.com/update_organisation', {
         method: 'POST',
         headers: {
