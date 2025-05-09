@@ -159,7 +159,7 @@ let currentSettings = {
         let jsonResult = await response.json();
         //Använd resultatet till något
         if (jsonResult['Data']){
-          console.log('Organisationen man får ut', jsonResult['Data']);
+          console.log('Hämtning av organisation', jsonResult['Data']);
         }
         if (jsonResult['Message']){
           console.log('Organisationen man får ut', jsonResult['Message']);
@@ -195,7 +195,7 @@ let currentSettings = {
     });
 
     let jsonResult = await response.json();
-    console.log(jsonResult);
+    console.log('Organisationen har uppdaterats: ', jsonResult);
   }
   
 
