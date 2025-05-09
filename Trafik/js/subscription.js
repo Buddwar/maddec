@@ -33,14 +33,17 @@ let countrycodes = {
 }
 
 // Save button click handler
-document.getElementById('save-button').addEventListener('click', () => {
-    const frequency = document.getElementById('update-frequency').value;
-    
-    //  send this to backend
-    console.log('Saving new frequency:', frequency);
-    
-    // Show success message
-    showSuccessMessage();
+document.getElementById('save-button').addEventListener('click', async () => {
+    const countrycode = document.getElementById('update-frequency').value;
+    /*Jag ändrade så att man kan uppdatera vilket län man prenumerar på */
+    let result = await update_user_details(countrycode);
+    if(result['Success']){
+        // Show success message
+        showSuccessMessage();
+        //Laddar om nuvarande fönstret så att uppdaterade uppgifter om användaren visas
+        window.location.reload();
+        console.log(result['Message']);
+    }
 });
 
 // Cancel button click handler
