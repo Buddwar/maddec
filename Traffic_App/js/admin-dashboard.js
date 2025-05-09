@@ -176,7 +176,7 @@ let currentSettings = {
     //Exempel data på sådant som kan uppdateras för organisationer
     //OBS organisationsnumret går inte att uppdatera utan det är endast resterande värden
 
-    data = {
+    /*data = {
       orgnr: sessionStorage.getItem('orgnr'),
       'weekly': 90,
       'monthly': 60,
@@ -185,7 +185,7 @@ let currentSettings = {
       'secondarycolor': 'red',
       'fontstyle': 'Times New Roman',
       'fontsize': '12'
-  }
+  }*/
     console.log(data);
       let response = await fetch('https://bergstrom.pythonanywhere.com/update_organisation', {
         method: 'POST',
@@ -193,7 +193,16 @@ let currentSettings = {
             'Content-Type': 'application/json',
         },
         credentials: 'include',
-        body: JSON.stringify({data})
+        body: JSON.stringify({
+      orgnr: sessionStorage.getItem('orgnr'),
+      'weekly': 90,
+      'monthly': 60,
+      'yearly': 15000,
+      'primarycolor': 'blue',
+      'secondarycolor': 'red',
+      'fontstyle': 'Times New Roman',
+      'fontsize': '12'
+        })
     });
 
     let jsonResult = await response.json();
