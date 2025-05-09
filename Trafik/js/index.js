@@ -302,7 +302,7 @@ subscribeForm.addEventListener('submit', (e) => {
   };
   
   // send this data to backend
-  console.log('Subscription data:', formData);
+  console.log('Subscription data:', formData);//Finns en funktion längre ner i filen
   
   // Show success message and close modal
   alert('Tack för din prenumeration! Du kommer att få trafikinformation enligt vald frekvens.');
@@ -371,7 +371,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 data för användaren*/
 async function create_subscriber(data){
 
-
     let response = await fetch('https://bergstrom.pythonanywhere.com/create_user', {
     method: 'POST',
     headers: {
@@ -382,3 +381,4 @@ async function create_subscriber(data){
     let jsonResult = await response.json();
     console.log(jsonResult);
 }
+create_subscriber(data);
