@@ -55,21 +55,16 @@ window.addEventListener('load', async () => {
 
     //Hämta användarens data
     let subscriber_data = await get_user_details();
-    console.log(subscriber_data);
-
-    /*const userData = {
-        name: 'Test Name',
-        email: 'test@example.com',
-        phone: '070-123 45 67',
-        state: 'Stockholms län',
-        frequency: 'daily'
-    };*/
-
-    document.getElementById('subscriber-name').textContent = subscriber_data['fname'] + ' ' + subscriber_data['lname'];
-    document.getElementById('subscriber-email').textContent = subscriber_data['email'];
-    document.getElementById('subscriber-phone').textContent = subscriber_data['phone'];
-    document.getElementById('subscriber-state').textContent = countrycodes[subscriber_data['countrycode']];
-    document.getElementById('update-frequency').value = subscriber_data['subtype'];
+    if(subscriber_data['Success']){
+        document.getElementById('subscriber-name').textContent = subscriber_data['Data']['fname'] + ' ' + subscriber_data['Data']['lname'];
+        document.getElementById('subscriber-email').textContent = subscriber_data['Data']['email'];
+        document.getElementById('subscriber-phone').textContent = subscriber_data['Data']['phone'];
+        document.getElementById('subscriber-state').textContent = countrycodes[subscriber_data['Data']['countrycode']];
+        document.getElementById('update-frequency').value = subscriber_data['Data']['subtype'];
+    }
+    else{
+        console.log(subscriber_data)
+    }
 });
 
 /*Function för att hämta användaren som är inloggad
