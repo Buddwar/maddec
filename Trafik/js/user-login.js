@@ -1,4 +1,4 @@
-document.getElementById('login-form').addEventListener('submit', (e) => {
+document.getElementById('login-form').addEventListener('submit', async (e) => {
     e.preventDefault();
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
@@ -9,7 +9,7 @@ document.getElementById('login-form').addEventListener('submit', (e) => {
     
 
 
-    result = login (username, password);
+    result = await login (username, password);
     console.log('Resultatet av inlogg:', result)
     if(result['Success']){
         //Redirect to subscription page after successful login
