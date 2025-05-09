@@ -153,7 +153,7 @@ let currentSettings = {
           //o det är ju då för att kontrollera VEM det är som är inloggad
           credentials: 'include',
           body: JSON.stringify({
-            orgnr: sessionStorage.getItem('orgnr')//<----------HÄR FUNGERAR DET
+            orgnr: sessionStorage.getItem('orgnr')
           })
       });
       if(response.ok){
@@ -176,7 +176,7 @@ let currentSettings = {
     //Exempel data på sådant som kan uppdateras för organisationer
     //OBS organisationsnumret går inte att uppdatera utan det är endast resterande värden
 
-    /*data = {
+    data = {
       orgnr: sessionStorage.getItem('orgnr'),
       'weekly': 90,
       'monthly': 60,
@@ -185,7 +185,7 @@ let currentSettings = {
       'secondarycolor': 'red',
       'fontstyle': 'Times New Roman',
       'fontsize': '12'
-  }*/
+  }
     console.log(data);
       let response = await fetch('https://bergstrom.pythonanywhere.com/update_organisation', {
         method: 'POST',
@@ -193,20 +193,13 @@ let currentSettings = {
             'Content-Type': 'application/json',
         },
         credentials: 'include',
-        body: JSON.stringify({
-      orgnr: sessionStorage.getItem('orgnr'),
-      'weekly': 90,
-      'monthly': 60,
-      'yearly': 15000,
-      'primarycolor': 'blue',
-      'secondarycolor': 'red',
-      'fontstyle': 'Times New Roman',
-      'fontsize': '12'
-        })
+        body: JSON.stringify(data)
     });
 
-    let jsonResult = await response.json();
-    console.log('Organisationen har uppdaterats: ', jsonResult);
+    if (response.ok){
+      let jsonResult = await response.json();
+      console.log('Organisationen har uppdaterats: ', jsonResult);
+    }
   }
   
 
