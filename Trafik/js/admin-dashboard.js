@@ -155,7 +155,8 @@ let currentSettings = {
               'Content-Type': 'application/json',
           },//Här skickar med vår sessionscookie från serversidan
           //o det är ju då för att kontrollera VEM det är som är inloggad
-          credentials: 'include'
+          credentials: 'include',
+          body: JSON.stringify({})
       });
       if(response.ok){
         let jsonResult = await response.json();
