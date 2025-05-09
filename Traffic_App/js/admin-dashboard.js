@@ -134,6 +134,7 @@ let currentSettings = {
   window.addEventListener('load', () => {
     updatePreview();
     load_organisation();
+    load_organisation();
     update_organisation();
   });
   
@@ -152,7 +153,7 @@ let currentSettings = {
           //o det är ju då för att kontrollera VEM det är som är inloggad
           credentials: 'include',
           body: JSON.stringify({
-            orgnr: sessionStorage.getItem('orgnr')
+            orgnr: sessionStorage.getItem('orgnr')//<----------HÄR FUNGERAR DET
           })
       });
       if(response.ok){
@@ -174,7 +175,7 @@ let currentSettings = {
   async function update_organisation(data){
     //Exempel data på sådant som kan uppdateras för organisationer
     //OBS organisationsnumret går inte att uppdatera utan det är endast resterande värden
-    orgnr = sessionStorage.getItem('orgnr');
+    orgnr = sessionStorage.getItem('orgnr'); //<---------------------HÄR ÄR ORGNR NULL
     console.log('Session Storage:', orgnr);
 
     data = {
