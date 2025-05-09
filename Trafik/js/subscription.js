@@ -46,6 +46,8 @@ document.getElementById('save-button').addEventListener('click', () => {
 // Cancel button click handler
 document.getElementById('cancel-button').addEventListener('click', () => {
     window.location.href = 'index.html';
+
+    //Anropa databasen och logga ut användaren
 });
 
 // Load user data (this would come from backend)
@@ -55,14 +57,14 @@ window.addEventListener('load', async () => {
 
     //Hämta användarens data
     let subscriber_data = await get_user_details();
-    if(subscriber_data['Success']){
+    if(subscriber_data['Success']){//Om vi lyckades hämta data
         document.getElementById('subscriber-name').textContent = subscriber_data['Data']['fname'] + ' ' + subscriber_data['Data']['lname'];
         document.getElementById('subscriber-email').textContent = subscriber_data['Data']['email'];
         document.getElementById('subscriber-phone').textContent = subscriber_data['Data']['phone'];
         document.getElementById('subscriber-state').textContent = countrycodes[subscriber_data['Data']['countrycode']];
         document.getElementById('update-frequency').value = subscriber_data['Data']['subtype'];
     }
-    else{
+    else{//Något gick tokigt med hämtningen av data, loggar bara det för tillfället
         console.log(subscriber_data)
     }
 });
@@ -78,6 +80,22 @@ async function get_user_details(){
         //o det är ju då för att kontrollera VEM det är som är inloggad
         credentials: 'include',
         body: JSON.stringify({})
+    });
+    let jsonResult = await response.json();
+    return jsonResult;
+}
+
+/*Function för att hämta användaren som är inloggad
+Ingen data behöver skickas in här utan det räcker att bara anropa funktionen */
+async function update_user_details(countrycode){
+    let data = {'countrycode': countrycode}
+    let response = await fetch('https://bergstrom.pythonanywhere.com/update_user', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify(data)
     });
     let jsonResult = await response.json();
     return jsonResult;
