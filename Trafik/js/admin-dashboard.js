@@ -133,8 +133,11 @@ let currentSettings = {
 
   window.addEventListener('load', () => {
     updatePreview();
+    //Exempelvis ladda organisationen ifråga när sidan laddas
     load_organisation();
+    //Organsiationen genomför en uppdatering
     update_organisation();//<----tar emot en dict (se function vad det är för typ av data som går att uppdatera)
+    //Hämta organisationen igen, nå sånt
     load_organisation();
   });
   
