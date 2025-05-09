@@ -10,6 +10,7 @@ document.getElementById('login-form').addEventListener('submit', (e) => {
 
 
     result = login (username, password);
+    console.log('Resultatet av inlogg:', result)
     if(result['Success']){
         //Redirect to subscription page after successful login
         window.location.href = 'subscription.html';
@@ -34,5 +35,6 @@ async function login(email, passw){
     /*Resultatet som man får tillbaka är 
 {Success: True/False, Message: 'meddelande'}*/
     const jsonResult = await response.json();
+    console.log('Resultatet', jsonResult);
     return jsonResult;
 }
