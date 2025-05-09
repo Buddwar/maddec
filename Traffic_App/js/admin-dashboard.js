@@ -170,7 +170,7 @@ let currentSettings = {
       }
     }
 
-  //Anropa funktionen och skicka in den data som behövs(en dict kanske)
+  //Anropa funktionen och skicka in den data som behövs(dict)
   async function update_organisation(data){
     //Exempel data på sådant som kan uppdateras för organisationer
     //OBS organisationsnumret går inte att uppdatera utan det är endast resterande värden
@@ -188,10 +188,9 @@ let currentSettings = {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-        },//Här skickar med vår sessionscookie från serversidan
-        //o det är ju då för att kontrollera VEM det är som är inloggad
+        },
         credentials: 'include',
-        body: JSON.stringify(data)//Skickar över den data som vi vill ändra
+        body: JSON.stringify(data)
     });
 
     let jsonResult = await response.json();
