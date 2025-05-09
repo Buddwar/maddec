@@ -1,3 +1,28 @@
+let countrycodes = {
+"01": "Stockholms Län",
+"03": "Uppsalas län",
+"04": "Södermanlands län",
+"05": "Östergötlands län",
+"06": "Jönköpings län",
+"07": "Kronobergs län",
+"08": "Kalmar län",
+"09": "Gotlands län",
+"10": "Blekinge län",
+"12": "Skåne län",
+"13": "Hallands län",
+"14": "Västra Götalands län",
+"17": "Värmlands län",
+"182": "Örebro län",
+"19": "Västmanlands län",
+"20": "Dalarnas län",
+"21": "Gävleborgs län",
+"22": "Västernorrlands län",
+"23": "Jämtlands län",
+"24": "Västerbottens län",
+"25": "Norrbottens län"
+}
+  
+  
   // Function to show success message
   function showSuccessMessage() {
     const successMessage = document.getElementById('success-message');
@@ -32,19 +57,19 @@ window.addEventListener('load', async () => {
     let subscriber_data = await get_user_details();
     console.log(subscriber_data);
 
-    const userData = {
+    /*const userData = {
         name: 'Test Name',
         email: 'test@example.com',
         phone: '070-123 45 67',
         state: 'Stockholms län',
         frequency: 'daily'
-    };
+    };*/
 
-    document.getElementById('subscriber-name').textContent = userData.name;
-    document.getElementById('subscriber-email').textContent = userData.email;
-    document.getElementById('subscriber-phone').textContent = userData.phone;
-    document.getElementById('subscriber-state').textContent = userData.state;
-    document.getElementById('update-frequency').value = userData.frequency;
+    document.getElementById('subscriber-name').textContent = subscriber_data['fname'] + ' ' + subscriber_data['lname'];
+    document.getElementById('subscriber-email').textContent = subscriber_data['email'];
+    document.getElementById('subscriber-phone').textContent = subscriber_data['phone'];
+    document.getElementById('subscriber-state').textContent = countrycodes[subscriber_data['countrycode']];
+    document.getElementById('update-frequency').value = subscriber_data['subtype'];
 });
 
 /*Function för att hämta användaren som är inloggad
