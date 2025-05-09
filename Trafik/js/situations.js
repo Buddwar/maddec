@@ -62,21 +62,11 @@ export async function getSituations(url) {
                             ? 'images/icon-obstacle-red.svg'
                             : 'images/icon-obstacle-orange.svg';
                         }
-                          //if (dev.SeverityText?.toLowerCase() === 'mycket stor påverkan') {
-                            //iconClass = 'bi bi-cone-striped';
-                            //iconColor = 'red';
-                          //} else if (dev.SeverityText?.toLowerCase() === 'stor påverkan') {
-                            //iconClass = 'bi bi-cone-striped';
-                            //iconColor = 'orange';
-                          //}
-                        //}
 
                         // Skapa Leaflet-divIcon med Bootstrap Icon om vi har en giltig ikon
                         if (iconUrl) {
                           const customIcon = L.icon({
-                            iconUrl, //: dev.SeverityText === 'Mycket stor påverkan'
-                                //? 'images/icon-accident-red.svg' // Updated path
-                                //: 'images/icon-accident-orange.svg', // Updated path
+                            iconUrl,
                             iconSize: [32, 32],
                             iconAnchor: [16, 32]
                           });
