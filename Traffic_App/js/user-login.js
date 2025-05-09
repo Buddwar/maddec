@@ -9,3 +9,5 @@ document.getElementById('login-form').addEventListener('submit', (e) => {
     // Redirect to subscription page after successful login
     window.location.href = 'subscription.html';
 });
+
+

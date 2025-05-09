@@ -134,7 +134,7 @@ let currentSettings = {
   window.addEventListener('load', () => {
     updatePreview();
     load_organisation();
-    //update_organisation();
+    update_organisation();
   });
   
 
@@ -175,7 +175,7 @@ let currentSettings = {
     //Exempel data på sådant som kan uppdateras för organisationer
     //OBS organisationsnumret går inte att uppdatera utan det är endast resterande värden
     data = {
-      'orgnr': '5512345679',
+      'orgnr': sessionStorage.getItem('orgnr'),
       'weekly': 90,
       'monthly': 60,
       'yearly': 15000,
@@ -184,17 +184,20 @@ let currentSettings = {
       'fontstyle': 'Times New Roman',
       'fontsize': '12'
   }
+      let response = await fetch('https://bergstrom.pythonanywhere.com/update_organisation', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },//Här skickar med vår sessionscookie från serversidan
+        //o det är ju då för att kontrollera VEM det är som är inloggad
+        credentials: 'include',
+        body: JSON.stringify(data)//Skickar över den data som vi vill ändra
+    });
 
-    let response = await fetch('https://bergstrom.pythonanywhere.com/update_organisation', {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-  });
     let jsonResult = await response.json();
     console.log(jsonResult);
   }
+  
 
   async function logout_organisation(){
 
