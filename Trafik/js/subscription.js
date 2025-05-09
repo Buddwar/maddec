@@ -27,13 +27,18 @@ document.getElementById('cancel-button').addEventListener('click', () => {
 window.addEventListener('load', () => {
     // This is where we would fetch the user's current subscription data
     // For demo purposes, we're using hardcoded values
-    const userData = {
+
+    //Hämta användarens data
+    let subscriber_data = get_user_details();
+    console.log(subscriber_data);
+
+    /*const userData = {
         name: 'Test Name',
         email: 'test@example.com',
         phone: '070-123 45 67',
         state: 'Stockholms län',
         frequency: 'daily'
-    };
+    };*/
 
     document.getElementById('subscriber-name').textContent = userData.name;
     document.getElementById('subscriber-email').textContent = userData.email;
@@ -42,16 +47,18 @@ window.addEventListener('load', () => {
     document.getElementById('update-frequency').value = userData.frequency;
 });
 
-
-async function get_user_details(email){
-    data = {'email': email};
+/*Function för att hämta användaren som är inloggad
+Ingen data behöver skickas in här utan det räcker att bara anropa funktionen */
+async function get_user_details(){
     let response = await fetch('https://bergstrom.pythonanywhere.com/get_user', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },//Här skickar med vår sessionscookie från serversidan
         //o det är ju då för att kontrollera VEM det är som är inloggad
-        credentials: 'include'
+        credentials: 'include',
+        body: JSON.stringify({})
     });
     let jsonResult = await response.json();
+    return jsonResult;
 }

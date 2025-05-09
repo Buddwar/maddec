@@ -148,7 +148,10 @@ let currentSettings = {
     baserat på om företaget har lyckats logga in
     
     denna route använder sig av organisationsnumret och det är något som sparades
-    undan när organisationen genomförde en lyckad inloggning*/
+    undan när organisationen genomförde en lyckad inloggning
+    
+    med andra ord, vi behöver inte skicka in ett organisationsnummer till databasen.
+    Databasen har koll på vem det är som är inloggad baserat på sessionen/cookies*/
         let response = await fetch('https://bergstrom.pythonanywhere.com/get_single_organisation', {
           method: 'POST',
           headers: {
@@ -160,8 +163,9 @@ let currentSettings = {
       });
       if(response.ok){
         let jsonResult = await response.json();
+        console.log(jsonResult);
         //Använd resultatet till något
-        if (jsonResult['Data']){
+        /*if (jsonResult['Data']){
           console.log('Hämtning av organisation', jsonResult['Data']);
         }
         if (jsonResult['Message']){
@@ -169,7 +173,7 @@ let currentSettings = {
         }
         if (!jsonResult['Success']){
           window.location.href = `admin-login.html`;
-        }
+        }*/
       }
     }
 
