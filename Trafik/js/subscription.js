@@ -24,21 +24,21 @@ document.getElementById('cancel-button').addEventListener('click', () => {
 });
 
 // Load user data (this would come from backend)
-window.addEventListener('load', () => {
+window.addEventListener('load', async () => {
     // This is where we would fetch the user's current subscription data
     // For demo purposes, we're using hardcoded values
 
     //Hämta användarens data
-    let subscriber_data = get_user_details();
+    let subscriber_data = await get_user_details();
     console.log(subscriber_data);
 
-    /*const userData = {
+    const userData = {
         name: 'Test Name',
         email: 'test@example.com',
         phone: '070-123 45 67',
         state: 'Stockholms län',
         frequency: 'daily'
-    };*/
+    };
 
     document.getElementById('subscriber-name').textContent = userData.name;
     document.getElementById('subscriber-email').textContent = userData.email;
