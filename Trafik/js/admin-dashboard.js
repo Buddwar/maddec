@@ -143,6 +143,7 @@ let currentSettings = {
   
 
   async function load_organisation(){
+
     /*Här vill vi hämta den organisation som ska visas
     baserat på om företaget har lyckats logga in
     
@@ -154,10 +155,7 @@ let currentSettings = {
               'Content-Type': 'application/json',
           },//Här skickar med vår sessionscookie från serversidan
           //o det är ju då för att kontrollera VEM det är som är inloggad
-          credentials: 'include',
-          body: JSON.stringify({
-            orgnr: sessionStorage.getItem('orgnr')
-          })
+          credentials: 'include'
       });
       if(response.ok){
         let jsonResult = await response.json();

@@ -41,3 +41,17 @@ window.addEventListener('load', () => {
     document.getElementById('subscriber-state').textContent = userData.state;
     document.getElementById('update-frequency').value = userData.frequency;
 });
+
+
+async function get_user_details(email){
+    data = {'email': email};
+    let response = await fetch('https://bergstrom.pythonanywhere.com/get_user', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },//Här skickar med vår sessionscookie från serversidan
+        //o det är ju då för att kontrollera VEM det är som är inloggad
+        credentials: 'include'
+    });
+    let jsonResult = await response.json();
+}
