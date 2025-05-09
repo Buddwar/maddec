@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trafikservice - Administratörsinloggning</title>
+    <link rel="stylesheet" href="styles/admin-login.css">
+</head>
+<body>
+    <header>
+        <a href="index.html">← Tillbaka</a>
+        <h1>Trafikservice</h1>
+    </header>
+
+    <main>
+        <div class="login-container">
+            <h2>Inloggning Administratör</h2>
+            <form id="login-form" class="form-container">
+                <input type="text" id="username" placeholder="Adminanvändare">
+                <input type="password" id="password" placeholder="Lösenord">
+                <button type="submit">Logga in</button>
+                <p class="error-message" id="error-message">Felaktigt användarnamn eller lösenord</p>
+            </form>
+        </div>
+    </main>
+
+    <script src="js/admin-login.js"></script>
+</body> 
+</html> 
