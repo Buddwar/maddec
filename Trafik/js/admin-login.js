@@ -10,7 +10,7 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
 
     if (result['Success']){
         // Redirect to admin dashboard after successful login
-        window.location.href = 'admin-dashboard.html';
+        window.location.href = `admin-dashboard.html`;
     }
     else{
         console.log(result['Message']);
@@ -33,6 +33,7 @@ async function login(orgnr, passw){
             //Datan som skickas behöver vara som json
             'Content-Type': 'application/json'
         },
+        credentials: 'include',
         //O vi stoppar in vår dictionary beståendes av orgnr och lösenord
         body: JSON.stringify(org_credentials)
     });

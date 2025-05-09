@@ -134,34 +134,47 @@ let currentSettings = {
   window.addEventListener('load', () => {
     updatePreview();
     load_organisation();
-    //update_organisation();
+    update_organisation();//<----tar emot en dict (se function vad det är för typ av data som går att uppdatera)
+    load_organisation();
   });
   
 
   async function load_organisation(){
-    /*Hämta ut organisation som ska visas genom att 
-    plocka ut orgnr ifrån URL och sedan göra ett anrop till 
-    get_single_org*/
+    /*Här vill vi hämta den organisation som ska visas
+    baserat på om företaget har lyckats logga in
+    
+    denna route använder sig av organisationsnumret och det är något som sparades
+    undan när organisationen genomförde en lyckad inloggning*/
+        let response = await fetch('https://bergstrom.pythonanywhere.com/get_single_organisation', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },//Här skickar med vår sessionscookie från serversidan
+          //o det är ju då för att kontrollera VEM det är som är inloggad
+          credentials: 'include',
+          body: JSON.stringify({
+            orgnr: sessionStorage.getItem('orgnr')
+          })
+      });
+      if(response.ok){
+        let jsonResult = await response.json();
+        //Använd resultatet till något
+        if (jsonResult['Data']){
+          console.log('Hämtning av organisation', jsonResult['Data']);
+        }
+        if (jsonResult['Message']){
+          console.log('Organisationen man får ut', jsonResult['Message']);
+        }
+        if (!jsonResult['Success']){
+          window.location.href = `admin-login.html`;
+        }
+      }
+    }
 
-    let response = await fetch('https://bergstrom.pythonanywhere.com/get_single_organisation', {
-      method: 'POST',//Metoden är POST eftersom vi vill skicka data dit
-      headers: {
-          //Datan som skickas behöver vara som json
-          'Content-Type': 'application/json',
-      },
-      credentials: 'same-origin'
-  });
-    let jsonResult = await response.json();
-    //Använd resultatet till något
-    console.log('Organisationen man får ut', jsonResult);
-  }
-
-  //Anropa funktionen och skicka in den data som behövs(en dict kanske)
+  //Anropa funktionen och skicka in den data som behövs(dict)
   async function update_organisation(data){
-    //Exempel data på sådant som kan uppdateras för organisationer
-    //OBS organisationsnumret går inte att uppdatera utan det är endast resterande värden
+    //Det här är den typen av data som kan uppdateras för organisationer
     data = {
-      'orgnr': '5512345679',
       'weekly': 90,
       'monthly': 60,
       'yearly': 15000,
@@ -170,14 +183,37 @@ let currentSettings = {
       'fontstyle': 'Times New Roman',
       'fontsize': '12'
   }
+    console.log(data);
+      let response = await fetch('https://bergstrom.pythonanywhere.com/update_organisation', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify(data)
+    });
 
-    let response = await fetch('https://bergstrom.pythonanywhere.com/update_organisation', {
+    if (response.ok){
+      let jsonResult = await response.json();
+      console.log('Organisationen har uppdaterats: ', jsonResult);
+    }
+  }
+  
+
+  /*Utloggning för organisationer, en egen route där vi rensar
+  sessionsvariabeln hos Flask */
+  async function logout_organisation(){
+
+    let response = await fetch('https://bergstrom.pythonanywhere.com/logout_organisation', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
       },
-      body: JSON.stringify(data)
+      credentials: 'include'
   });
     let jsonResult = await response.json();
     console.log(jsonResult);
+    if (jsonResult['Success']){//Kontroll att vi lyckades logga ut
+      window.location.href = `admin-login.html`;//Dirigera om användaren till login-sidan
+    }
   }
