@@ -36,7 +36,8 @@ let countrycodes = {
 document.getElementById('save-button').addEventListener('click', async () => {
     const countrycode = document.getElementById('update-frequency').value;
     /*Jag ändrade så att man kan uppdatera vilket län man prenumerar på */
-    let result = await update_user_details(countrycode);
+    let result = await update_user_details(countrycode);//Functionen kommer returnera en dict tillbaka
+    //Dicten kommer se ut likt följande > {'Success': 'True/False', 'Message': 'meddelande'}
     if(result['Success']){
         // Show success message
         showSuccessMessage();
@@ -47,10 +48,17 @@ document.getElementById('save-button').addEventListener('click', async () => {
 });
 
 // Cancel button click handler
-document.getElementById('cancel-button').addEventListener('click', () => {
-    window.location.href = 'index.html';
+document.getElementById('cancel-button').addEventListener('click', async() => {
 
     //Anropa databasen och logga ut användaren
+
+    let result = await logout_user();
+    if(result['Success']){
+        window.location.href = 'index.html';
+    }
+    else{
+        console.log('Problem uppstod med att logga ut användaren...');
+    }
 });
 
 // Load user data (this would come from backend)
@@ -88,8 +96,8 @@ async function get_user_details(){
     return jsonResult;
 }
 
-/*Function för att hämta användaren som är inloggad
-Ingen data behöver skickas in här utan det räcker att bara anropa funktionen */
+/*Function för att uppdatera användaren som är inloggad
+Endast countrycode behövs vid anrop av funktionen */
 async function update_user_details(countrycode){
     let data = {'countrycode': countrycode}
     let response = await fetch('https://bergstrom.pythonanywhere.com/update_user', {
@@ -103,3 +111,17 @@ async function update_user_details(countrycode){
     let jsonResult = await response.json();
     return jsonResult;
 }
+
+  /*Function för att logga ut användaren */
+  async function logout_user(){
+
+    let response = await fetch('https://bergstrom.pythonanywhere.com/logout_user', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      credentials: 'include'
+  });
+    let jsonResult = await response.json();
+    return jsonResult;
+  }
