@@ -291,7 +291,7 @@ window.addEventListener('click', (e) => {
   }
 });
 
-subscribeForm.addEventListener('submit', (e) => {
+subscribeForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   const formData = {
     /*Jag lade till andra fält som behövs, fnamn, lname osv
@@ -304,18 +304,25 @@ subscribeForm.addEventListener('submit', (e) => {
     start: new Date().toJSON().slice(0,10),
     countrycode: document.getElementById('subscriber-state').value,
     subtype: document.getElementById('subscriber-frequency').value,
-    orgnr: '4444456789',//Exempel
-    paymethod: 'Mastercard'//Exempel
+    orgnr: '4444456789',//Exempel, denna får hämtas ifrån Iframen
+    paymethod: 'Mastercard'//Exempel, denna får hämtas ifrån betalformuläret
   };
   
   // send this data to backend
   console.log('Subscription data:', formData);//Finns en funktion längre ner i filen
   /*Dock så behöver vi genomföra en betalning innan vi sparar undan användaren*/
-  
-  // Show success message and close modal
-  alert('Tack för din prenumeration! Du kommer att få trafikinformation enligt vald frekvens.');
-  subscribeModal.style.display = 'none';
-  subscribeForm.reset();
+
+  //exempel på anrop till functionen
+  let result = await create_subscriber(data);
+  if (result['Success']){
+    // Show success message and close modal
+    alert('Tack för din prenumeration! Du kommer att få trafikinformation enligt vald frekvens.');
+    subscribeModal.style.display = 'none';
+    subscribeForm.reset();
+  }
+  else{
+    console.log('Det var problem att skapa upp prenumeranten.', result['Message']);
+  }
 });
 
 // Initialize map on page load
