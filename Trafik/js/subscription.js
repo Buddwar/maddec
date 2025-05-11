@@ -51,10 +51,9 @@ document.getElementById('save-button').addEventListener('click', async () => {
 document.getElementById('cancel-button').addEventListener('click', async() => {
 
     //Anropa databasen och logga ut användaren
-
     let result = await logout_user();
-    if(result['Success']){
-        window.location.href = 'index.html';
+    if(result['Success']){//Om det gick bra med att logga ut
+        window.location.href = 'index.html';//Dirigera om användaren
     }
     else{
         console.log('Problem uppstod med att logga ut användaren...');
@@ -68,15 +67,16 @@ window.addEventListener('load', async () => {
 
     //Hämta användarens data
     let subscriber_data = await get_user_details();
-    if(subscriber_data['Success']){//Om vi lyckades hämta data
+    if(subscriber_data['Success']){//Om vi lyckades hämta data, t. ex. om användaren är inloggad så ska det fungera
         document.getElementById('subscriber-name').textContent = subscriber_data['Data']['fname'] + ' ' + subscriber_data['Data']['lname'];
         document.getElementById('subscriber-email').textContent = subscriber_data['Data']['email'];
         document.getElementById('subscriber-phone').textContent = subscriber_data['Data']['phone'];
         document.getElementById('subscriber-state').textContent = countrycodes[subscriber_data['Data']['countrycode']];
         document.getElementById('update-frequency').value = subscriber_data['Data']['subtype'];  
     }
-    else{//Något gick tokigt med hämtningen av data, loggar bara det för tillfället
+    else{//Något gick tokigt med hämtningen av data, t. ex. användaren är inte inloggad?
         console.log(subscriber_data)
+        window.location.href = 'index.html';
     }
 });
 
