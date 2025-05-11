@@ -294,10 +294,12 @@ window.addEventListener('click', (e) => {
 subscribeForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const formData = {
+    /*Jag lade till andra fält som behövs, fnamn, lname osv*/
     fname: document.getElementById('subscriber-fname').value,
     lname: document.getElementById('subscriber-lname').value,
     email: document.getElementById('subscriber-email').value,
     phone: document.getElementById('subscriber-phone').value,
+    start: new Date().toJSON.slice(0,10),
     countrycode: document.getElementById('subscriber-state').value,
     subtype: document.getElementById('subscriber-frequency').value
   };
