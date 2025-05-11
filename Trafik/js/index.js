@@ -299,7 +299,7 @@ subscribeForm.addEventListener('submit', (e) => {
     lname: document.getElementById('subscriber-lname').value,
     email: document.getElementById('subscriber-email').value,
     phone: document.getElementById('subscriber-phone').value,
-    start: new Date().toJSON.slice(0,10),
+    start: new Date().toJSON().slice(0,10),
     countrycode: document.getElementById('subscriber-state').value,
     subtype: document.getElementById('subscriber-frequency').value
   };
