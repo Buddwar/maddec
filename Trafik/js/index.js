@@ -294,14 +294,18 @@ window.addEventListener('click', (e) => {
 subscribeForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const formData = {
-    /*Jag lade till andra fält som behövs, fnamn, lname osv*/
+    /*Jag lade till andra fält som behövs, fnamn, lname osv
+    dock så behöver vi hämta organisationsnummer också här innan vi sparar undan all data*/
     fname: document.getElementById('subscriber-fname').value,
     lname: document.getElementById('subscriber-lname').value,
     email: document.getElementById('subscriber-email').value,
+    passw: document.getElementById('subscriber-passw').value,
     phone: document.getElementById('subscriber-phone').value,
     start: new Date().toJSON().slice(0,10),
     countrycode: document.getElementById('subscriber-state').value,
-    subtype: document.getElementById('subscriber-frequency').value
+    subtype: document.getElementById('subscriber-frequency').value,
+    orgnr: '4444456789',//Exempel
+    paymethod: 'Mastercard'//Exempel
   };
   
   // send this data to backend
