@@ -313,7 +313,7 @@ subscribeForm.addEventListener('submit', async (e) => {
   /*Dock så behöver vi genomföra en betalning innan vi sparar undan användaren*/
 
   //exempel på anrop till functionen
-  let result = await create_subscriber(data);
+  let result = await create_subscriber(formData);
   if (result['Success']){
     // Show success message and close modal
     alert('Tack för din prenumeration! Du kommer att få trafikinformation enligt vald frekvens.');
