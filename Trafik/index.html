@@ -47,8 +47,11 @@
       <button class="modal-close" id="modal-close">&times;</button>
       <h2>Prenumerera på trafikinformation</h2>
       <form class="subscribe-form" id="subscribe-form">
-        <label for="subscriber-name">Namn:</label>
-        <input type="text" id="subscriber-name" required>
+        <label for="subscriber-fname">Förnamn:</label>
+        <input type="text" id="subscriber-fname" required>
+
+        <label for="subscriber-lname">Efternamn:</label>
+        <input type="text" id="subscriber-lname" required>
         
         <label for="subscriber-email">E-post:</label>
         <input type="email" id="subscriber-email" required>
@@ -85,10 +88,9 @@
         <label for="subscriber-frequency">Hur ofta vill du få information:</label>
         <select id="subscriber-frequency" required>
           <option value="">Välj alternativ</option>
-          <option value="realtime">Realtid</option>
-          <option value="hourly">En gång om dagen</option>
-          <option value="daily">En gång i veckan</option>
-          <option value="weekly">En gång i månaden</option>
+          <option value="weekly">Veckovis</option>
+          <option value="monthly">Månadsvis</option>
+          <option value="yearly">Årligen</option>
           </select>
         
         <button type="submit">Bekräfta prenumeration</button>

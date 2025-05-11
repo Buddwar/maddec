@@ -294,15 +294,17 @@ window.addEventListener('click', (e) => {
 subscribeForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const formData = {
-    name: document.getElementById('subscriber-name').value,
+    fname: document.getElementById('subscriber-fname').value,
+    lname: document.getElementById('subscriber-lname').value,
     email: document.getElementById('subscriber-email').value,
     phone: document.getElementById('subscriber-phone').value,
-    state: document.getElementById('subscriber-state').value,
-    frequency: document.getElementById('subscriber-frequency').value
+    countrycode: document.getElementById('subscriber-state').value,
+    subtype: document.getElementById('subscriber-frequency').value
   };
   
   // send this data to backend
   console.log('Subscription data:', formData);//Finns en funktion längre ner i filen
+  /*Dock så behöver vi genomföra en betalning innan vi sparar undan användaren*/
   
   // Show success message and close modal
   alert('Tack för din prenumeration! Du kommer att få trafikinformation enligt vald frekvens.');
