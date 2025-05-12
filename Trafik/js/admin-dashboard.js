@@ -100,6 +100,17 @@ let currentSettings = {
    */
   function applySettings() {
     console.log('Applying settings to backend…', currentSettings);
+
+    data = {
+      'weekly': document.getElementById('weekly').value,
+      'monthly': document.getElementById('monthly').value,
+      'yearly': document.getElementById('yearly').value,
+      'primarycolor': document.getElementById('primarycolor').value,
+      'secondarycolor': document.getElementById('secondarycolor').value,
+      'fontstyle': document.getElementById('font-family').value,
+      'fontsize': document.getElementById('fontsize').value
+  }
+    update_organisation(data);
     showSuccessMessage();
   }
   
@@ -171,15 +182,6 @@ let currentSettings = {
   //Anropa funktionen och skicka in den data som behövs(dict)
   async function update_organisation(data){
     //Det här är den typen av data som kan uppdateras för organisationer
-    data = {
-      'weekly': 90,
-      'monthly': 60,
-      'yearly': 15000,
-      'primarycolor': 'blue',
-      'secondarycolor': 'red',
-      'fontstyle': 'Times New Roman',
-      'fontsize': '12'
-  }
     console.log(data);
       let response = await fetch('https://bergstrom.pythonanywhere.com/update_organisation', {
         method: 'POST',
