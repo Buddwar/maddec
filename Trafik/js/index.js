@@ -415,11 +415,12 @@ async function create_subscriber(data){
       return jsonResult;
   }
 
+  /*Här hämtar vi ut orgnr ifrån URL */
   function getUrl(){
     let url_org = new URLSearchParams(window.location.search);
     return url_org.get('orgnr');
   }
-
+/*Så när användaren klickar på knappen så skcikar vi med orgnr i URLen till den nya sidan */
   let login_button = document.getElementById('login-button');
   login_button.addEventListener('click', (e) => {
     e.preventDefault();
