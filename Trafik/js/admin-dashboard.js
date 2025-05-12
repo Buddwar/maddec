@@ -164,16 +164,13 @@ let currentSettings = {
       if(response.ok){
         let jsonResult = await response.json();
         console.log(jsonResult);
-        //Använd resultatet till något
-        /*if (jsonResult['Data']){
-          console.log('Hämtning av organisation', jsonResult['Data']);
+
+        //Kika ifall det gick bra att hämta data om organisationen
+        if(jsonResult['Success']){
+          document.getElementById('font-family').value = jsonResult['Data']['fontstyle'];
+          document.getElementById('bg-color').value = jsonResult['Data']['primarycolor'];
+          document.getElementById('button-color').value = jsonResult['Data']['secondarycolor'];
         }
-        if (jsonResult['Message']){
-          console.log('Organisationen man får ut', jsonResult['Message']);
-        }
-        if (!jsonResult['Success']){
-          window.location.href = `admin-login.html`;
-        }*/
       }
     }
 
