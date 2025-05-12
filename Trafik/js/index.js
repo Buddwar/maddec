@@ -414,3 +414,17 @@ async function create_subscriber(data){
       let jsonResult = await response.json();
       return jsonResult;
   }
+
+  function getUrl(){
+    let url_org = new URLSearchParams(window.location.search);
+    return url_org.get('orgnr');
+  }
+
+  let login_button = document.getElementById('login-button');
+  login_button.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    let orgnr = getUrl();
+    let login_url = `user-login.html?orgnr=${orgnr}`;
+    window.location.href = login_url;
+  })
