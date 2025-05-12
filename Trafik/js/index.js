@@ -118,12 +118,12 @@ if (buttonTxtColor) {
   //return state || '01';
 }
 
-function updateStateTitle(countyCode) {
-  const stateTitle = document.querySelector('.state-title');
-  if (stateTitle) {
-    stateTitle.textContent = STATE_NAMES[countyCode] || 'Okänt län';
-  }
-}
+//function updateStateTitle(countyCode) {
+  //const stateTitle = document.querySelector('.state-title');
+  //if (stateTitle) {
+    //stateTitle.textContent = STATE_NAMES[countyCode] || 'Okänt län';
+  //}
+//}
 
 //async function fetchTrafficData(countyCode) {
   //try {
@@ -262,7 +262,7 @@ function updateTrafficList(items, containerId) {
   //updateTrafficList(trafficData.situations, 'traffic-list');
 //}
 
-//unction initializeMap() {
+//function initializeMap() {
   //console.log('Initializing map...');
   //const map = L.map('map').setView([59.3293, 18.0686], 12); // Stockholm as default
   //L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
