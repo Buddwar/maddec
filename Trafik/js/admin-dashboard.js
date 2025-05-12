@@ -190,6 +190,8 @@ let currentSettings = {
       console.log('Organisationen har uppdaterats: ', jsonResult);
     }
   }
+
+  document.getElementById('cancel-button').addEventListener('click', logout_organisation);
   
 
   /*Utloggning för organisationer, en egen route där vi rensar
