@@ -26,7 +26,7 @@
                 </div>
 
                 <form id="customization-form">
-                    <div class="form-group">
+                    <!--<div class="form-group">
                         <label for="state-selector">Välj län att visa:</label>
                         <select id="state-selector">
                             <option value="01">Stockholms län</option>
@@ -51,8 +51,15 @@
                             <option value="24">Västerbottens län</option>
                             <option value="25">Norrbottens län</option>
                         </select>
+                    </div>-->
+                      <div class="form-group">
+                        <label for="weekly">Pris - Veckovis:</label>
+                        <input type="text" value="30" id="weekly">
+                        <label for="monthly">Pris - Månadsvis:</label>
+                        <input type="text" value="120" id="monthly">
+                        <label for="yearly">Pris - Årligen:</label>
+                        <input type="text" value="1200" id="yearly">
                     </div>
-
                     <div class="form-group">
                         <label for="font-family">Typsnitt:</label>
                         <select id="font-family">
@@ -63,12 +70,16 @@
                             <option value="'Roboto', sans-serif">Roboto</option>
                         </select>
                     </div>
+                      <div class="form-group">
+                        <label for="font-size">Teckenstorlek:</label>
+                        <input type="text" value="30" id="fontsize">
+                    </div>
 
           <!-- Primärfärg -->
           <div class="form-group">
             <label>Primärfärg:</label>
             <div class="color-preview">
-              <input type="color" id="bg-color" value="#ffffff">
+              <input type="color" id="primarycolor" value="#ffffff">
               <span class="color-name" id="bg-color-name">#FFFFFF</span>
             </div>
           </div>
@@ -77,14 +88,14 @@
           <div class="form-group">
             <label>Sekundärfärg:</label>
             <div class="color-preview">
-              <input type="color" id="text-color" value="#333333">
+              <input type="color" id="secondarycolor" value="#333333">
               <span class="color-name" id="text-color-name">#333333</span>
             </div>
           </div>
         </form>
-      </div>
-      <div class="preview-controls">
+        <div class="preview-controls">
           <button type="button" class="save-button" id="apply-button">Tillämpa ändringar</button>
+      </div>
       </div>
       <!--
             <div class="preview-panel">

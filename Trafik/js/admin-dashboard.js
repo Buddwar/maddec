@@ -100,6 +100,17 @@ let currentSettings = {
    */
   function applySettings() {
     console.log('Applying settings to backend…', currentSettings);
+
+    data = {
+      'weekly': document.getElementById('weekly').value,
+      'monthly': document.getElementById('monthly').value,
+      'yearly': document.getElementById('yearly').value,
+      'primarycolor': document.getElementById('primarycolor').value,
+      'secondarycolor': document.getElementById('secondarycolor').value,
+      'fontstyle': document.getElementById('font-family').value,
+      'fontsize': document.getElementById('fontsize').value
+  }
+    update_organisation(data);
     showSuccessMessage();
   }
   
@@ -161,25 +172,16 @@ let currentSettings = {
       console.log('Det här är organisationen som finns', jsonResult);
 
         //Kika ifall det gick bra att hämta data om organisationen
-      if(jsonResult['Success']){
+      /*if(jsonResult['Success']){
         document.getElementById('font-family').value = jsonResult['Data']['fontstyle'];
         document.getElementById('bg-color').value = jsonResult['Data']['primarycolor'];
         console.log('Hämtning av färger osv är genomfört och applicerat.');
-      }
+      }*/
     }
 
   //Anropa funktionen och skicka in den data som behövs(dict)
   async function update_organisation(data){
     //Det här är den typen av data som kan uppdateras för organisationer
-    data = {
-      'weekly': 90,
-      'monthly': 60,
-      'yearly': 15000,
-      'primarycolor': 'blue',
-      'secondarycolor': 'red',
-      'fontstyle': 'Times New Roman',
-      'fontsize': '12'
-  }
     console.log(data);
       let response = await fetch('https://bergstrom.pythonanywhere.com/update_organisation', {
         method: 'POST',
@@ -193,6 +195,7 @@ let currentSettings = {
     if (response.ok){
       let jsonResult = await response.json();
       console.log('Organisationen har uppdaterats: ', jsonResult);
+      console.log('Detta är organisationen nu efter uppdatering: ', load_organisation())
     }
   }
   
