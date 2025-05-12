@@ -296,9 +296,13 @@ window.addEventListener('click', (e) => {
 
 subscribeForm.addEventListener('submit', async (e) => {
   e.preventDefault();
+    let url_org = new URLSearchParams(window.location.search);
+    let orgnr = url_org.get('orgnr');
+
   const formData = {
     /*Jag lade till andra fält som behövs, fnamn, lname osv
     dock så behöver vi hämta organisationsnummer också här innan vi sparar undan all data*/
+
     fname: document.getElementById('subscriber-fname').value,
     lname: document.getElementById('subscriber-lname').value,
     email: document.getElementById('subscriber-email').value,
@@ -307,7 +311,7 @@ subscribeForm.addEventListener('submit', async (e) => {
     start: new Date().toJSON().slice(0,10),
     countrycode: document.getElementById('subscriber-state').value,
     subtype: document.getElementById('subscriber-frequency').value,
-    orgnr: '4444456789',//Exempel, denna får hämtas ifrån Iframen
+    orgnr: orgnr,//Exempel, denna får hämtas ifrån Iframen
     paymethod: 'Mastercard'//Exempel, denna får hämtas ifrån betalformuläret
   };
   
@@ -329,7 +333,18 @@ subscribeForm.addEventListener('submit', async (e) => {
 });
 
 // Initialize map on page load
-//document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', async () => {
+  //Hämta orgnr ifrån URL
+  let url_org = new URLSearchParams(window.location.search);
+  let orgnr = url_org.get('orgnr');
+  //Stoppa in orgnr i denna funktion när vi anropar
+  let result = await load_organisation(orgnr);
+  //Använd resultatet som vi får tillbaka
+  document.getElementById('subscribe-button').style.backgroundColor = result['Data']['primarycolor'];
+  document.getElementById('login-button').style.backgroundColor = result['Data']['primarycolor'];
+
+  document.body.style.backgroundColor = result['Data']['secondarycolor'];
+});
   // Initialize the map (already exported from map-init.js)
   //console.log('Map initialized:', map);
 
@@ -369,6 +384,8 @@ subscribeForm.addEventListener('submit', async (e) => {
 
 /*Anropa denna funktion och stoppa in 
 data för användaren*/
+/*Anropa denna funktion och stoppa in 
+data för användaren*/
 async function create_subscriber(data){
 
     let response = await fetch('https://bergstrom.pythonanywhere.com/create_user', {
@@ -382,3 +399,33 @@ async function create_subscriber(data){
     let jsonResult = await response.json();
     return jsonResult;//Och vi returnerar det till vem som anropade functionen
 }
+
+//Ladda organisationen ifråga och hämta dess värden
+  async function load_organisation(orgnr){
+    let data = {'orgnr': orgnr};
+        let response = await fetch('https://bergstrom.pythonanywhere.com/get_organisation', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },//Här skickar med vår sessionscookie från serversidan
+          //o det är ju då för att kontrollera VEM det är som är inloggad
+          body: JSON.stringify(data)
+      });
+      let jsonResult = await response.json();
+      return jsonResult;
+  }
+
+  /*Här hämtar vi ut orgnr ifrån URL */
+  function getUrl(){
+    let url_org = new URLSearchParams(window.location.search);
+    return url_org.get('orgnr');
+  }
+/*Så när användaren klickar på knappen så skcikar vi med orgnr i URLen till den nya sidan */
+  let login_button = document.getElementById('login-button');
+  login_button.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    let orgnr = getUrl();
+    let login_url = `user-login.html?orgnr=${orgnr}`;
+    window.location.href = login_url;
+  })

@@ -13,7 +13,9 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
     console.log('Resultatet av inlogg:', result)
     if(result['Success']){
         //Redirect to subscription page after successful login
-        window.location.href = 'subscription.html';
+            let orgnr = getUrl();
+            let login_url = `user-login.html?orgnr=${orgnr}`;
+            window.location.href = login_url;
     }
 });
 
@@ -38,3 +40,9 @@ async function login(email, passw){
     console.log('Resultatet', jsonResult);
     return jsonResult;
 }
+
+  /*Här hämtar vi ut orgnr ifrån URL */
+function getUrl(){
+    let url_org = new URLSearchParams(window.location.search);
+    return url_org.get('orgnr');
+  }
