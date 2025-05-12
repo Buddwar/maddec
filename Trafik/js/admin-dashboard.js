@@ -170,6 +170,7 @@ let currentSettings = {
           document.getElementById('font-family').value = jsonResult['Data']['fontstyle'];
           document.getElementById('bg-color').value = jsonResult['Data']['primarycolor'];
           document.getElementById('button-color').value = jsonResult['Data']['secondarycolor'];
+          console.log('Hämtning av färger osv är genomfört och applicerat.');
         }
       }
     }
