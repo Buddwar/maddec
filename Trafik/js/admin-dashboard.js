@@ -171,13 +171,13 @@ let currentSettings = {
       let jsonResult = await response.json();
       console.log('Det här är organisationen som finns', jsonResult);
       if(jsonResult['Success']){
-        document.getElementById('weekly').value = jsonResult['weekly'];
-        document.getElementById('monthly').value = jsonResult['monthly'];
-        document.getElementById('yearly').value = jsonResult['yearly'];
-        document.getElementById('primarycolor').value = jsonResult['primarycolor'];
-        document.getElementById('secondarycolor').value = jsonResult['secondarycolor'];
-        document.getElementById('font-family').value = jsonResult['fontstyle'];
-        document.getElementById('fontsize').value = jsonResult['fontsize'];
+        document.getElementById('weekly').value = jsonResult['Data']['weekly'];
+        document.getElementById('monthly').value = jsonResult['Data']['monthly'];
+        document.getElementById('yearly').value = jsonResult['Data']['yearly'];
+        document.getElementById('primarycolor').value = jsonResult['Data']['primarycolor'];
+        document.getElementById('secondarycolor').value = jsonResult['Data']['secondarycolor'];
+        document.getElementById('font-family').value = jsonResult['Data']['fontstyle'];
+        document.getElementById('fontsize').value = jsonResult['Data']['fontsize'];
       }
 
     }
