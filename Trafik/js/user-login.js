@@ -14,7 +14,7 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
     if(result['Success']){
         //Redirect to subscription page after successful login
             let orgnr = getUrl();
-            let login_url = `user-login.html?orgnr=${orgnr}`;
+            let sbuscription_url = `subscription.html?orgnr=${orgnr}`;
             window.location.href = login_url;
     }
 });
