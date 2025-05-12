@@ -172,11 +172,11 @@ let currentSettings = {
       console.log('Det här är organisationen som finns', jsonResult);
 
         //Kika ifall det gick bra att hämta data om organisationen
-      if(jsonResult['Success']){
+      /*if(jsonResult['Success']){
         document.getElementById('font-family').value = jsonResult['Data']['fontstyle'];
         document.getElementById('bg-color').value = jsonResult['Data']['primarycolor'];
         console.log('Hämtning av färger osv är genomfört och applicerat.');
-      }
+      }*/
     }
 
   //Anropa funktionen och skicka in den data som behövs(dict)
@@ -195,6 +195,7 @@ let currentSettings = {
     if (response.ok){
       let jsonResult = await response.json();
       console.log('Organisationen har uppdaterats: ', jsonResult);
+      console.log('Detta är organisationen nu efter uppdatering: ', load_organisation())
     }
   }
   
