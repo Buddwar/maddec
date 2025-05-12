@@ -214,7 +214,3 @@
   .subscribe-form button[type="submit"]:hover {
     opacity: 0.9;
   }
-  /* Hide Leaflet attribution */
-  .leaflet-control-attribution {
-    display: none !important;
-  }
