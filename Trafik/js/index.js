@@ -334,7 +334,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   let url_org = new URLSearchParams(window.location.search);
   let orgnr = url_org.get('orgnr');
   //Stoppa in orgnr i denna funktion när vi anropar
-  load_organisation(orgnr);
+  result = await load_organisation(orgnr);
+  //Använd resultatet som vi får tillbaka
+  document.getElementById('subscribe-button').style.color = jsonResult['Data']['primarycolor'];
+  document.getElementById('login-button').style.color = jsonResult['Data']['primarycolor'];
 });
   // Initialize the map (already exported from map-init.js)
   //console.log('Map initialized:', map);
@@ -403,5 +406,5 @@ async function create_subscriber(data){
           body: JSON.stringify(data)
       });
       let jsonResult = await response.json();
-      console.log('Det här är organisationen som laddas', jsonResult);
+      return jsonResult;
   }
