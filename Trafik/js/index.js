@@ -296,9 +296,13 @@ window.addEventListener('click', (e) => {
 
 subscribeForm.addEventListener('submit', async (e) => {
   e.preventDefault();
+    let url_org = new URLSearchParams(window.location.search);
+    let orgnr = url_org.get('orgnr');
+
   const formData = {
     /*Jag lade till andra fält som behövs, fnamn, lname osv
     dock så behöver vi hämta organisationsnummer också här innan vi sparar undan all data*/
+
     fname: document.getElementById('subscriber-fname').value,
     lname: document.getElementById('subscriber-lname').value,
     email: document.getElementById('subscriber-email').value,
@@ -307,7 +311,7 @@ subscribeForm.addEventListener('submit', async (e) => {
     start: new Date().toJSON().slice(0,10),
     countrycode: document.getElementById('subscriber-state').value,
     subtype: document.getElementById('subscriber-frequency').value,
-    orgnr: '4444456789',//Exempel, denna får hämtas ifrån Iframen
+    orgnr: orgnr,//Exempel, denna får hämtas ifrån Iframen
     paymethod: 'Mastercard'//Exempel, denna får hämtas ifrån betalformuläret
   };
   
@@ -338,6 +342,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   //Använd resultatet som vi får tillbaka
   document.getElementById('subscribe-button').style.backgroundColor  = result['Data']['primarycolor'];
   document.getElementById('login-button').style.backgroundColor  = result['Data']['primarycolor'];
+  document.getElementById('subscribe-button').style.color  = result['Data']['secondarycolor'];
+  document.getElementById('login-button').style.color  = result['Data']['secondarycolor'];
+
   document.body.style.backgroundColor = result['Data']['secondarycolor'];
 });
   // Initialize the map (already exported from map-init.js)
