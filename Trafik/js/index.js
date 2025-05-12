@@ -330,8 +330,11 @@ subscribeForm.addEventListener('submit', async (e) => {
 
 // Initialize map on page load
 document.addEventListener('DOMContentLoaded', async () => {
-  //Hämta orgnr ifrån iframe
-  load_organisation('4444456789');
+  //Hämta orgnr ifrån URL
+  let url_org = new URLSearchParams(window.location.search);
+  let orgnr = url_org.get('orgnr');
+  //Stoppa in orgnr i denna funktion när vi anropar
+  load_organisation(orgnr);
 });
   // Initialize the map (already exported from map-init.js)
   //console.log('Map initialized:', map);
