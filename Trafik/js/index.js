@@ -329,7 +329,10 @@ subscribeForm.addEventListener('submit', async (e) => {
 });
 
 // Initialize map on page load
-//document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', async () => {
+  //Hämta orgnr ifrån iframe
+  load_organisation('4444456789');
+});
   // Initialize the map (already exported from map-init.js)
   //console.log('Map initialized:', map);
 
@@ -369,6 +372,8 @@ subscribeForm.addEventListener('submit', async (e) => {
 
 /*Anropa denna funktion och stoppa in 
 data för användaren*/
+/*Anropa denna funktion och stoppa in 
+data för användaren*/
 async function create_subscriber(data){
 
     let response = await fetch('https://bergstrom.pythonanywhere.com/create_user', {
@@ -382,3 +387,18 @@ async function create_subscriber(data){
     let jsonResult = await response.json();
     return jsonResult;//Och vi returnerar det till vem som anropade functionen
 }
+
+//Ladda organisationen ifråga och hämta dess värden
+  async function load_organisation(orgnr){
+    let data = {'orgnr': orgnr};
+        let response = await fetch('https://bergstrom.pythonanywhere.com/get_organisation', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },//Här skickar med vår sessionscookie från serversidan
+          //o det är ju då för att kontrollera VEM det är som är inloggad
+          body: JSON.stringify(data)
+      });
+      let jsonResult = await response.json();
+      console.log('Det här är organisationen som laddas', jsonResult);
+  }
