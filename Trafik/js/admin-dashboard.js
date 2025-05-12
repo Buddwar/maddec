@@ -133,11 +133,7 @@ let currentSettings = {
 
   window.addEventListener('load', () => {
     updatePreview();
-    //Exempelvis ladda organisationen ifråga när sidan laddas
-    load_organisation();
-    //Organsiationen genomför en uppdatering
-    update_organisation();//<----tar emot en dict (se function vad det är för typ av data som går att uppdatera)
-    //Hämta organisationen igen, nå sånt
+    //Exempelvis ladda organisationen ifråga när sidan laddas och sätt alla färger
     load_organisation();
   });
   
@@ -161,17 +157,15 @@ let currentSettings = {
           credentials: 'include',
           body: JSON.stringify({})
       });
-      if(response.ok){
-        let jsonResult = await response.json();
-        console.log(jsonResult);
+      let jsonResult = await response.json();
+      console.log('Det här är organisationen som finns', jsonResult);
 
         //Kika ifall det gick bra att hämta data om organisationen
-        if(jsonResult['Success']){
-          document.getElementById('font-family').value = jsonResult['Data']['fontstyle'];
-          document.getElementById('bg-color').value = jsonResult['Data']['primarycolor'];
-          document.getElementById('button-color').value = jsonResult['Data']['secondarycolor'];
-          console.log('Hämtning av färger osv är genomfört och applicerat.');
-        }
+      if(jsonResult['Success']){
+        document.getElementById('font-family').value = jsonResult['Data']['fontstyle'];
+        document.getElementById('bg-color').value = jsonResult['Data']['primarycolor'];
+        document.getElementById('button-color').value = jsonResult['Data']['secondarycolor'];
+        console.log('Hämtning av färger osv är genomfört och applicerat.');
       }
     }
 
