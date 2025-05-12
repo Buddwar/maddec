@@ -170,6 +170,16 @@ let currentSettings = {
       });
       let jsonResult = await response.json();
       console.log('Det här är organisationen som finns', jsonResult);
+      if(jsonResult['Success']){
+        document.getElementById('weekly').value = jsonResult['weekly'];
+        document.getElementById('monthly').value = jsonResult['monthly'];
+        document.getElementById('yearly').value = jsonResult['yearly'];
+        document.getElementById('primarycolor').value = jsonResult['primarycolor'];
+        document.getElementById('secondarycolor').value = jsonResult['secondarycolor'];
+        document.getElementById('font-family').value = jsonResult['fontstyle'];
+        document.getElementById('fontsize').value = jsonResult['fontsize'];
+      }
+
     }
 
   //Anropa funktionen och skicka in den data som behövs(dict)
@@ -191,6 +201,7 @@ let currentSettings = {
     }
   }
 
+  //Avbryt knapp, anropar log-out functionen
   document.getElementById('cancel-button').addEventListener('click', logout_organisation);
   
 
