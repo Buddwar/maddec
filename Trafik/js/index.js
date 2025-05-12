@@ -334,10 +334,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   let url_org = new URLSearchParams(window.location.search);
   let orgnr = url_org.get('orgnr');
   //Stoppa in orgnr i denna funktion när vi anropar
-  result = await load_organisation(orgnr);
+  let result = await load_organisation(orgnr);
   //Använd resultatet som vi får tillbaka
-  document.getElementById('subscribe-button').style.color = jsonResult['Data']['primarycolor'];
-  document.getElementById('login-button').style.color = jsonResult['Data']['primarycolor'];
+  document.getElementById('subscribe-button').style.color = result['Data']['primarycolor'];
+  document.getElementById('login-button').style.color = result['Data']['primarycolor'];
 });
   // Initialize the map (already exported from map-init.js)
   //console.log('Map initialized:', map);
