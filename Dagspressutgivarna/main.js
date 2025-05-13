@@ -99,18 +99,21 @@ async function getExistingOrganisations(){
         list_element.classList.add('list-group-item');//Slänger in en bootstrap klass så de blir snyggare
         list_element.classList.add('list_element');
         remove_button = document.createElement('button');
-
+        sendmail_button = document.createElement('button');
         //Lägger till en bootstrap icon på knappen
         remove_button.innerHTML = '<i class="bi bi-trash h5"></i>';
+        sendmail_button.innerHTML = '<i class="bi bi-envelope-fill"></i>';
         //Appenda paragrafen till varje list element
+        list_element.appendChild(sendmail_button);
         list_element.appendChild(orgnr_para);
         list_element.appendChild(orgname_para);
         list_element.appendChild(orgemail_para);
-        //Varje list-element får sin egna knapp
+        //Varje list-element får sin egna knapp för radering
         list_element.appendChild(remove_button);
         /*Tar bort borders med hjälp av en klass
         bara så den ska smälta in i bakgrunden*/
         remove_button.classList.add('no_border_button');
+        sendmail_button.classList.add('no_border_button');
         
 
 
@@ -121,9 +124,33 @@ async function getExistingOrganisations(){
             //Varje 
             delete_organisation(value['orgnr']);
         });
+        sendmail_button.addEventListener('click', function(){
+            //Skicka iväg ett mail till företaget
+            send_email(value['orgnr'], value['email']);
+        });
+
+
+
         //Och det appendas till UL elementet som finns i DOM
         company_list.appendChild(list_element);
-    }
+
+}
+}
+
+async function send_email(orgnr, email){
+    //Datan som vi ska skicka iväg
+    data = {'orgnr': orgnr, 'email': email};
+    console.log(orgnr);
+    //Anropet till routen
+    let response = await fetch ('https://bergstrom.pythonanywhere.com/resend_email',{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+    let jsonResult = await response.json();
+    console.log(jsonResult);
 }
 
 /*Borttagning av företag*/
