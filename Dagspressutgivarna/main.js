@@ -151,6 +151,10 @@ async function send_email(orgnr, email){
     });
     let jsonResult = await response.json();
     console.log(jsonResult);
+    if(jsonResult['Success']){
+        //Om det gick bra så visar vi ett meddelande
+        document.getElementById('alert_message').classList.add('show');
+    }
 }
 
 /*Borttagning av företag*/
