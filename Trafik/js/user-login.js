@@ -19,6 +19,13 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
     }
 });
 
+document.getElementById('back_button').addEventListener('click', (e) => {
+    e.preventDefault();
+    let orgnr = getUrl();
+    let index_url = `index.html?orgnr=${orgnr}`;
+    window.location.href = index_url;
+});
+
 async function login(email, passw){
     user_credentials = {'email': email, 'passw': passw}
 
