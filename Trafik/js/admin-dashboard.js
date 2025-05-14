@@ -179,6 +179,11 @@ let currentSettings = {
         document.getElementById('font-family').value = jsonResult['Data']['fontstyle'];
         document.getElementById('fontsize').value = jsonResult['Data']['fontsize'];
       }
+      else{
+        //Dirigera om användaren till login-sidan
+        console.log('Problem med att hämta organisationen');
+        logout_organisation();
+      }
 
     }
 
@@ -197,7 +202,12 @@ let currentSettings = {
 
     if (response.ok){
       let jsonResult = await response.json();
-      console.log('Organisationen har uppdaterats: ', jsonResult);
+      if (jsonResult['Success']){
+        console.log('Organisationen har uppdaterats: ', jsonResult);
+      }
+      else{
+        console.log('Problem med att uppdatera organisationen: ', jsonResult['Message']);
+      }
     }
   }
 

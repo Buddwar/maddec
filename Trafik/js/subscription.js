@@ -12,7 +12,7 @@ let countrycodes = {
 "13": "Hallands län",
 "14": "Västra Götalands län",
 "17": "Värmlands län",
-"182": "Örebro län",
+"18": "Örebro län",
 "19": "Västmanlands län",
 "20": "Dalarnas län",
 "21": "Gävleborgs län",
