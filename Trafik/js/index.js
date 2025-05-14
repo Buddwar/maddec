@@ -364,6 +364,7 @@ subscribeForm.addEventListener('submit', async (e) => {
     subscribeForm.reset();
   }
   else{
+    //Exempelvis om användaren redan finns i databasen
     console.log('Det var problem att skapa upp prenumeranten.', result['Message']);
   }
 });
@@ -381,47 +382,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   document.body.style.backgroundColor = result['Data']['secondarycolor'];
 });
-  // Initialize the map (already exported from map-init.js)
-  //console.log('Map initialized:', map);
-
-  // Fetch and display traffic situations
-  //const situationUrl = `https://trafikverket.onrender.com/traffic/group3/situation?county=01`;
-  //await getSituations(situationUrl);
-
-  // Fetch and display cameras
-  //const cameraUrl = `https://trafikverket.onrender.com/traffic/group3/cameras?county=01`;
-  //await getCameras(cameraUrl);
-
-  // Fetch and display road conditions
-  //const roadConditionUrl = `https://trafikverket.onrender.com/traffic/group3/roadcondition?county=01`;
-  //await getRoadConditions(roadConditionUrl);
-
-  //const swiper = new Swiper('.traffic-swiper', {
-    //direction: 'horizontal', // or 'vertical'
-    //loop: true,
-    //slidesPerView: 1,
-    //spaceBetween: 10,
-    //autoplay: {
-        //delay: 3000, // 3 seconds
-        //disableOnInteraction: false,
-    //},
-    //navigation: {
-        //nextEl: '.swiper-button-next',
-        //prevEl: '.swiper-button-prev',
-    //},
-    //pagination: {
-        //el: '.swiper-pagination',
-        //clickable: true,
-    //},
-  //});
-
-  //console.log('Swiper initialized:', swiper);
-//});
 
 /*Anropa denna funktion och stoppa in 
-data för användaren*/
-/*Anropa denna funktion och stoppa in 
-data för användaren*/
+data för användaren
+
+dock så måste en betalning ske innan detta*/
 async function create_subscriber(data){
 
     let response = await fetch('https://bergstrom.pythonanywhere.com/create_user', {
