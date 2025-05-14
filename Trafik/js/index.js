@@ -322,7 +322,11 @@ subscribeForm.addEventListener('submit', async (e) => {
   checkoutButton.addEventListener('click', function () {
     //Vi genomför ett anrop till vår backend för att skapa en checkout-session
     fetch('https://bergstrom.pythonanywhere.com/create-checkout', {
-      method: 'POST'
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData)
     })
     .then(response => response.json())
     .then(session => {
@@ -339,10 +343,10 @@ subscribeForm.addEventListener('submit', async (e) => {
   });
 
 
-  document.getElementById(payment-button)
+  //document.getElementById(payment-button)
 
   // send this data to backend
-  console.log('Subscription data:', formData);//Finns en funktion längre ner i filen
+  //console.log('Subscription data:', formData);//Finns en funktion längre ner i filen
   /*Dock så behöver vi genomföra en betalning innan vi sparar undan användaren*/
 
   //exempel på anrop till functionen
