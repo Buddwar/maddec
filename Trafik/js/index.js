@@ -336,14 +336,21 @@ subscribeForm.addEventListener('submit', async (e) => {
   /* Skapar upp stripe med min public key och
   skickar användaren till stripe för betalning */
   const stripe = Stripe("pk_test_51ROEEUQa1oVulqg0SHQKcwrGlBDFcySZXwTtIaC5MNpTBnRntmiEnhPq5q6jdnqhgPi5Wy3omP8oCU4kgbJoSyd2005Rzsk7dk");
-  const paymentResult = await stripe.redirectToCheckout({
+  /*const paymentResult = await stripe.redirectToCheckout({
     sessionId: session.id
-  });
+  });*/
 
+  stripe.redirectToCheckout({
+    sessionId: session.id}).then(function(result) {
+    if (result.error) {
+      alert(result.error.message);
+    }
+  });
+  
   /* Felhantering som kastar upp en varning */
-  if (paymentResult.error) {
+  /*if (paymentResult.error) {
     alert(paymentResult.error.message);
-  }
+  }*/
 
 
 
