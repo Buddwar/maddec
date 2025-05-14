@@ -316,7 +316,7 @@ subscribeForm.addEventListener('submit', async (e) => {
   };
   
   /* Ser till att användaren valt en betalningsmethod */
-  if (!formData['payment-method']) {
+  if (!formData['paymethod']) {
     alert('Vänligen välj en betalningsmetod.');
     return;
   }   
@@ -355,7 +355,7 @@ subscribeForm.addEventListener('submit', async (e) => {
   /*Dock så behöver vi genomföra en betalning innan vi sparar undan användaren*/
 
   //exempel på anrop till functionen
-  
+
   /*let result = await create_subscriber(formData);
   if (result['Success']){
     // Show success message and close modal
@@ -369,8 +369,8 @@ subscribeForm.addEventListener('submit', async (e) => {
     subscribeModal.style.display = 'none';
     subscribeForm.reset();
     alert('Det var problem att skapa upp prenumeranten.', result['Message']);
-  }
-});*/
+  }*/
+});
 
 // Initialize map on page load
 document.addEventListener('DOMContentLoaded', async () => {
