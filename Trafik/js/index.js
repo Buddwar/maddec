@@ -319,26 +319,39 @@ checkoutButton.addEventListener('click', async (e) => {
     orgnr: orgnr,
     paymethod: document.getElementById('payment-method').value,//Denna är troligtvis oanvändbar vid detta läge, men fortfarande något som behövs hos varje prenumerant
   };
-
-  try {
-    const response = await fetch('https://bergstrom.pythonanywhere.com/create-checkout', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    });
-
-    const session = await response.json();
-    if (session.id) {
-      await stripe.redirectToCheckout({ sessionId: session.id });
-    } 
-    else if(session.Message)
+  if (paymethod == 'credit-card')
     {
-      alert(session.Message);
+    try {
+      //Vi gör ett anropt till vår backend för att skapa en checkout-session
+      const response = await fetch('https://bergstrom.pythonanywhere.com/create-checkout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },//vi skickar över formulärs data
+        body: JSON.stringify(formData),
+      });
+      //Om vi får tillbaka en session så skickar vi iväg användaren till stripe
+      const session = await response.json();
+      if (session.id) {
+        //här sker omdirigeringen till stripe
+        await stripe.redirectToCheckout({ sessionId: session.id });
+      }//får vi tillbaka något annt än ett id så gick troligtvis något fel i backend
+      else if(session.Message)
+      {//Det kan möjligtvis vara så att användaren redan finns i databasen
+        alert(session.Message);
+      }
+    } 
+    catch (error) 
+    {
+      console.error('Fel vid fetch:', error);
     }
-  } catch (error) {
-    console.error('Fel vid fetch:', error);
+  }
+  else if (paymethod == 'invoice')
+  {
+    console.log('Betalning via faktura');
+  }
+  else if (paymethod == 'swish'){
+    console.log('Betalning via swish');
   }
 });
 
