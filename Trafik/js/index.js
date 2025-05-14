@@ -349,6 +349,29 @@ checkoutButton.addEventListener('click', async (e) => {
   else if (formData.paymethod == 'invoice')
   {
     console.log('Betalning via faktura');
+    try
+    {
+      //Vi gör ett anrop till vår route för att skapa upp en faktura hos Stripe
+      let response = await fetch('https://bergstrom.pythonanywhere.com/create_invoice', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },//vi skickar över formulärs data
+      body: JSON.stringify(formData),
+    });
+    let result = await response.json();
+    if (result['Success'])
+      {
+      alert('Fakturan har skapats och skickas till din e-postadress!')
+    }
+    else{
+      alert('Det uppstod problem med att skapa fakturan.\nVänligen försök igen eller välj ett annat betalsätt.')
+    }
+    }
+    catch (error) {
+      console.error('Fel vid fetch:', error);
+    }
+
   }
   else if (formData.paymethod == 'swish'){
     console.log('Betalning via swish');
