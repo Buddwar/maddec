@@ -310,10 +310,9 @@ subscribeForm.addEventListener('submit', async (e) => {
     phone: document.getElementById('subscriber-phone').value,
     start: new Date().toJSON().slice(0,10),
     countrycode: document.getElementById('subscriber-state').value,
-
-    subtype: document.getElementById('paymrnt-method').value,
-    orgnr: '4444456789',//Exempel, denna får hämtas ifrån Iframen
-    paymethod: 'Mastercard'//Exempel, denna får hämtas ifrån betalformuläret
+    subtype: document.getElementById('subscriber-frequency').value,
+    orgnr: orgnr,//Exempel, denna får hämtas ifrån Iframen
+    paymethod: document.getElementById('payment-method').value,
   };
   
   /* Ser till att användaren valt en betalningsmethod */
