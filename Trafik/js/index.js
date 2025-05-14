@@ -294,7 +294,7 @@ window.addEventListener('click', (e) => {
   }
 });
 
-const stripe = Stripe('pk_test_51ROEEUQa1oVulqg0SHQKcwrGlBDFcySZXwTtIaC5MNpTBnRntmiEnhPq5q6jdnqhgPi5Wy3omP8oCU4kgbJoSyd2005Rzsk7dk');
+const stripe = Stripe('pk_test_51RHnEg4hITlgGwkum4TAOWSVSN0itVczKgwRT9JvUeS705gnwFwCdUmequjd2fp4sL5SBesuZxm5aVMLIz713Am500KzFPVk8L');
 const checkoutButton = document.getElementById('checkout-button');
 
 checkoutButton.addEventListener('click', async (e) => {
