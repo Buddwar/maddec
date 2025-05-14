@@ -314,6 +314,26 @@ subscribeForm.addEventListener('submit', async (e) => {
     orgnr: orgnr,//Exempel, denna får hämtas ifrån Iframen
     paymethod: document.getElementById('payment-method').value,
   };
+
+  const stripe = Stripe('pk_test_51ROEEUQa1oVulqg0SHQKcwrGlBDFcySZXwTtIaC5MNpTBnRntmiEnhPq5q6jdnqhgPi5Wy3omP8oCU4kgbJoSyd2005Rzsk7dk');
+  const checkoutButton = document.getElementById('checkout-button');
+
+  checkoutButton.addEventListener('click', function () {
+    fetch('https://bergstrom.pythonanywhere.com/create-checkout', {
+      method: 'POST'
+    })
+    .then(response => response.json())
+    .then(session => {
+      if (session.id) {
+        stripe.redirectToCheckout({ sessionId: session.id });
+      } else {
+        console.error('Inget session-ID i svaret:', session);
+      }
+    })
+    .catch(error => {
+      console.error('Fel vid fetch:', error);
+    });
+  });
   
   /* Ser till att användaren valt en betalningsmethod */
   //if (!formData['paymethod']) {
