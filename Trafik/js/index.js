@@ -315,32 +315,48 @@ subscribeForm.addEventListener('submit', async (e) => {
     paymethod: document.getElementById('payment-method').value,
   };
 
-  const stripe = Stripe('pk_test_51ROEEUQa1oVulqg0SHQKcwrGlBDFcySZXwTtIaC5MNpTBnRntmiEnhPq5q6jdnqhgPi5Wy3omP8oCU4kgbJoSyd2005Rzsk7dk');
-  const checkoutButton = document.getElementById('checkout-button');
+const stripe = Stripe('pk_test_51ROEEUQa1oVulqg0SHQKcwrGlBDFcySZXwTtIaC5MNpTBnRntmiEnhPq5q6jdnqhgPi5Wy3omP8oCU4kgbJoSyd2005Rzsk7dk');
+const checkoutButton = document.getElementById('checkout-button');
 
-  //Användaren klickade på betala knappen
-  checkoutButton.addEventListener('click', function () {
-    //Vi genomför ett anrop till vår backend för att skapa en checkout-session
-    fetch('https://bergstrom.pythonanywhere.com/create-checkout', {
+checkoutButton.addEventListener('click', async (e) => {
+  e.preventDefault(); // Hindra standardbeteende
+
+  let url_org = new URLSearchParams(window.location.search);
+  let orgnr = url_org.get('orgnr');
+
+  const formData = {
+    fname: document.getElementById('subscriber-fname').value,
+    lname: document.getElementById('subscriber-lname').value,
+    email: document.getElementById('subscriber-email').value,
+    passw: document.getElementById('subscriber-passw').value,
+    phone: document.getElementById('subscriber-phone').value,
+    start: new Date().toJSON().slice(0,10),
+    countrycode: document.getElementById('subscriber-state').value,
+    subtype: document.getElementById('subscriber-frequency').value,
+    orgnr: orgnr,
+    paymethod: document.getElementById('payment-method').value,
+  };
+
+  try {
+    const response = await fetch('https://bergstrom.pythonanywhere.com/create-checkout', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(formData)
-    })
-    .then(response => response.json())
-    .then(session => {
-      if (session.id) {//Om vi får tillbaka ett session-ID så kan vi gå vidare
-        //Dirigera om användaren till stripe checkout
-        stripe.redirectToCheckout({ sessionId: session.id });
-      } else {
-        console.error('Inget session-ID i svaret:', session);
-      }
-    })
-    .catch(error => {
-      console.error('Fel vid fetch:', error);
+      body: JSON.stringify(formData),
     });
-  });
+
+    const session = await response.json();
+
+    if (session.id) {
+      await stripe.redirectToCheckout({ sessionId: session.id });
+    } else {
+      console.error('Inget session-ID i svaret:', session);
+    }
+  } catch (error) {
+    console.error('Fel vid fetch:', error);
+  }
+});
 
 
   //document.getElementById(payment-button)
