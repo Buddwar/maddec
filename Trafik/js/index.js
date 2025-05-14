@@ -303,11 +303,46 @@ subscribeForm.addEventListener('submit', async (e) => {
     phone: document.getElementById('subscriber-phone').value,
     start: new Date().toJSON().slice(0,10),
     countrycode: document.getElementById('subscriber-state').value,
-    subtype: document.getElementById('subscriber-frequency').value,
+    subtype: document.getElementById('paymrnt-method').value,
     orgnr: '4444456789',//Exempel, denna får hämtas ifrån Iframen
     paymethod: 'Mastercard'//Exempel, denna får hämtas ifrån betalformuläret
   };
   
+  /* Ser till att användaren valt en betalningsmethod */
+  if (!formData.payment-method) {
+    alert('Vänligen välj en betalningsmetod.');
+    return;
+  }   
+  
+  /* Skickar POST anrop  till flask */
+  const response = await fetch('/create-checkout',{
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(formData) /* Skickar data från formData */
+  });
+
+  /* Väntar in svar från Flask */
+  const session = await response.json();
+
+  /* Skapar upp stripe med min public key och
+  skickar användaren till stripe för betalning */
+  const stripe = Stripe("pk_test_51ROEEUQa1oVulqg0SHQKcwrGlBDFcySZXwTtIaC5MNpTBnRntmiEnhPq5q6jdnqhgPi5Wy3omP8oCU4kgbJoSyd2005Rzsk7dk");
+  const paymentResult = await stripe.redirectToCheckout({
+    sessionId: session.id
+  });
+
+  /* Felhantering som kastar upp en varning */
+  if (paymentResult.error) {
+    alert(paymentResult.error.message);
+  }
+
+
+
+
+  document.getElementById(payment-button)
+
   // send this data to backend
   console.log('Subscription data:', formData);//Finns en funktion längre ner i filen
   /*Dock så behöver vi genomföra en betalning innan vi sparar undan användaren*/
