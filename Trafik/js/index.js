@@ -329,6 +329,9 @@ subscribeForm.addEventListener('submit', async (e) => {
   }
   else{
     console.log('Det var problem att skapa upp prenumeranten.', result['Message']);
+    subscribeModal.style.display = 'none';
+    subscribeForm.reset();
+    alert('Det var problem att skapa upp prenumeranten.', result['Message']);
   }
 });
 
