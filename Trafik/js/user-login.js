@@ -13,8 +13,17 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
     console.log('Resultatet av inlogg:', result)
     if(result['Success']){
         //Redirect to subscription page after successful login
-        window.location.href = 'subscription.html';
+            let orgnr = getUrl();
+            let subscription_url = `subscription.html?orgnr=${orgnr}`;
+            window.location.href = subscription_url;
     }
+});
+
+document.getElementById('back_button').addEventListener('click', (e) => {
+    e.preventDefault();
+    let orgnr = getUrl();
+    let index_url = `index.html?orgnr=${orgnr}`;
+    window.location.href = index_url;
 });
 
 async function login(email, passw){
@@ -38,3 +47,9 @@ async function login(email, passw){
     console.log('Resultatet', jsonResult);
     return jsonResult;
 }
+
+  /*Här hämtar vi ut orgnr ifrån URL */
+function getUrl(){
+    let url_org = new URLSearchParams(window.location.search);
+    return url_org.get('orgnr');
+  }

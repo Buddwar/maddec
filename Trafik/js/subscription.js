@@ -53,7 +53,11 @@ document.getElementById('cancel-button').addEventListener('click', async() => {
     //Anropa databasen och logga ut användaren
     let result = await logout_user();
     if(result['Success']){//Om det gick bra med att logga ut
-        window.location.href = 'index.html';//Dirigera om användaren
+        let orgnr = getUrl();
+        let index_url = `index.html?orgnr=${orgnr}`;
+        window.location.href = index_url;
+
+        //window.location.href = 'index.html';//Dirigera om användaren
     }
     else{
         console.log('Problem uppstod med att logga ut användaren...');
@@ -76,7 +80,9 @@ window.addEventListener('load', async () => {
     }
     else{//Något gick tokigt med hämtningen av data, t. ex. användaren är inte inloggad?
         console.log(subscriber_data)
-        window.location.href = 'index.html';
+        let orgnr = getUrl();
+        let index_url = `index.html?orgnr=${orgnr}`;
+        window.location.href = index_url;
     }
 });
 
@@ -125,3 +131,8 @@ async function update_user_details(countrycode){
     let jsonResult = await response.json();
     return jsonResult;
   }
+/*Här hämtar vi ut orgnr ifrån URL */
+function getUrl(){
+    let url_org = new URLSearchParams(window.location.search);
+    return url_org.get('orgnr');
+}

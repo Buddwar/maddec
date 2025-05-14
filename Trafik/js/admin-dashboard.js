@@ -100,6 +100,17 @@ let currentSettings = {
    */
   function applySettings() {
     console.log('Applying settings to backend…', currentSettings);
+
+    data = {
+      'weekly': document.getElementById('weekly').value,
+      'monthly': document.getElementById('monthly').value,
+      'yearly': document.getElementById('yearly').value,
+      'primarycolor': document.getElementById('primarycolor').value,
+      'secondarycolor': document.getElementById('secondarycolor').value,
+      'fontstyle': document.getElementById('font-family').value,
+      'fontsize': document.getElementById('fontsize').value
+  }
+    update_organisation(data);
     showSuccessMessage();
   }
   
@@ -133,11 +144,7 @@ let currentSettings = {
 
   window.addEventListener('load', () => {
     updatePreview();
-    //Exempelvis ladda organisationen ifråga när sidan laddas
-    load_organisation();
-    //Organsiationen genomför en uppdatering
-    update_organisation();//<----tar emot en dict (se function vad det är för typ av data som går att uppdatera)
-    //Hämta organisationen igen, nå sånt
+    //Exempelvis ladda organisationen ifråga när sidan laddas och sätt alla färger
     load_organisation();
   });
   
@@ -161,34 +168,23 @@ let currentSettings = {
           credentials: 'include',
           body: JSON.stringify({})
       });
-      if(response.ok){
-        let jsonResult = await response.json();
-        console.log(jsonResult);
-        //Använd resultatet till något
-        /*if (jsonResult['Data']){
-          console.log('Hämtning av organisation', jsonResult['Data']);
-        }
-        if (jsonResult['Message']){
-          console.log('Organisationen man får ut', jsonResult['Message']);
-        }
-        if (!jsonResult['Success']){
-          window.location.href = `admin-login.html`;
-        }*/
+      let jsonResult = await response.json();
+      console.log('Det här är organisationen som finns', jsonResult);
+      if(jsonResult['Success']){
+        document.getElementById('weekly').value = jsonResult['Data']['weekly'];
+        document.getElementById('monthly').value = jsonResult['Data']['monthly'];
+        document.getElementById('yearly').value = jsonResult['Data']['yearly'];
+        document.getElementById('primarycolor').value = jsonResult['Data']['primarycolor'];
+        document.getElementById('secondarycolor').value = jsonResult['Data']['secondarycolor'];
+        document.getElementById('font-family').value = jsonResult['Data']['fontstyle'];
+        document.getElementById('fontsize').value = jsonResult['Data']['fontsize'];
       }
+
     }
 
   //Anropa funktionen och skicka in den data som behövs(dict)
   async function update_organisation(data){
     //Det här är den typen av data som kan uppdateras för organisationer
-    data = {
-      'weekly': 90,
-      'monthly': 60,
-      'yearly': 15000,
-      'primarycolor': 'blue',
-      'secondarycolor': 'red',
-      'fontstyle': 'Times New Roman',
-      'fontsize': '12'
-  }
     console.log(data);
       let response = await fetch('https://bergstrom.pythonanywhere.com/update_organisation', {
         method: 'POST',
@@ -204,6 +200,9 @@ let currentSettings = {
       console.log('Organisationen har uppdaterats: ', jsonResult);
     }
   }
+
+  //Avbryt knapp, anropar log-out functionen
+  document.getElementById('cancel-button').addEventListener('click', logout_organisation);
   
 
   /*Utloggning för organisationer, en egen route där vi rensar

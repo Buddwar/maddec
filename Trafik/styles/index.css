@@ -2,7 +2,7 @@
     --bg-color: #ffffff;
     --button-color: #007bff;
     --font-family: Arial, sans-serif;
-    --button-text-color: #ffffff; 
+    --button-text-color: #272727; 
     --text-color:         #333333;
   }
   * {
@@ -213,8 +213,4 @@
   }
   .subscribe-form button[type="submit"]:hover {
     opacity: 0.9;
-  }
-  /* Hide Leaflet attribution */
-  .leaflet-control-attribution {
-    display: none !important;
   }

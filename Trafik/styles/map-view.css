@@ -135,7 +135,20 @@
     font-size: 0.95rem;
   }  
   
-  @media (max-width: 600px) {
+  @media (min-width: 480px) {
+    .leaflet-popup-content {
+      font-size: 0.75rem;
+      padding: 8px;
+      max-width: 95vw;
+    }
+    .leaflet-popup-content-wrapper {
+      max-width: 90vw;
+      box-sizing: border-box;
+      overflow-wrap: break-word;
+    }
+  }
+
+  @media (min-width: 768px) {
     .leaflet-popup-content {
       font-size: 0.85rem;
       padding: 8px;
@@ -143,8 +156,10 @@
     }
   }
 
-.leaflet-popup-content-wrapper {
-  max-width: 95vw;
-  box-sizing: border-box;
-  overflow-wrap: break-word;
-}
+  @media (min-width: 1280px) {
+    .leaflet-popup-content {
+      font-size: 0.95rem;
+      padding: 8px;
+      max-width: 95vw;
+    }
+  }
