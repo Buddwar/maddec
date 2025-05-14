@@ -145,32 +145,26 @@
   }
 
 /* Justera popup-innehåll för mindre skärmar */
-@media (max-width: 768px) {
-  .leaflet-popup-content {
-    font-size: 0.85rem;
-    max-width: 80vw;
-  }
-}
 
 @media (max-width: 480px) {
   .leaflet-popup-content {
     font-size: 0.75rem;
     max-width: 60vw;
   }
+   /* Stil på popup för stor påverkan */ 
+  .severity-high {
+    padding: .5rem;
+    font-size: medium;
+  }
 
+  /* Stil på popup för mkt stor påverkan */
   .severity-very-high {
     padding: .5rem;
     font-size: medium;
   }
 
   .popup-roadname {
-    font-size: small;
-  }
-
-  /* Stil på popup för stor påverkan */ 
-  .severity-high {
-    padding: .5rem;
-    font-size: medium;
+    font-size: 0.85rem;
   }
 
   .popup-starttime {
@@ -179,5 +173,82 @@
 
   .popup-endtime {
     font-size: x-small;
+  }
+
+  /* Stil på popup för väglag */
+  .popup-conditiontext {
+    padding: .5rem;
+    font-size: medium;
+  }
+
+  .popup-condition-roadname {
+    font-size: 0.85rem;
+  }
+
+  .popup-time-update {
+    font-size: x-small;
+  }
+
+  /* Stil på popup för kameror */
+  .popup-cameraname {
+    padding: .5rem;
+    font-size: medium;
+  }
+}
+
+@media (max-width: 768px) {
+  .leaflet-popup-content {
+    font-size: 0.85rem;
+    max-width: 80vw;
+  }
+
+    /* Stil på popup för stor påverkan */ 
+  .severity-high {
+    padding: .5rem;
+    font-size: medium;
+  }
+
+  /* Stil på popup för mkt stor påverkan */
+  .severity-very-high {
+    padding: .5rem;
+    font-size: medium;
+  }
+
+  .popup-roadname {
+    font-size: 0.85rem;
+  }
+
+  .popup-messagetype {
+    font-size: 0.8rem;
+  }
+
+  .popup-direction {
+    font-size: 0.8rem;
+  }
+
+  .popup-starttime {
+    font-size: small;
+  }
+
+  .popup-endtime {
+    font-size: small;
+  }
+
+  /* Stil på popup för väglag */
+  .popup-conditiontext {
+    padding: .5rem;
+    font-size: medium;
+  }
+
+  .popup-condition-roadname {
+    font-size: 0.85rem;
+  }
+
+  .popup-condition-info {
+    font-size: 0.8rem;
+  }
+
+  .popup-time-update {
+    font-size: small;
   }
 }

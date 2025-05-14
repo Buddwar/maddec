@@ -33,7 +33,7 @@ export async function getCameras(cameraUrl) {
         // och dess vägnr
         const popupContent = `
           <div class="popup-cameraname"<strong>${cam.Name || 'Okänd kamera'}</strong><br></div>
-          <strong>Vägnr: </strong> ${cam.RoadNumber || 'Okänd'}<br>
+          <div class="popup-camera-roadnr"><strong>Vägnr: </strong> ${cam.RoadNumber || 'Okänd'}<br></div>
         `;
   
         // Ikoner för kameror

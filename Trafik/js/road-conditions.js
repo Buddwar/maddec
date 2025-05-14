@@ -95,11 +95,11 @@ export async function getRoadConditions(roadConditionUrl) {
                   conditionText?.toLowerCase() === 'dåligt' ? 'condition-bad' : conditionText?.toLowerCase() === 'mycket dåligt' ? 'condition-very-bad' : ''}">
                        <strong>${conditionText || 'Ingen påverkan angiven'}</strong><br>
                 </div>
-                <div class="popup-condition-roadname"><strong>${locationText || 'Ingen info'}</strong><br></div>
-                <strong>${cond.Cause || 'Okänd orsak'}</strong><br>
-                ${cond.ConditionInfo || 'Ingen info'}<br>
-                <strong>${cond.Warning || 'Ingen varning'}</strong><br>
-                <strong>Uppdaterat: </strong>${cond.StartTime ? formatDateTime(cond.StartTime) : 'Ingen tid angiven'}<br>
+                <div class="popup-condition-roadname"><strong>${locationText}</strong><br></div>
+                ${cond.Cause ? `<div class="popup-cause"><strong>${cond.Cause}</strong><br></div>` : ''}
+                <div class="popup-condition-info"><strong>Väglag: </strong>${cond.ConditionInfo || 'Ingen info'}<br></div>
+                ${cond.Warning ? `<div class="popup-warning"><strong>${cond.Warning}</strong><br></div>` : ''}
+                <div class="popup-time-update"><strong>Uppdaterat: </strong>${cond.StartTime ? formatDateTime(cond.StartTime) : 'Ingen tid angiven'}<br></div>
               `;
   
               // Skapar och lägger till polyline (väglinjerna) på kartan med popup-innehåll
