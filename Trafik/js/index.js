@@ -294,27 +294,6 @@ window.addEventListener('click', (e) => {
   }
 });
 
-subscribeForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
-    let url_org = new URLSearchParams(window.location.search);
-    let orgnr = url_org.get('orgnr');
-
-  const formData = {
-    /*Jag lade till andra fält som behövs, fnamn, lname osv
-    dock så behöver vi hämta organisationsnummer också här innan vi sparar undan all data*/
-
-    fname: document.getElementById('subscriber-fname').value,
-    lname: document.getElementById('subscriber-lname').value,
-    email: document.getElementById('subscriber-email').value,
-    passw: document.getElementById('subscriber-passw').value,
-    phone: document.getElementById('subscriber-phone').value,
-    start: new Date().toJSON().slice(0,10),
-    countrycode: document.getElementById('subscriber-state').value,
-    subtype: document.getElementById('subscriber-frequency').value,
-    orgnr: orgnr,//Exempel, denna får hämtas ifrån Iframen
-    paymethod: document.getElementById('payment-method').value,
-  };
-
 const stripe = Stripe('pk_test_51ROEEUQa1oVulqg0SHQKcwrGlBDFcySZXwTtIaC5MNpTBnRntmiEnhPq5q6jdnqhgPi5Wy3omP8oCU4kgbJoSyd2005Rzsk7dk');
 const checkoutButton = document.getElementById('checkout-button');
 
@@ -381,7 +360,6 @@ checkoutButton.addEventListener('click', async (e) => {
     subscribeForm.reset();
     alert('Det var problem att skapa upp prenumeranten.', result['Message']);
   }*/
-});
 
 // Initialize map on page load
 document.addEventListener('DOMContentLoaded', async () => {
