@@ -18,6 +18,7 @@
     <div class="button-group">
       <a href="#" class="subscribe-button" id="subscribe-button">Prenumerera</a>
       <a href="user-login.html" class="subscribe-button" id="login-button">Logga in</a>
+      <script src="https://js.stripe.com/v3/"></script> <!-- Stripe -->
     </div>
   </header>
 
@@ -87,19 +88,28 @@
             <option value="24">Västerbottens län</option>
             <option value="25">Norrbottens län</option>
           </select>
-        
+
         <label for="subscriber-frequency">Hur ofta vill du få information:</label>
         <select id="subscriber-frequency" required>
           <option value="">Välj alternativ</option>
           <option value="weekly">Veckovis</option>
           <option value="monthly">Månadsvis</option>
           <option value="yearly">Årligen</option>
-          </select>
+        </select>  
+        
+        <!-- Betalning  -->
+        <label for="payment-method">Betalningsmetod:</label>
+        <select id="payment-method" name="payment-method" required>
+          <option value="">Välj betalningsmetod</option>
+          <option value="credit-card">Kreditkort</option>
+          <option value="invoice">Faktura</option>
+          <option value="swish">Swish</option>
+        </select>
         
         <button type="submit">Bekräfta prenumeration</button>
       </form>
-        </div>
-      </div>
+      
+     
 
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -114,5 +124,6 @@
   <script type="module" src="js/utilities.js"></script>
   <script type="module" src="js/county-selector.js"></script>
   <script type="module" src="js/index.js"></script>
+  
 </body>
 </html>

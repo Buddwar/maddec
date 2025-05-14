@@ -312,15 +312,58 @@ subscribeForm.addEventListener('submit', async (e) => {
     countrycode: document.getElementById('subscriber-state').value,
     subtype: document.getElementById('subscriber-frequency').value,
     orgnr: orgnr,//Exempel, denna får hämtas ifrån Iframen
-    paymethod: 'Mastercard'//Exempel, denna får hämtas ifrån betalformuläret
+    paymethod: document.getElementById('payment-method').value,
   };
   
+  /* Ser till att användaren valt en betalningsmethod */
+  if (!formData['paymethod']) {
+    alert('Vänligen välj en betalningsmetod.');
+    return;
+  }   
+  
+  /* Skickar POST anrop  till flask */
+  const response = await fetch('/create-checkout',{
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(formData) /* Skickar data från formData */
+  });
+
+  /* Väntar in svar från Flask */
+  const session = await response.json();
+
+  /* Skapar upp stripe med min public key och
+  skickar användaren till stripe för betalning */
+  const stripe = Stripe("pk_test_51ROEEUQa1oVulqg0SHQKcwrGlBDFcySZXwTtIaC5MNpTBnRntmiEnhPq5q6jdnqhgPi5Wy3omP8oCU4kgbJoSyd2005Rzsk7dk");
+  /*const paymentResult = await stripe.redirectToCheckout({
+    sessionId: session.id
+  });*/
+
+  stripe.redirectToCheckout({
+    sessionId: session.id}).then(function(result) {
+    if (result.error) {
+      alert(result.error.message);
+    }
+  });
+  
+  /* Felhantering som kastar upp en varning */
+  /*if (paymentResult.error) {
+    alert(paymentResult.error.message);
+  }*/
+
+
+
+
+  document.getElementById(payment-button)
+
   // send this data to backend
   console.log('Subscription data:', formData);//Finns en funktion längre ner i filen
   /*Dock så behöver vi genomföra en betalning innan vi sparar undan användaren*/
 
   //exempel på anrop till functionen
-  let result = await create_subscriber(formData);
+
+  /*let result = await create_subscriber(formData);
   if (result['Success']){
     // Show success message and close modal
     alert('Tack för din prenumeration! Du kommer att få trafikinformation enligt vald frekvens.');
@@ -328,8 +371,12 @@ subscribeForm.addEventListener('submit', async (e) => {
     subscribeForm.reset();
   }
   else{
+    //Exempelvis om användaren redan finns i databasen
     console.log('Det var problem att skapa upp prenumeranten.', result['Message']);
-  }
+    subscribeModal.style.display = 'none';
+    subscribeForm.reset();
+    alert('Det var problem att skapa upp prenumeranten.', result['Message']);
+  }*/
 });
 
 // Initialize map on page load
@@ -345,47 +392,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   document.body.style.backgroundColor = result['Data']['secondarycolor'];
 });
-  // Initialize the map (already exported from map-init.js)
-  //console.log('Map initialized:', map);
-
-  // Fetch and display traffic situations
-  //const situationUrl = `https://trafikverket.onrender.com/traffic/group3/situation?county=01`;
-  //await getSituations(situationUrl);
-
-  // Fetch and display cameras
-  //const cameraUrl = `https://trafikverket.onrender.com/traffic/group3/cameras?county=01`;
-  //await getCameras(cameraUrl);
-
-  // Fetch and display road conditions
-  //const roadConditionUrl = `https://trafikverket.onrender.com/traffic/group3/roadcondition?county=01`;
-  //await getRoadConditions(roadConditionUrl);
-
-  //const swiper = new Swiper('.traffic-swiper', {
-    //direction: 'horizontal', // or 'vertical'
-    //loop: true,
-    //slidesPerView: 1,
-    //spaceBetween: 10,
-    //autoplay: {
-        //delay: 3000, // 3 seconds
-        //disableOnInteraction: false,
-    //},
-    //navigation: {
-        //nextEl: '.swiper-button-next',
-        //prevEl: '.swiper-button-prev',
-    //},
-    //pagination: {
-        //el: '.swiper-pagination',
-        //clickable: true,
-    //},
-  //});
-
-  //console.log('Swiper initialized:', swiper);
-//});
 
 /*Anropa denna funktion och stoppa in 
-data för användaren*/
-/*Anropa denna funktion och stoppa in 
-data för användaren*/
+data för användaren
+
+dock så måste en betalning ske innan detta*/
 async function create_subscriber(data){
 
     let response = await fetch('https://bergstrom.pythonanywhere.com/create_user', {
