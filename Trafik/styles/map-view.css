@@ -1,6 +1,8 @@
 #map {
     height: 100vh;
     width: 100%;
+    min-height: 100vh;
+    min-width: 100vw;
   }
 
   body {
@@ -134,32 +136,48 @@
     white-space: normal;
     font-size: 0.95rem;
   }  
-  
-  @media (min-width: 480px) {
-    .leaflet-popup-content {
-      font-size: 0.75rem;
-      padding: 8px;
-      max-width: 95vw;
-    }
-    .leaflet-popup-content-wrapper {
-      max-width: 90vw;
-      box-sizing: border-box;
-      overflow-wrap: break-word;
-    }
+
+  .leaflet-popup-content-wrapper {
+    box-sizing: border-box;
+    border-radius: 10px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
   }
 
-  @media (min-width: 768px) {
-    .leaflet-popup-content {
-      font-size: 0.85rem;
-      padding: 8px;
-      max-width: 95vw;
-    }
+/* Justera popup-innehåll för mindre skärmar */
+@media (max-width: 768px) {
+  .leaflet-popup-content {
+    font-size: 0.85rem;
+    max-width: 80vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .leaflet-popup-content {
+    font-size: 0.75rem;
+    max-width: 60vw;
   }
 
-  @media (min-width: 1280px) {
-    .leaflet-popup-content {
-      font-size: 0.95rem;
-      padding: 8px;
-      max-width: 95vw;
-    }
+  .severity-very-high {
+    padding: .5rem;
+    font-size: medium;
   }
+
+  .popup-roadname {
+    font-size: small;
+  }
+
+  /* Stil på popup för stor påverkan */ 
+  .severity-high {
+    padding: .5rem;
+    font-size: medium;
+  }
+
+  .popup-starttime {
+    font-size: x-small;
+  }
+
+  .popup-endtime {
+    font-size: x-small;
+  }
+}

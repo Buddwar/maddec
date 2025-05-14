@@ -3,6 +3,7 @@
 import { map, situationCluster } from "./map-init.js";
 import { formatDateTime } from './utilities.js';
 
+
 // Exportera en array med markörer.
 export const situationMarkers = [];
 
@@ -38,8 +39,8 @@ export async function getSituations(url) {
                           </div>
                           <div class="popup-roadname"><strong>${dev.RoadName || dev.RoadNumber || 'Okänd väg'}</strong><br></div>
                           <div class="popup-messagetype"><strong>${dev.MessageType || 'Ingen meddelandetyp angiven'}</strong><br></div>
-                          <div class="popup-restriction">${dev.TrafficRestrictionType || 'Ingen trafikrestriktion angiven'}<br></div>
-                          <div class ="popup-direction"><strong>Riktning: </strong> ${dev.AffectedDirection || 'Ingen riktning angiven'}<br></div>
+                          ${dev.TrafficRestrictionType ? `<div class="popup-restriction">${dev.TrafficRestrictionType || 'Ingen trafikrestriktion angiven'}<br></div>` : ''}
+                          ${dev.AffectedDirection ? `<div class ="popup-direction"><strong>Riktning: </strong> ${dev.AffectedDirection || 'Ingen riktning angiven'}<br></div>` : ''}
                           <div class="popup-message">${dev.Message || 'Inget meddelande angivet'}<br></div>
                           <div class="popup-starttime"><strong>Starttid:</strong> ${dev.CreationTime ? formatDateTime(dev.CreationTime) : 'Ingen tid angiven'}<br></div>
                           <div class="popup-endtime"><strong>Sluttid:</strong> ${dev.EndTime ? formatDateTime(dev.EndTime) : 'Ingen tid angiven'}<br></div>

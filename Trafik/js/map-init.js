@@ -11,3 +11,9 @@ export const situationCluster = L.markerClusterGroup(); // Klustergrupp för sit
 export const cameraCluster = L.markerClusterGroup(); // Klustergrupp för kameror (alltså klumpar vi ihop kameror)
 export const roadConditionLines = []; // En tom array som innehåller polylines från Leaflet, vi sparar dessa för att sedan kunna ta bort dem vid byte av län.
 
+// Funktion för att tvinga Leaflet att uppdatera kartans storlek vid fönsterändring
+window.addEventListener('resize', function() {
+  if (map) {
+    map.invalidateSize(); // Tvinga Leaflet att uppdatera kartans storlek
+  }
+});
