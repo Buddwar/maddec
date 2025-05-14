@@ -294,12 +294,16 @@ window.addEventListener('click', (e) => {
   }
 });
 
+//publik nyckel för stripe
+//Denna nyckel är för testning och kommer att bytas ut mot en riktig nyckel när vi går live
 const stripe = Stripe('pk_test_51RHnEg4hITlgGwkum4TAOWSVSN0itVczKgwRT9JvUeS705gnwFwCdUmequjd2fp4sL5SBesuZxm5aVMLIz713Am500KzFPVk8L');
 const checkoutButton = document.getElementById('checkout-button');
 
+//Lägger till en eventlistener på knappen som ska skicka iväg betalningen
 checkoutButton.addEventListener('click', async (e) => {
-  e.preventDefault(); // Hindra standardbeteende
+  e.preventDefault();
 
+  //Vi plockar ut orgnr ifrån URLen
   let url_org = new URLSearchParams(window.location.search);
   let orgnr = url_org.get('orgnr');
 
@@ -326,11 +330,12 @@ checkoutButton.addEventListener('click', async (e) => {
     });
 
     const session = await response.json();
-
     if (session.id) {
       await stripe.redirectToCheckout({ sessionId: session.id });
-    } else {
-      console.error('Inget session-ID i svaret:', session);
+    } 
+    else if(session.Message)
+    {
+      alert(session.Message);
     }
   } catch (error) {
     console.error('Fel vid fetch:', error);
@@ -375,11 +380,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.body.style.backgroundColor = result['Data']['secondarycolor'];
 });
 
-/*Anropa denna funktion och stoppa in 
-data för användaren
+/*Denna funktion användes tidigare för att skapa en användare
+men nu sköts det i samband med betalningen
 
 dock så måste en betalning ske innan detta*/
-async function create_subscriber(data){
+/*async function create_subscriber(data){
 
     let response = await fetch('https://bergstrom.pythonanywhere.com/create_user', {
     method: 'POST',
@@ -391,7 +396,7 @@ async function create_subscriber(data){
     //Resultatet vi får tillbaka konverteras till json
     let jsonResult = await response.json();
     return jsonResult;//Och vi returnerar det till vem som anropade functionen
-}
+}*/
 
 //Ladda organisationen ifråga och hämta dess värden
   async function load_organisation(orgnr){
