@@ -318,13 +318,16 @@ subscribeForm.addEventListener('submit', async (e) => {
   const stripe = Stripe('pk_test_51ROEEUQa1oVulqg0SHQKcwrGlBDFcySZXwTtIaC5MNpTBnRntmiEnhPq5q6jdnqhgPi5Wy3omP8oCU4kgbJoSyd2005Rzsk7dk');
   const checkoutButton = document.getElementById('checkout-button');
 
+  //Användaren klickade på betala knappen
   checkoutButton.addEventListener('click', function () {
+    //Vi genomför ett anrop till vår backend för att skapa en checkout-session
     fetch('https://bergstrom.pythonanywhere.com/create-checkout', {
       method: 'POST'
     })
     .then(response => response.json())
     .then(session => {
-      if (session.id) {
+      if (session.id) {//Om vi får tillbaka ett session-ID så kan vi gå vidare
+        //Dirigera om användaren till stripe checkout
         stripe.redirectToCheckout({ sessionId: session.id });
       } else {
         console.error('Inget session-ID i svaret:', session);
@@ -334,45 +337,6 @@ subscribeForm.addEventListener('submit', async (e) => {
       console.error('Fel vid fetch:', error);
     });
   });
-  
-  /* Ser till att användaren valt en betalningsmethod */
-  //if (!formData['paymethod']) {
-    //alert('Vänligen välj en betalningsmetod.');
-    //return;
-  //}   
-  
-  /* Skickar POST anrop  till flask */
-  //const response = await fetch('/create-checkout',{
-    //method: 'POST',
-    //headers: {
-    //  'Content-Type': 'application/json'
-    //},
-    //body: JSON.stringify(formData) /* Skickar data från formData */
-  //});
-
-  /* Väntar in svar från Flask */
-  //const session = await response.json();
-
-  /* Skapar upp stripe med min public key och
-  skickar användaren till stripe för betalning */
-  //const stripe = Stripe("pk_test_51ROEEUQa1oVulqg0SHQKcwrGlBDFcySZXwTtIaC5MNpTBnRntmiEnhPq5q6jdnqhgPi5Wy3omP8oCU4kgbJoSyd2005Rzsk7dk");
-  /*const paymentResult = await stripe.redirectToCheckout({
-    sessionId: session.id
-  });*/
-
-  //stripe.redirectToCheckout({
-    //sessionId: session.id}).then(function(result) {
-    //if (result.error) {
-      //alert(result.error.message);
-    //}
-  //});
-  
-  /* Felhantering som kastar upp en varning */
-  /*if (paymentResult.error) {
-    alert(paymentResult.error.message);
-  }*/
-
-
 
 
   document.getElementById(payment-button)
