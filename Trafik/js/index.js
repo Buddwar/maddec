@@ -366,6 +366,7 @@ checkoutButton.addEventListener('click', async (e) => {
     }
     else{
       alert('Det uppstod problem med att skapa fakturan.\nVänligen försök igen eller välj ett annat betalsätt.')
+      console.log(result['Message']);
     }
     }
     catch (error) {
