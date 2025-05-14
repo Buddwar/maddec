@@ -319,7 +319,7 @@ checkoutButton.addEventListener('click', async (e) => {
     orgnr: orgnr,
     paymethod: document.getElementById('payment-method').value,//Denna är troligtvis oanvändbar vid detta läge, men fortfarande något som behövs hos varje prenumerant
   };
-  if (paymethod == 'credit-card')
+  if (formData.paymethod == 'credit-card')
     {
     try {
       //Vi gör ett anropt till vår backend för att skapa en checkout-session
@@ -346,11 +346,11 @@ checkoutButton.addEventListener('click', async (e) => {
       console.error('Fel vid fetch:', error);
     }
   }
-  else if (paymethod == 'invoice')
+  else if (formData.paymethod == 'invoice')
   {
     console.log('Betalning via faktura');
   }
-  else if (paymethod == 'swish'){
+  else if (formData.paymethod == 'swish'){
     console.log('Betalning via swish');
   }
 });
