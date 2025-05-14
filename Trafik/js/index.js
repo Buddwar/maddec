@@ -313,7 +313,7 @@ checkoutButton.addEventListener('click', async (e) => {
     countrycode: document.getElementById('subscriber-state').value,
     subtype: document.getElementById('subscriber-frequency').value,
     orgnr: orgnr,
-    paymethod: document.getElementById('payment-method').value,
+    paymethod: document.getElementById('payment-method').value,//Denna är troligtvis oanvändbar vid detta läge, men fortfarande något som behövs hos varje prenumerant
   };
 
   try {
