@@ -26,20 +26,7 @@
       <div class="map-container">
         <div id="map"></div>
       </div>
-      <!--
-      <div class="traffic-info">
-        <h3>Aktuella trafikstörningar</h3>
-        <div class="swiper traffic-swiper">
-          <div class="swiper-wrapper" id="traffic-list">
-            <div class="swiper-slide">Slide 1</div>
-            <div class="swiper-slide">Slide 2</div>
-            <div class="swiper-slide">Slide 3</div>
-          </div>
-          <div class="swiper-pagination"></div>
-          <div class="swiper-button-next"></div>
-          <div class="swiper-button-prev"></div>
-        </div>
-      </div>-->
+
   </main>
 
   <!-- Subscription Modal -->
@@ -107,6 +94,9 @@
         </select>
         
         <button type="submit">Bekräfta prenumeration</button>
+
+        <!--TEST BETALA KNAPP-->
+        <button id="checkout-button">Betala</button>
       </form>
       
      
@@ -125,5 +115,30 @@
   <script type="module" src="js/county-selector.js"></script>
   <script type="module" src="js/index.js"></script>
   
+
+<script>
+  const stripe = Stripe('pk_test_51ROEEUQa1oVulqg0SHQKcwrGlBDFcySZXwTtIaC5MNpTBnRntmiEnhPq5q6jdnqhgPi5Wy3omP8oCU4kgbJoSyd2005Rzsk7dk');
+  const checkoutButton = document.getElementById('checkout-button');
+
+  checkoutButton.addEventListener('click', function () {
+    fetch('https://bergstrom.pythonanywhere.com/create-checkout', {
+      method: 'POST'
+    })
+    .then(response => response.json())
+    .then(session => {
+      if (session.id) {
+        stripe.redirectToCheckout({ sessionId: session.id });
+      } else {
+        console.error('Inget session-ID i svaret:', session);
+      }
+    })
+    .catch(error => {
+      console.error('Fel vid fetch:', error);
+    });
+  });
+</script>
+
+
+
 </body>
 </html>
