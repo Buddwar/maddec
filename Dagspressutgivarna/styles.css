@@ -19,8 +19,9 @@ body{
     grid-gap: 1rem;
     text-align: center;
     background-color: rgb(255, 123, 80);
-    box-shadow: -10px 5px 10px rgba(0,0,0,0.3);
     border-radius: .3rem;
+    border-style: solid;
+    border-width: .2rem;
     padding: 1rem;
     color: white
 }
@@ -32,6 +33,8 @@ h1{
     background-color: #A8F1FF;
     padding-block: 1rem;
     border-radius: .3rem;
+    width: 50%;
+    margin: 0 auto;
 }
 h1,
 .button_container{
@@ -87,9 +90,7 @@ select{
     border-style: none;
     font-size: 1.2rem;
 }
-
-
-@media(min-width: 1065px){
+@media(min-width: 768px){
     .form_container{
         grid-template-columns: auto auto;
     }
@@ -97,6 +98,21 @@ select{
         display: grid;
         grid-template-columns: auto auto;
         align-items: start;
+    }
+    input:not([type="color"]),
+    select{
+        width: 100%;
+    }
+}
+
+@media(min-width: 1280px){
+    .form_container{
+        grid-template-columns: auto auto;
+    }
+    .outer_container{
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
     }
     input:not([type="color"]),
     select{
