@@ -1,7 +1,7 @@
 body{
     margin: 1rem;
     padding: 0;
-    background-color: 4ED7F1;
+    background-color: #4ED7F1;
     color: rgb(58, 58, 58);
     font-size: 1.2rem;
     font-family: Arial, Helvetica, sans-serif;
@@ -29,7 +29,7 @@ body{
     grid-template-columns: auto;
 }
 h1{
-    background-color: A8F1FF;
+    background-color: #A8F1FF;
     padding-block: 1rem;
     border-radius: .3rem;
 }
@@ -39,7 +39,7 @@ h1,
     margin-block: 2rem;
 }
 .error_message{
-    visibility: hidden;
+    
     color: red;
     width: 50%;
     margin: 0 auto;
