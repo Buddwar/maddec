@@ -74,10 +74,10 @@ document.getElementById('delete-button').addEventListener('click', async() => {
         //Anropa databasen och radera användaren
         let result = await delete_user(email);
         if(result['Success']){//Om allting gick bra med raderingen
-            console.log(result['Data']);
+            console.log(result['Message']);
             //Då loggar vi ut användaren
-            let result = await logout_user();
-            if (result['Success']){
+            let logout_result = await logout_user();
+            if (logout_result['Success']){
                 console.log('Användarens konto är raderat och personen blev utloggad');
                 window.location.reload();
             }
