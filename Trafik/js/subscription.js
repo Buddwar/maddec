@@ -64,16 +64,30 @@ document.getElementById('cancel-button').addEventListener('click', async() => {
     }
 });
 document.getElementById('delete-button').addEventListener('click', async() => {
-    //Hämta email ifrån sidan
-    let email = document.getElementById('subscriber-email').textContent.trim();
-    console.log(email);
-    //Anropa databasen och radera användaren
-    let result = await delete_user(email);
-    if(result['Success']){//Om allting gick bra med raderingen
-        console.log(result['Data']);
+
+    let dialog_window = 'Är du säker på att du vill radera ditt konto?';
+
+    if (confirm(dialog_window)){
+        //Hämta email ifrån sidan
+        let email = document.getElementById('subscriber-email').textContent.trim();
+        console.log(email);
+        //Anropa databasen och radera användaren
+        let result = await delete_user(email);
+        if(result['Success']){//Om allting gick bra med raderingen
+            console.log(result['Data']);
+            //Då loggar vi ut användaren
+            let result = await logout_user();
+            if (result['Success']){
+                console.log('Användarens konto är raderat och personen blev utloggad');
+                window.location.reload();
+            }
+        }
+        else{
+            console.log('Problem med att radera användaren...', result['Message']);
+        }
     }
     else{
-        console.log('Problem med att radera användaren...', result['Message']);
+        console.log('Användaren tröck avbryt');
     }
 });
 
