@@ -18,11 +18,11 @@ body{
     grid-template-columns: auto;
     grid-gap: 1rem;
     text-align: center;
-    background-color: A8F1FF;
+    background-color: rgb(255, 123, 80);
     box-shadow: -10px 5px 10px rgba(0,0,0,0.3);
     border-radius: .3rem;
     padding: 1rem;
-    color: rgb(114, 114, 114);
+    color: white
 }
 .inner_container{
     display: grid;
@@ -52,7 +52,6 @@ ul{
 button{
     border-radius: 5px;
     padding: .5rem;
-    background-color: FFFA8D;
 }
 input,
 select{
@@ -73,8 +72,20 @@ select{
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+.create_button{
+    background-color: rgb(153, 204, 255);
+    color: white;
+    border-radius: .3rem;
+    padding: 1rem;
+    border-style: none;
+    font-size: 1.2rem;}
 .create_button:hover{
-    background-color: rgb(204, 241, 255);
+    background-color: white;
+    color:  rgb(153, 204, 255);
+    border-radius: .3rem;
+    padding: 1rem;
+    border-style: none;
+    font-size: 1.2rem;
 }
 
 
