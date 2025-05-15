@@ -64,8 +64,10 @@ document.getElementById('cancel-button').addEventListener('click', async() => {
     }
 });
 document.getElementById('delete-button').addEventListener('click', async() => {
+    //Hämta email ifrån sidan
+    let email = document.getElementById('subscriber-email').textContent;
     //Anropa databasen och radera användaren
-    let result = await delete_user();
+    let result = await delete_user(email);
     if(result['Success']){//Om allting gick bra med raderingen
         console.log(result['Data']);
     }
@@ -149,13 +151,14 @@ function getUrl(){
 
 
   /*Function för att radera användaren*/
-  async function delete_user(){
+  async function delete_user(email){
     let response = await fetch('https://bergstrom.pythonanywhere.com/delete_user', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
       },
-      credentials: 'include'
+      credentials: 'include',
+      body: JSON.stringify({email: email})
   });
     let jsonResult = await response.json();
     return jsonResult;
