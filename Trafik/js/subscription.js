@@ -63,6 +63,16 @@ document.getElementById('cancel-button').addEventListener('click', async() => {
         console.log('Problem uppstod med att logga ut användaren...');
     }
 });
+document.getElementById('delete-button').addEventListener('click', async() => {
+    //Anropa databasen och radera användaren
+    let result = await delete_user();
+    if(result['Success']){//Om allting gick bra med raderingen
+        console.log(result['Data']);
+    }
+    else{
+        console.log('Problem uppstod med att logga ut användaren...');
+    }
+});
 
 // Load user data (this would come from backend)
 window.addEventListener('load', async () => {
@@ -136,3 +146,17 @@ function getUrl(){
     let url_org = new URLSearchParams(window.location.search);
     return url_org.get('orgnr');
 }
+
+
+  /*Function för att radera användaren*/
+  async function delete_user(){
+    let response = await fetch('https://bergstrom.pythonanywhere.com/delete_user', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      credentials: 'include'
+  });
+    let jsonResult = await response.json();
+    return jsonResult;
+  }
