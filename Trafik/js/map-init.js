@@ -1,6 +1,7 @@
 // Initiera Leaflet-kartan, detta är taget från Leaflet direkt.
 // Vi exporterar kartan, sätter koordinaterna för vart kartan ska visas först, tillsammans med zoom-nivån.
 export const map = L.map('map').setView([59.33263, 18.06761], 13); //Här kan tidningarna själva skriva in koordinaterna för staden de befinner sig i.
+
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attributionControl: true,
   maxZoom: 19,

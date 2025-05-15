@@ -37,30 +37,50 @@
     font-size: 1.2rem;
   }
 
-  .button-group {
-    position: absolute;
-    right: 0.5rem;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    gap: 0.5rem;
-  }
-  
-  .subscribe-button {
-    background: var(--button-color);
-    color:      var(--button-text-color);
-    padding: 0.25rem 0.5rem;
-    border-radius: 0.25rem;
-    text-decoration: none;
-    font-weight: bold;
-    transition: opacity 0.3s;
-    font-size: 0.8rem;
-  }
-  
-  .subscribe-button:hover {
-    transform: scale(1.05);
-    transition: transform 0.3s ease;
-  }
+  /* CSS för båda knapparna */
+.button-group {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+/* Prenumerera-knappen får följande stil */
+#subscribe-button {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 1.25rem;
+  pointer-events: auto;
+  background: var(--button-color);
+  color: var(--button-text-color);
+  padding: .5rem 1rem;
+  border-radius: 0.25rem;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.8rem;
+  z-index: 1000;
+}
+
+/* Logga in-knappen får följande stil */
+#login-button {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  pointer-events: auto;
+  background: var(--button-color);
+  color: var(--button-text-color);
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.8rem;
+  z-index: 1000;
+}
+
+#subscribe-button:hover,
+#login-button:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
   
 
   main {
@@ -70,13 +90,23 @@
     flex-direction: column;
     gap: 0.5rem;
   }
+
   #map {
     width: 100%;
     height: 100px;
     border-radius: 0.25rem;
     overflow: hidden;
     box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    position: relative;
   }
+
+  /* CONTAINER FÖR KARTAN */
+  .map-container {
+    position: relative;
+    width: 100%;
+    height: 100vh; 
+  } 
+
   .traffic-info {
     background-color: #fff;
     border-radius: 0.25rem;

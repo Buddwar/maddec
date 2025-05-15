@@ -14,18 +14,15 @@
   <link rel="stylesheet" href="styles/map-view.css"> <!-- Map Project CSS -->
 </head>
 <body>
-<header>
-    <div class="button-group">
-      <a href="#" class="subscribe-button" id="subscribe-button">Prenumerera</a>
-      <a href="user-login.html" class="subscribe-button" id="login-button">Logga in</a>
-      <script src="https://js.stripe.com/v3/"></script> 
-    </div>
-  </header>
 
   <main>
-      <div class="map-container">
-        <div id="map"></div>
+    <div class="map-container">
+      <div class="button-group">
+        <a href="#" class="subscribe-button" id="subscribe-button">Prenumerera</a>
+        <a href="user-login.html" class="subscribe-button" id="login-button">Logga in</a>
       </div>
+    <div id="map"></div>
+    </div>
   </main>
 
   <!-- Subscription Modal -->
@@ -110,6 +107,8 @@
   <script type="module" src="js/utilities.js"></script>
   <script type="module" src="js/county-selector.js"></script>
   <script type="module" src="js/index.js"></script>
+  <!-- Stripe JS -->
+  <script src="https://js.stripe.com/v3/"></script> 
 
 
 
