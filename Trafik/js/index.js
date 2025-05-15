@@ -294,15 +294,20 @@ window.addEventListener('click', (e) => {
   }
 });
 
-subscribeForm.addEventListener('submit', async (e) => {
+//publik nyckel för stripe
+//Denna nyckel är för testning och kommer att bytas ut mot en riktig nyckel när vi går live
+const stripe = Stripe('pk_test_51RHnEg4hITlgGwkum4TAOWSVSN0itVczKgwRT9JvUeS705gnwFwCdUmequjd2fp4sL5SBesuZxm5aVMLIz713Am500KzFPVk8L');
+const checkoutButton = document.getElementById('checkout-button');
+
+//Lägger till en eventlistener på knappen som ska skicka iväg betalningen
+checkoutButton.addEventListener('click', async (e) => {
   e.preventDefault();
-    let url_org = new URLSearchParams(window.location.search);
-    let orgnr = url_org.get('orgnr');
+
+  //Vi plockar ut orgnr ifrån URLen
+  let url_org = new URLSearchParams(window.location.search);
+  let orgnr = url_org.get('orgnr');
 
   const formData = {
-    /*Jag lade till andra fält som behövs, fnamn, lname osv
-    dock så behöver vi hämta organisationsnummer också här innan vi sparar undan all data*/
-
     fname: document.getElementById('subscriber-fname').value,
     lname: document.getElementById('subscriber-lname').value,
     email: document.getElementById('subscriber-email').value,
@@ -311,36 +316,68 @@ subscribeForm.addEventListener('submit', async (e) => {
     start: new Date().toJSON().slice(0,10),
     countrycode: document.getElementById('subscriber-state').value,
     subtype: document.getElementById('subscriber-frequency').value,
-    orgnr: orgnr,//Exempel, denna får hämtas ifrån Iframen
-    paymethod: document.getElementById('payment-method').value,
+    orgnr: orgnr,
+    paymethod: document.getElementById('payment-method').value,//Denna är troligtvis oanvändbar vid detta läge, men fortfarande något som behövs hos varje prenumerant
   };
-
-  const stripe = Stripe('pk_test_51ROEEUQa1oVulqg0SHQKcwrGlBDFcySZXwTtIaC5MNpTBnRntmiEnhPq5q6jdnqhgPi5Wy3omP8oCU4kgbJoSyd2005Rzsk7dk');
-  const checkoutButton = document.getElementById('checkout-button');
-
-  //Användaren klickade på betala knappen
-  checkoutButton.addEventListener('click', function () {
-    //Vi genomför ett anrop till vår backend för att skapa en checkout-session
-    fetch('https://bergstrom.pythonanywhere.com/create-checkout', {
+  if (formData.paymethod == 'credit-card')
+    {
+    try {
+      //Vi gör ett anropt till vår backend för att skapa en checkout-session
+      const response = await fetch('https://bergstrom.pythonanywhere.com/create-checkout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },//vi skickar över formulärs data
+        body: JSON.stringify(formData),
+      });
+      //Om vi får tillbaka en session så skickar vi iväg användaren till stripe
+      const session = await response.json();
+      if (session.id) {
+        //här sker omdirigeringen till stripe
+        await stripe.redirectToCheckout({ sessionId: session.id });
+      }//får vi tillbaka något annt än ett id så gick troligtvis något fel i backend
+      else if(session.Message)
+      {//Det kan möjligtvis vara så att användaren redan finns i databasen
+        alert(session.Message);
+      }
+    } 
+    catch (error) 
+    {
+      console.error('Fel vid fetch:', error);
+    }
+  }
+  else if (formData.paymethod == 'invoice')
+  {
+    console.log('Betalning via faktura');
+    try
+    {
+      //Vi gör ett anrop till vår route för att skapa upp en faktura hos Stripe
+      let response = await fetch('https://bergstrom.pythonanywhere.com/create_invoice', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData)
-    })
-    .then(response => response.json())
-    .then(session => {
-      if (session.id) {//Om vi får tillbaka ett session-ID så kan vi gå vidare
-        //Dirigera om användaren till stripe checkout
-        stripe.redirectToCheckout({ sessionId: session.id });
-      } else {
-        console.error('Inget session-ID i svaret:', session);
-      }
-    })
-    .catch(error => {
-      console.error('Fel vid fetch:', error);
+      },//vi skickar över formulärs data
+      body: JSON.stringify(formData),
     });
-  });
+    let result = await response.json();
+    if (result['Success'])
+      {
+      alert('Fakturan har skapats och skickas till din e-postadress!')
+    }
+    else{
+      alert('Det uppstod problem med att skapa fakturan.\nVänligen försök igen eller välj ett annat betalsätt.')
+      console.log(result['Message']);
+    }
+    }
+    catch (error) {
+      console.error('Fel vid fetch:', error);
+    }
+
+  }
+  else if (formData.paymethod == 'swish'){
+    console.log('Betalning via swish');
+  }
+});
 
 
   //document.getElementById(payment-button)
@@ -365,7 +402,6 @@ subscribeForm.addEventListener('submit', async (e) => {
     subscribeForm.reset();
     alert('Det var problem att skapa upp prenumeranten.', result['Message']);
   }*/
-});
 
 // Initialize map on page load
 document.addEventListener('DOMContentLoaded', async () => {
@@ -381,11 +417,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.body.style.backgroundColor = result['Data']['secondarycolor'];
 });
 
-/*Anropa denna funktion och stoppa in 
-data för användaren
+/*Denna funktion användes tidigare för att skapa en användare
+men nu sköts det i samband med betalningen
 
 dock så måste en betalning ske innan detta*/
-async function create_subscriber(data){
+/*async function create_subscriber(data){
 
     let response = await fetch('https://bergstrom.pythonanywhere.com/create_user', {
     method: 'POST',
@@ -397,7 +433,7 @@ async function create_subscriber(data){
     //Resultatet vi får tillbaka konverteras till json
     let jsonResult = await response.json();
     return jsonResult;//Och vi returnerar det till vem som anropade functionen
-}
+}*/
 
 //Ladda organisationen ifråga och hämta dess värden
   async function load_organisation(orgnr){
