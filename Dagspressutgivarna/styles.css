@@ -1,10 +1,10 @@
 body{
-    margin: 1rem;
     padding: 0;
     background-color: #4ED7F1;
     color: rgb(58, 58, 58);
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-family: Arial, Helvetica, sans-serif;
+    margin-inline: 2rem;
 }
 .outer_container{
     display: grid;
@@ -30,11 +30,11 @@ body{
     grid-template-columns: auto;
 }
 h1{
-    background-color: #A8F1FF;
+    background-color: rgb(255, 123, 80);
     padding-block: 1rem;
     border-radius: .3rem;
-    width: 50%;
     margin: 0 auto;
+    color: white;
 }
 h1,
 .button_container{
@@ -90,6 +90,9 @@ select{
     border-style: none;
     font-size: 1.2rem;
 }
+
+
+
 @media(min-width: 768px){
     .form_container{
         grid-template-columns: auto auto;
@@ -103,6 +106,9 @@ select{
     select{
         width: 100%;
     }
+    h1{
+        width: 75%;
+    }
 }
 
 @media(min-width: 1280px){
@@ -112,11 +118,15 @@ select{
     .outer_container{
         display: flex;
         justify-content: center;
-        gap: 2rem;
+        gap: 1rem;
+        margin: 0 auto;
     }
     input:not([type="color"]),
     select{
         width: 100%;
+    }
+    h1{
+        width: 50%;
     }
 }
 

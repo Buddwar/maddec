@@ -174,3 +174,18 @@ async function delete_organisation(orgnr){
     console.log(jsonResult);
     location.reload();
 }
+
+
+let input_fields = document.querySelectorAll('input');
+input_fields.forEach(input =>{
+    input.addEventListener('input', () => {
+        if(input.value.trim() === ''){
+            input.classList.add('is-invalid');
+            input.classList.remove('is-valid');
+        }
+        else{
+            input.classList.remove('is-invalid');
+            input.classList.add('is-valid');
+        }
+    })
+});

@@ -11,11 +11,6 @@
 <body onload="getExistingOrganisations()">
 
     <h1>Dagspressutgivarna AB <i class="bi bi-person-circle"></i></h1>
-    <div class="d-none text-center alert alert-success alert-dismissible fade show" role="alert" id="alert_message">
-        Ditt meddelande skickades!
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-
 
 <div class="outer_container">
     <form>
@@ -24,41 +19,41 @@
                 <h2>Uppgifter</h2>
                 <div>
                     <label for="orgnr">Organisationsnummer</label><br>
-                    <input type="text" id="orgnr" value="1234567891"><br>
+                    <input type="text" id="orgnr" value="1234567891" class="form-control"><br>
                 </div>
                 <div>
                     <label for="email">E-postadress</label><br>
-                    <input type="email" id="email" value="h23anber@du.se"><br>
+                    <input type="email" id="email" value="h23anber@du.se" class="form-control"><br>
                 </div>
                 <div>
                     <label for="passw">Lösenord</label><br>
-                    <input type="password" id="passw" value="hunter2"><br>
+                    <input type="password" id="passw" value="hunter23" class="form-control"><br>
                 </div>
                 <div>
                     <label for="orgname">Namn på organisation</label><br>
-                    <input type="text" id="orgname" value="Aftonbladet"><br>
+                    <input type="text" id="orgname" value="Aftonbladet" class="form-control"><br>
                 </div>
             </div>
             <div class="inner_container">
                 <h2>Priser <i class="bi bi-tag"></i></h2>
                 <div>
                     <label for="weekly">Pris - Veckovis</label><br>
-                    <input type="text" id="weekly" value="30"><br>
+                    <input type="text" id="weekly" value="30" class="form-control"><br>
                 </div>
                 <div>
                     <label for="monthly">Pris - Månadsvis</label><br>
-                    <input type="text" id="monthly" value="60"><br>
+                    <input type="text" id="monthly" value="60" class="form-control"><br>
                 </div>
                 <div>
                     <label for="yearly">Pris - Årligen</label><br>
-                    <input type="text" id="yearly" value="90"><br>
+                    <input type="text" id="yearly" value="90" class="form-control"><br>
                 </div>
             </div>
             <div class="inner_container">
                 <h2>Textutseende</h2>
                 <div>
                     <label for="fontstyle">Teckensnitt</label><br>
-                    <select name="fontstyle" id="fontstyle">
+                    <select name="fontstyle" id="fontstyle" class="form-control">
                         <option value="Times New Roman">Times New Roman</option>
                         <option value="Arial">Arial</option>
                         <option value="Calibri">Calibri</option>
@@ -67,21 +62,21 @@
                 </div>
                 <div>
                     <label for="fontsize">Teckenstorlek</label><br>
-                    <input type="text" id="fontsize" value="12"><br>
+                    <input type="text" id="fontsize" value="12" class="form-control"><br>
                 </div>
             </div>
             <div>
                 <h2>Färger</h2>
                 <div>
                     <label for="primarycolor">Primärfärg</label><br>
-                    <input type="color" id="primarycolor" value="#7FFFD4"><br>
+                    <input type="color" id="primarycolor" value="#7FFFD4" ><br>
                 </div>
                 <div>
                     <label for="secondarycolor">Sekundärfärg</label><br>
                     <input type="color" id="secondarycolor" value="#F0F8FF"><br>
                 </div>
             </div>
-                <p class="error_message" id="error_message">Errors</p>
+                <div></div>
             <div class="button_container">
                 <button type="button" class="create_button" onclick="createOrganisation()">Skapa företag</button>
             </div>
