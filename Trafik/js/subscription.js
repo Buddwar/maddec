@@ -65,7 +65,8 @@ document.getElementById('cancel-button').addEventListener('click', async() => {
 });
 document.getElementById('delete-button').addEventListener('click', async() => {
     //Hämta email ifrån sidan
-    let email = document.getElementById('subscriber-email').textContent;
+    let email = document.getElementById('subscriber-email').textContent.trim();
+    console.log(email);
     //Anropa databasen och radera användaren
     let result = await delete_user(email);
     if(result['Success']){//Om allting gick bra med raderingen
