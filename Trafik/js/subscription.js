@@ -70,7 +70,7 @@ document.getElementById('delete-button').addEventListener('click', async() => {
         console.log(result['Data']);
     }
     else{
-        console.log('Problem uppstod med att logga ut användaren...');
+        console.log('Problem med att radera användaren...', result['Message']);
     }
 });
 
