@@ -178,7 +178,7 @@ let currentSettings = {
         document.getElementById('secondarycolor').value = jsonResult['Data']['secondarycolor'];
         document.getElementById('font-family').value = jsonResult['Data']['fontstyle'];
         document.getElementById('fontsize').value = jsonResult['Data']['fontsize'];
-        document.getElementById('company_name').value = jsonResult['Data']['company_name'];
+        document.getElementById('company_name').textContent = jsonResult['Data']['company_name'];
       }
       else{
         //Dirigera om användaren till login-sidan
