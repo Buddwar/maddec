@@ -182,6 +182,7 @@
     z-index: 1000;
   }
   .modal-content {
+    text-align: center;
     position: relative;
     background-color: #fff;
     margin: 5% auto;
@@ -194,6 +195,7 @@
   .modal-content h2 {
     font-size: 1rem;
     margin-bottom: 0.5rem;
+    color: #007bff;
   }
   .modal-close {
     position: absolute;
@@ -243,4 +245,18 @@
   }
   .subscribe-form button[type="submit"]:hover {
     opacity: 0.9;
+  }
+
+  #checkout-button {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: 5rem;
+    padding: 0.5rem;
+    background-color: var(--button-color);
+    color: #fff;
+    border: none;
+    border-radius: 0.25rem;
+    font-size: .9rem;
+    cursor: pointer;
+    transition: opacity 0.3s;
   }
