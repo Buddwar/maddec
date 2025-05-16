@@ -67,7 +67,7 @@ select{
 }
 .list_element{
     display: grid;
-    grid-template-columns: auto auto 0.5fr 0.5fr auto;
+    grid-template-columns: auto auto 1fr 1fr auto;
     grid-gap: 1rem;
 }
 .list_element p{
