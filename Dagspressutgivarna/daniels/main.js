@@ -129,12 +129,23 @@ async function getExistingOrganisations() {
                     <div><strong>Org.namn:</strong> ${value['orgname']}</div>
                     <div><strong>Email:</strong> ${value['email']}</div>
                 </div>
-                <button class="no_border_button" title="Radera organisation">
+                <button class="no_border_button email-btn" title="Skicka e-post">
+                    <i class="bi bi-envelope"></i>
+                </button>
+                <button class="no_border_button delete-btn" title="Radera organisation">
                     <i class="bi bi-trash"></i>
                 </button>
             `;
 
-            list_element.querySelector('button').addEventListener('click', () => {
+            //Utskick av e-postmeddelande
+            list_element.querySelector('.email-btn').addEventListener('click', () => {
+                if(confirm('Är du säker på att du vill skicka e-post till denna organisation?')) {
+                    send_email(value['orgnr'], value['email']);
+                }
+            });
+
+            //Radering av företaget
+            list_element.querySelector('.delete-btn').addEventListener('click', () => {
                 if (confirm('Är du säker på att du vill radera denna organisation?')) {
                     delete_organisation(value['orgnr']);
                 }
@@ -172,3 +183,24 @@ document.getElementById('organisationForm').addEventListener('submit', createOrg
 document.getElementById('orgnr').addEventListener('input', (e) => {
     e.target.value = e.target.value.replace(/\D/g, '').slice(0, 10);
 });
+
+
+async function send_email(orgnr, email){
+    //Datan som vi ska skicka iväg
+    data = {'orgnr': orgnr, 'email': email};
+    console.log(orgnr);
+    //Anropet till routen
+    let response = await fetch ('https://bergstrom.pythonanywhere.com/resend_email',{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+    let jsonResult = await response.json();
+    console.log(jsonResult);
+    if(jsonResult['Success']){
+        //Om det gick bra så visar vi ett meddelande
+        document.getElementById('alert_message').classList.add('show');
+    }
+}
