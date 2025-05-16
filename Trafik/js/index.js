@@ -322,6 +322,7 @@ checkoutButton.addEventListener('click', async (e) => {
   if (formData.paymethod == 'credit-card')
     {
     try {
+      display_loadingscreen();
       //Vi gör ett anropt till vår backend för att skapa en checkout-session
       const response = await fetch('https://bergstrom.pythonanywhere.com/create-checkout', {
         method: 'POST',
@@ -333,16 +334,19 @@ checkoutButton.addEventListener('click', async (e) => {
       //Om vi får tillbaka en session så skickar vi iväg användaren till stripe
       const session = await response.json();
       if (session.id) {
+        remove_loadingscreen();
         //här sker omdirigeringen till stripe
         await stripe.redirectToCheckout({ sessionId: session.id });
       }//får vi tillbaka något annt än ett id så gick troligtvis något fel i backend
       else if(session.Message)
       {//Det kan möjligtvis vara så att användaren redan finns i databasen
+        remove_loadingscreen();
         alert(session.Message);
       }
     } 
     catch (error) 
     {
+      remove_loadingscreen();
       console.error('Fel vid fetch:', error);
     }
   }
@@ -351,6 +355,7 @@ checkoutButton.addEventListener('click', async (e) => {
     console.log('Betalning via faktura');
     try
     {
+      display_loadingscreen();
       //Vi gör ett anrop till vår route för att skapa upp en faktura hos Stripe
       let response = await fetch('https://bergstrom.pythonanywhere.com/create_invoice', {
       method: 'POST',
@@ -362,14 +367,17 @@ checkoutButton.addEventListener('click', async (e) => {
     let result = await response.json();
     if (result['Success'])
       {
+      remove_loadingscreen();
       alert('Fakturan har skapats och skickas till din e-postadress!')
     }
     else{
+      remove_loadingscreen();
       alert('Det uppstod problem med att skapa fakturan.\nVänligen försök igen eller välj ett annat betalsätt.')
       console.log(result['Message']);
     }
     }
     catch (error) {
+      remove_loadingscreen();
       console.error('Fel vid fetch:', error);
     }
 
@@ -443,8 +451,7 @@ dock så måste en betalning ske innan detta*/
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
-          },//Här skickar med vår sessionscookie från serversidan
-          //o det är ju då för att kontrollera VEM det är som är inloggad
+          },
           body: JSON.stringify(data)
       });
       let jsonResult = await response.json();
@@ -465,3 +472,10 @@ dock så måste en betalning ske innan detta*/
     let login_url = `user-login.html?orgnr=${orgnr}`;
     window.location.href = login_url;
   })
+
+  function display_loadingscreen(){
+    document.getElementById('loading_screen').style.display = 'block';
+  }
+  function remove_loadingscreen(){
+    document.getElementById('loading_screen').style.display = 'none';
+  }
