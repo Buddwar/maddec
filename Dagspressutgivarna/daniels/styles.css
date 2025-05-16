@@ -310,6 +310,8 @@ button:hover {
     align-items: center;
     justify-content: center;
     font-size: 1.2rem;
+    width: 2.5rem;
+    height: 2.5rem;
 }
 
 
