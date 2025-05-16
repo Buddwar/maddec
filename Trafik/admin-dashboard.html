@@ -5,53 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trafikservice - Företagspanel</title>
     <link rel="stylesheet" href="styles/admin-dashboard.css">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
 
 </head>
 <body>
     <header>
-        <h1>Företagspanel</h1>
+        
     </header>
 
     <main>
         <div class="dashboard-container">
             <div class="settings-panel">
                 <div class="panel-header">
-                    <h2>Anpassa Utseende</h2>
-                    <p>Ändra utseendet på trafikinformationen</p>
-                </div>
-
-                <div class="success-message" id="success-message">
-                    Dina ändringar har sparats!
+                    <h2>Företagsnamn</h2>
                 </div>
 
                 <form id="customization-form">
-                    <!--<div class="form-group">
-                        <label for="state-selector">Välj län att visa:</label>
-                        <select id="state-selector">
-                            <option value="01">Stockholms län</option>
-                            <option value="03">Uppsala län</option>
-                            <option value="04">Södermanlands län</option>
-                            <option value="05">Östergötlands län</option>
-                            <option value="06">Jönköpings län</option>
-                            <option value="07">Kronobergs län</option>
-                            <option value="08">Kalmar län</option>
-                            <option value="09">Gotlands län</option>
-                            <option value="10">Blekinge län</option>
-                            <option value="12">Skåne län</option>
-                            <option value="13">Hallands län</option>
-                            <option value="14">Västra Götalands län</option>
-                            <option value="17">Värmlands län</option>
-                            <option value="18">Örebro län</option>
-                            <option value="19">Västmanlands län</option>
-                            <option value="20">Dalarnas län</option>
-                            <option value="21">Gävleborgs län</option>
-                            <option value="22">Västernorrlands län</option>
-                            <option value="23">Jämtlands län</option>
-                            <option value="24">Västerbottens län</option>
-                            <option value="25">Norrbottens län</option>
-                        </select>
-                    </div>-->
                       <div class="form-group">
                         <label for="weekly">Pris - Veckovis:</label>
                         <input type="text" value="30" id="weekly">
@@ -74,24 +43,25 @@
                         <label for="font-size">Teckenstorlek:</label>
                         <input type="text" value="30" id="fontsize">
                     </div>
-
+        <div class="color-settings">
           <!-- Primärfärg -->
           <div class="form-group">
-            <label>Primärfärg:</label>
+            <label>Primärfärg</label>
             <div class="color-preview">
-              <input type="color" id="primarycolor" value="#ffffff">
-              <span class="color-name" id="bg-color-name">#FFFFFF</span>
+              <input type="color" id="primarycolor">
+              <span class="color-name" id="bg-color-name"></span>
             </div>
           </div>
 
           <!-- Sekundärfärg -->
           <div class="form-group">
-            <label>Sekundärfärg:</label>
+            <label>Sekundärfärg</label>
             <div class="color-preview">
-              <input type="color" id="secondarycolor" value="#333333">
-              <span class="color-name" id="text-color-name">#333333</span>
+              <input type="color" id="secondarycolor">
+              <span class="color-name" id="text-color-name"></span>
             </div>
           </div>
+        </div>
         </form>
         <div class="preview-controls">
           <button type="button" class="save-button" id="apply-button">Tillämpa ändringar</button>
@@ -99,22 +69,6 @@
         </div>
         
       </div>
-      <!--
-            <div class="preview-panel">
-                <div class="panel-header">
-                    <h2>Förhandsgranskning</h2>
-                    <p>Se hur trafikinformationen kommer att se ut</p>
-                </div>
-
-                <div class="preview-frame">
-                    <iframe id="preview-iframe" src="index.html"></iframe>
-                </div>
-
-                <div class="preview-controls">
-                    <button type="button" class="save-button" id="apply-button">Tillämpa ändringar</button>
-                </div>
-            </div>
-        </div>-->
     </main>
     
     <script src="js/admin-dashboard.js"></script>
