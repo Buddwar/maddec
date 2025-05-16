@@ -1,5 +1,11 @@
-function createOrganisation(){
-    /*Vi bygger ihop företagsprofilen */
+async function createOrganisation(event) {
+    event.preventDefault();
+    
+    if (!validateForm()) return;
+
+    const button = document.querySelector('.submit-button');
+    button.disabled = true;
+    button.classList.add('loading');
 
     let orgnr = document.getElementById('orgnr').value;
     let email = document.getElementById('email').value;
@@ -13,129 +19,171 @@ function createOrganisation(){
     let primarycolor = document.getElementById('primarycolor').value;
     let secondarycolor = document.getElementById('secondarycolor').value;
 
-
-
     let company_profile = {
-        'orgnr': orgnr,
-        'email': email,
-        'passw': passw,
-        'orgname': orgname,
-        'weekly': weekly,
-        'monthly': monthly,
-        'yearly': yearly,
-        'fontstyle': fontstyle,
-        'fontsize': fontsize,
-        'primarycolor': primarycolor,
-        'secondarycolor': secondarycolor
+        orgnr,
+        email,
+        passw,
+        orgname,
+        weekly,
+        monthly,
+        yearly,
+        fontstyle,
+        fontsize,
+        primarycolor,
+        secondarycolor
+    };
+
+    try {
+        await writeOrganisation(company_profile);
+        displaySuccessMessage("Organisation skapad!");
+    } catch (err) {
+        displayErrorMessage("Ett oväntat fel inträffade.");
+        console.error(err);
+    } finally {
+        button.disabled = false;
+        button.classList.remove('loading');
     }
-    //console.log(company_profile);
-    //Kontrollera längden på orgnr
-    //Anropar funktionen så att vi kan spara undan den till databasen
-    writeOrganisation(company_profile);
-
 }
 
-//Hantering av felmeddelande som visas för användare
-function displayErrorMessage(message){
-    //let error_message = document.getElementById('error_message');
-    //error_message.style.visibility = 'visible';
-    //error_message.innerText = message;
-    alert(message);
+function validateForm() {
+    const orgnr = document.getElementById('orgnr').value;
+    const email = document.getElementById('email').value;
+    const passw = document.getElementById('passw').value;
+
+    if (!/^\d{10}$/.test(orgnr)) {
+        displayErrorMessage("Organisationsnummer måste vara 10 siffror");
+        return false;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        displayErrorMessage("Ogiltig e-postadress");
+        return false;
+    }
+
+    if (passw.length < 6) {
+        displayErrorMessage("Lösenordet måste vara minst 6 tecken");
+        return false;
+    }
+
+    return true;
 }
 
+function displayErrorMessage(message) {
+    const error_message = document.getElementById('error_message');
+    error_message.classList.add('visible');
+    error_message.innerText = message;
+    setTimeout(() => {
+        error_message.classList.remove('visible');
+    }, 5000);
+}
 
+function displaySuccessMessage(message) {
+    const success_message = document.getElementById('success_message');
+    success_message.classList.add('visible');
+    success_message.innerText = message;
+    setTimeout(() => {
+        success_message.classList.remove('visible');
+    }, 5000);
+}
 
-
-
-/*Vi skriver ner organisationen till databasen
- via denna funktion */
-async function writeOrganisation(company_profile){
-    //Vi gör ett anrop till vår databas, dess route
-    let response = await fetch ('https://bergstrom.pythonanywhere.com/create_organisation', {
-        method: 'POST',//Vi ska då skicka data dit, därav POST
-        headers: {//specifierar formatet på den data som vi ska skicka
+async function writeOrganisation(company_profile) {
+    let response = await fetch('https://bergstrom.pythonanywhere.com/create_organisation', {
+        method: 'POST',
+        headers: {
             'Content-Type': 'application/json'
-        },//Det som vi skickar är då företagsprofilen som vi konverterar till jsondata
+        },
         body: JSON.stringify(company_profile)
     });
 
     let jsonResult = await response.json();
-    console.log(jsonResult);
-    if(!jsonResult['Success']){
-        //Problem uppstod hos databasen
-        if (jsonResult['Message']){
+    if (!jsonResult['Success']) {
+        if (jsonResult['Message']) {
             displayErrorMessage(jsonResult['Message']);
         }
-    }
-    else{
-        //Allting var lyckat och vi laddar om sidan för att uppdatera listan med orgs
+    } else {
         location.reload();
     }
 }
 
-/*När sidan laddas så hämtar vi alla sparade organisationer och 
-fyller ut listan */
-async function getExistingOrganisations(){
-    let response = await fetch('https://bergstrom.pythonanywhere.com/get_organisations');
+async function getExistingOrganisations() {
+    const company_list = document.getElementById('company_list');
+    company_list.innerHTML = '<div class="loading">Laddar organisationer...</div>';
+
+    try {
+        let response = await fetch('https://bergstrom.pythonanywhere.com/get_organisations');
+        let jsonResult = await response.json();
+        company_list.innerHTML = "";
+
+        if (Object.keys(jsonResult).length === 0) {
+            company_list.innerHTML = '<div class="empty-state">Inga organisationer hittades</div>';
+            return;
+        }
+
+        for (let [_, value] of Object.entries(jsonResult)) {
+            let list_element = document.createElement('div');
+            list_element.classList.add('list_element');
+
+            list_element.innerHTML = `
+                <div class="org-details">
+                    <div><strong>Org.nr:</strong> ${value['orgnr']}</div>
+                    <div><strong>Org.namn:</strong> ${value['orgname']}</div>
+                    <div><strong>Email:</strong> ${value['email']}</div>
+                </div>
+                <button class="no_border_button email-btn" title="Skicka e-post">
+                    <i class="bi bi-envelope"></i>
+                </button>
+                <button class="no_border_button delete-btn" title="Radera organisation">
+                    <i class="bi bi-trash"></i>
+                </button>
+            `;
+
+            //Utskick av e-postmeddelande
+            list_element.querySelector('.email-btn').addEventListener('click', () => {
+                if(confirm('Är du säker på att du vill skicka e-post till denna organisation?\nMottagaren kommer att få ett nytt lösenord.')) {
+                    send_email(value['orgnr'], value['email']);
+                }
+            });
+
+            //Radering av företaget
+            list_element.querySelector('.delete-btn').addEventListener('click', () => {
+                if (confirm('Är du säker på att du vill radera denna organisation?')) {
+                    delete_organisation(value['orgnr']);
+                }
+            });
+
+            company_list.appendChild(list_element);
+        }
+    } catch (err) {
+        company_list.innerHTML = '<div class="error">Kunde inte ladda organisationer</div>';
+        console.error(err);
+    }
+}
+
+async function delete_organisation(orgnr) {
+    let organisation = { orgnr };
+    let response = await fetch('https://bergstrom.pythonanywhere.com/delete_organisation', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(organisation)
+    });
     let jsonResult = await response.json();
-    //console.log(jsonResult);
-
-    let company_list = document.getElementById('company_list');
-
-    //Vi loopar igenom respektive nyckel och dess värde
-    for (let [key, value] of Object.entries(jsonResult)){
-        //console.log(key, value);
-        //Vi vill då skapa upp ett list element för varje företag samt andra element
-        let list_element = document.createElement('li');
-        let orgnr_para = document.createElement('p');
-        let orgname_para = document.createElement('p');
-        let orgemail_para = document.createElement('p');
-
-        orgnr_para.innerHTML = value['orgnr'];
-        orgname_para.innerHTML = value['orgname'];
-        orgemail_para.innerHTML = value['email'];
-        //Texten som ska visas sätter vi här
-        //list_element.innerText = value['orgnr'] + '\n' + value['orgname'] + '\n' + value['email'] + '\n';
-        list_element.classList.add('list-group-item');//Slänger in en bootstrap klass så de blir snyggare
-        list_element.classList.add('list_element');
-        remove_button = document.createElement('button');
-        sendmail_button = document.createElement('button');
-        //Lägger till en bootstrap icon på knappen
-        remove_button.innerHTML = '<i class="bi bi-trash h5"></i>';
-        sendmail_button.innerHTML = '<i class="bi bi-envelope-fill"></i>';
-        //Appenda paragrafen till varje list element
-        list_element.appendChild(sendmail_button);
-        list_element.appendChild(orgnr_para);
-        list_element.appendChild(orgname_para);
-        list_element.appendChild(orgemail_para);
-        //Varje list-element får sin egna knapp för radering
-        list_element.appendChild(remove_button);
-        /*Tar bort borders med hjälp av en klass
-        bara så den ska smälta in i bakgrunden*/
-        remove_button.classList.add('no_border_button');
-        sendmail_button.classList.add('no_border_button');
-        
-
-
-        /*Och sedan så får varje knapp en eventlistener 
-        som anropar en funktion för att radera elementet organisationen
-        i fråga*/
-        remove_button.addEventListener('click', function(){
-            //Varje 
-            delete_organisation(value['orgnr']);
-        });
-        sendmail_button.addEventListener('click', function(){
-            //Skicka iväg ett mail till företaget
-            send_email(value['orgnr'], value['email']);
-        });
-
-
-
-        //Och det appendas till UL elementet som finns i DOM
-        company_list.appendChild(list_element);
-
+    if (jsonResult['Success']) {
+        location.reload();
+    } else {
+        displayErrorMessage("Kunde inte radera organisationen.");
+    }
 }
-}
+
+// Add event listener for form submission
+document.getElementById('organisationForm').addEventListener('submit', createOrganisation);
+
+// Add input masking for organization number
+document.getElementById('orgnr').addEventListener('input', (e) => {
+    e.target.value = e.target.value.replace(/\D/g, '').slice(0, 10);
+});
+
 
 async function send_email(orgnr, email){
     //Datan som vi ska skicka iväg
@@ -153,39 +201,7 @@ async function send_email(orgnr, email){
     console.log(jsonResult);
     if(jsonResult['Success']){
         //Om det gick bra så visar vi ett meddelande
-        document.getElementById('alert_message').classList.add('show');
+        alert('Ett e-postmeddelande har skickats till ' + email + '\nDet kan ta några minuter innan mejlet kommer fram.');
+
     }
 }
-
-/*Borttagning av företag*/
-async function delete_organisation(orgnr){
-    //Datan som vi ska skicka iväg
-    organisation = {'orgnr': orgnr};
-    console.log(orgnr);
-    //Anropet till routen
-    let response = await fetch ('https://bergstrom.pythonanywhere.com/delete_organisation',{
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(organisation)
-    });
-    let jsonResult = await response.json();
-    console.log(jsonResult);
-    location.reload();
-}
-
-
-let input_fields = document.querySelectorAll('input');
-input_fields.forEach(input =>{
-    input.addEventListener('input', () => {
-        if(input.value.trim() === ''){
-            input.classList.add('is-invalid');
-            input.classList.remove('is-valid');
-        }
-        else{
-            input.classList.remove('is-invalid');
-            input.classList.add('is-valid');
-        }
-    })
-});
