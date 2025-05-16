@@ -374,9 +374,34 @@ checkoutButton.addEventListener('click', async (e) => {
     }
 
   }
-  else if (formData.paymethod == 'swish'){
+  else if (formData.paymethod == 'swish') 
+  {
     console.log('Betalning via swish');
-  }
+    try 
+    {
+      let response = await fetch('https://bergstrom.pythonanywhere.com/create_swish', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      let result = await response.json();
+
+      if (result['Success']) {
+        window.location.href = result['Data']['url'];
+      } else {
+        alert('Prblem Uppstod' + (result['Message'] || 'Betalning misslckades'));
+        console.log(result);
+        alert('Det uppstod problem med betalningen.\nVänligen försök igen eller välj ett annat betalsätt.');
+        console.log(result['Message']);
+      }
+    }
+    catch (error) {
+      console.error('Fel vid fetch:', error);
+    }
+  } 
 });
 
 
