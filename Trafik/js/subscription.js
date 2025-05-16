@@ -36,9 +36,11 @@ let countrycodes = {
 document.getElementById('save-button').addEventListener('click', async () => {
     const countrycode = document.getElementById('update-frequency').value;
     /*Jag ändrade så att man kan uppdatera vilket län man prenumerar på */
+    display_loadingscreen();
     let result = await update_user_details(countrycode);//Functionen kommer returnera en dict tillbaka
     //Dicten kommer se ut likt följande > {'Success': 'True/False', 'Message': 'meddelande'}
     if(result['Success']){
+        remove_loadingscreen();
         // Show success message
         showSuccessMessage();
         //Laddar om nuvarande fönstret så att uppdaterade uppgifter om användaren visas
@@ -51,10 +53,12 @@ document.getElementById('save-button').addEventListener('click', async () => {
 document.getElementById('cancel-button').addEventListener('click', async() => {
 
     //Anropa databasen och logga ut användaren
+    display_loadingscreen();
     let result = await logout_user();
     if(result['Success']){//Om det gick bra med att logga ut
         let orgnr = getUrl();
         let index_url = `index.html?orgnr=${orgnr}`;
+        remove_loadingscreen();
         window.location.href = index_url;
 
         //window.location.href = 'index.html';//Dirigera om användaren
@@ -72,8 +76,10 @@ document.getElementById('delete-button').addEventListener('click', async() => {
         let email = document.getElementById('subscriber-email').textContent.trim();
         console.log(email);
         //Anropa databasen och radera användaren
+        display_loadingscreen();
         let result = await delete_user(email);
         if(result['Success']){//Om allting gick bra med raderingen
+            remove_loadingscreen();
             console.log(result['Message']);
             //Då loggar vi ut användaren
             let logout_result = await logout_user();
@@ -97,8 +103,10 @@ window.addEventListener('load', async () => {
     // For demo purposes, we're using hardcoded values
 
     //Hämta användarens data
+    display_loadingscreen();
     let subscriber_data = await get_user_details();
     if(subscriber_data['Success']){//Om vi lyckades hämta data, t. ex. om användaren är inloggad så ska det fungera
+        remove_loadingscreen();
         document.getElementById('subscriber-name').textContent = subscriber_data['Data']['fname'] + ' ' + subscriber_data['Data']['lname'];
         document.getElementById('subscriber-email').textContent = subscriber_data['Data']['email'];
         document.getElementById('subscriber-phone').textContent = subscriber_data['Data']['phone'];
@@ -177,4 +185,10 @@ function getUrl(){
   });
     let jsonResult = await response.json();
     return jsonResult;
+  }
+  function display_loadingscreen(){
+    document.getElementById('loading_screen').style.display = 'block';
+  }
+  function remove_loadingscreen(){
+    document.getElementById('loading_screen').style.display = 'none';
   }

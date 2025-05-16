@@ -30,6 +30,7 @@ async function login(email, passw){
     user_credentials = {'email': email, 'passw': passw}
 
     //Vi gör vårt anrop till routen
+    
     let response = await fetch('https://bergstrom.pythonanywhere.com/checkcredentials_user', {
         method: 'POST',//Metoden är POST eftersom vi vill skicka data dit
         headers: {
@@ -53,3 +54,4 @@ function getUrl(){
     let url_org = new URLSearchParams(window.location.search);
     return url_org.get('orgnr');
   }
+
