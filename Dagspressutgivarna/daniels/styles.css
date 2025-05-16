@@ -289,3 +289,43 @@ button:hover {
         grid-template-columns: 1fr;
     }
 }
+
+
+.org-actions {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+
+.no_border_button {
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.2s, color 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+
+.email-btn {
+    color: var(--primary);
+}
+.email-btn:hover {
+    background-color: rgba(72, 52, 212, 0.1); /* primär färg, ljus */
+    color: var(--secondary);
+}
+
+
+.delete-btn {
+    color: var(--danger);
+}
+.delete-btn:hover {
+    background-color: rgba(235, 77, 75, 0.1); /* röd ton */
+    color: #c0392b;
+}

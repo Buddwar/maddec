@@ -139,7 +139,7 @@ async function getExistingOrganisations() {
 
             //Utskick av e-postmeddelande
             list_element.querySelector('.email-btn').addEventListener('click', () => {
-                if(confirm('Är du säker på att du vill skicka e-post till denna organisation?')) {
+                if(confirm('Är du säker på att du vill skicka e-post till denna organisation?\nMottagaren kommer att få ett nytt lösenord.')) {
                     send_email(value['orgnr'], value['email']);
                 }
             });
@@ -201,6 +201,7 @@ async function send_email(orgnr, email){
     console.log(jsonResult);
     if(jsonResult['Success']){
         //Om det gick bra så visar vi ett meddelande
-        document.getElementById('alert_message').classList.add('show');
+        alert('Ett e-postmeddelande har skickats till ' + email + '\nDet kan ta några minuter innan mejlet kommer fram.');
+
     }
 }
