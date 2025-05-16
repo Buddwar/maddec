@@ -392,7 +392,7 @@ checkoutButton.addEventListener('click', async (e) => {
       if (result['Success']) {
         window.location.href = result['Data']['url'];
       } else {
-        alert('Prblem Uppstod' + (result['Message'] || 'Betalning misslckades'));
+        alert('Error' + (result['Message'] || 'Betalning misslckades'));
         console.log(result);
         alert('Det uppstod problem med betalningen.\nVänligen försök igen eller välj ett annat betalsätt.');
         console.log(result['Message']);
