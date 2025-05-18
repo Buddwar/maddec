@@ -159,15 +159,15 @@
   }
 
   .popup-direction {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
   }
 
   .popup-starttime {
-    font-size: small;
+    font-size: 0.65rem;
   }
 
   .popup-endtime {
-    font-size: small;
+    font-size: 0.65rem;
   }
 
   /* Stil på popup för väglag */
@@ -185,7 +185,7 @@
   }
 
   .popup-time-update {
-    font-size: small;
+    font-size: 0.7rem;
   }
 }
 
@@ -210,6 +210,10 @@
 
   .popup-roadname {
     font-size: 0.85rem;
+  }
+
+  .popup-direction {
+    font-size: 0.7rem;
   }
 
   .popup-starttime {
