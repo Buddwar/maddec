@@ -96,12 +96,39 @@ document.getElementById('delete-button').addEventListener('click', async() => {
         console.log('Användaren tröck avbryt');
     }
 });
+//Användaren klickar på förläng-knappen
+document.getElementById('extend-button').addEventListener('click', async() => {
+    //Vi hämtar ut e-postadressen
+    let email = document.getElementById('subscriber-email').textContent.trim();
+    //Vi visar vår loading screen då det kanske tar lite tid att göra ett anrop
+    display_loadingscreen();
+    let result = await extend_subscription(email);
+    if(result['Success']){//Om det gick bra
+        remove_loadingscreen();//Då tar vi bort loading screen
+        console.log(result['Message']);
+        window.location.reload();//Och laddar om nuvarande sida
+    }
+    else{
+        remove_loadingscreen();
+        console.log('Gick inte att hämta data');
+    }
+});
 
-// Load user data (this would come from backend)
+async function extend_subscription(email){
+    let response = await fetch('https://bergstrom.pythonanywhere.com/extend_subscription', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({email})
+    });
+    let jsonResult = await response.json();
+    return jsonResult;
+}
+
+//Ladda in befintliga uppgifter om användaren
 window.addEventListener('load', async () => {
-    // This is where we would fetch the user's current subscription data
-    // For demo purposes, we're using hardcoded values
-
     //Hämta användarens data
     display_loadingscreen();
     let subscriber_data = await get_user_details();
@@ -120,6 +147,7 @@ window.addEventListener('load', async () => {
         window.location.href = index_url;
     }
 });
+
 
 /*Function för att hämta användaren som är inloggad
 Ingen data behöver skickas in här utan det räcker att bara anropa funktionen */
