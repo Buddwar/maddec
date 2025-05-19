@@ -19,7 +19,7 @@ body{
 .dashboard-container{
 
     border-radius: 1rem;
-    background-color: #B5FCCD;
+    background-color: #007bff;
     padding: .4rem;
     margin-inline: 1rem;
 }
@@ -28,7 +28,7 @@ header{
     text-align: center;
 }
 .settings-panel{
-    background-color: #7AC6D2;
+    background-color: white;
     border-radius: 1rem;
     padding-inline: 1rem;;
 }
@@ -59,12 +59,12 @@ header{
 
 
 .save-button {
-  background-color: #27ae60; 
+  background-color: #007bff;
   color: white;
 }
 
 .save-button:hover {
-  background-color: #219150;
+  background-color: #3898ff;
   transform: scale(1.02);
 }
 
@@ -114,7 +114,7 @@ input::placeholder {
   font-style: italic;
 }
 #customization-form{
-    background-color: #B5FCCD;
+    background-color: white;
     border-radius: .5rem;
     padding: 1rem;
 }
