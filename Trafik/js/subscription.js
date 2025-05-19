@@ -108,6 +108,10 @@ document.getElementById('extend-button').addEventListener('click', async() => {
         console.log(result['Message']);
         window.location.reload();//Och laddar om nuvarande sida
     }
+    else{
+        remove_loadingscreen();
+        console.log('Gick inte att hämta data');
+    }
 });
 
 
