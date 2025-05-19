@@ -105,7 +105,7 @@ document.getElementById('extend-button').addEventListener('click', async() => {
     let result = await extend_subscription(email);
     if(result['Success']){//Om det gick bra
         remove_loadingscreen();//Då tar vi bort loading screen
-        console.log('Det gick bra att kontakta förlänga-routen');
+        console.log(result['Message']);
         window.location.reload();//Och laddar om nuvarande sida
     }
 });
