@@ -36,10 +36,6 @@ export async function getCameras(cameraUrl) {
           <div class="popup-camera-roadnr"><strong>Vägnr: </strong> ${cam.RoadNumber || 'Okänd'}<br></div>
         `;
   
-        // Ikoner för kameror
-        //const iconClass = 'bi bi-camera-fill'; <--- Bootstrap/ej använda?
-        //const iconColor = 'blue'; <---- Bootstrap/ej anävnda?
-  
         // Skapa Leaflet-divIcon med Bootstrap Icon
         // och lägg till den på kartan
         const cameraIcon = L.icon({

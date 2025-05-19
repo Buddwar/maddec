@@ -46,7 +46,8 @@ export async function getSituations(url) {
                           <div class="popup-endtime"><strong>Sluttid:</strong> ${dev.EndTime ? formatDateTime(dev.EndTime) : 'Ingen tid angiven'}<br></div>
                         `;
 
-                        // Ikoner för olika situationer och påverkan, dessa kommer att ändras - bootstrap används i nuläget för test
+                        // Ikoner för olika situationer och påverkan, dessa är skapade i Figma, och är olika för vägarbete, olycka och hinder.
+                        // Ikonerna ligger i images-mappen.
                         let iconUrl;
                         if (dev.MessageType?.toLowerCase() === 'vägarbete') {
                           iconUrl = dev.SeverityText?.toLowerCase() === 'mycket stor påverkan'
@@ -64,7 +65,7 @@ export async function getSituations(url) {
                             : 'images/icon-obstacle-orange.svg';
                         }
 
-                        // Skapa Leaflet-divIcon med Bootstrap Icon om vi har en giltig ikon
+                        // Skapa Leaflet-icon med ikonerna skapade i Figma.
                         if (iconUrl) {
                           const customIcon = L.icon({
                             iconUrl,
