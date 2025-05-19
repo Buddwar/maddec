@@ -421,8 +421,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   //Använd resultatet som vi får tillbaka
   document.getElementById('subscribe-button').style.backgroundColor = result['Data']['primarycolor'];
   document.getElementById('login-button').style.backgroundColor = result['Data']['primarycolor'];
-  document.body.style.backgroundColor = result['Data']['secondarycolor'];
-  document.body.style.color = result['Data']['secondarycolor'];
+  document.getElementById('subscribe-button').style.color = result['Data']['secondarycolor'];
+  document.getElementById('login-button').style.color = result['Data']['secondarycolor'];
   document.body.style.fontFamily = result['Data']['fontstyle'];
   document.body.style.fontSize = result['Data']['fontsize'] + 'px';
 });
