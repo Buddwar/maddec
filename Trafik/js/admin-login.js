@@ -5,11 +5,12 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
     
     // validate credentials against backend
     console.log('Admin login attempt:', { username, password });
-
+    display_loadingscreen();
     let result = await login(username, password);
 
     if (result['Success']){
         // Redirect to admin dashboard after successful login
+        remove_loadingscreen();
         window.location.href = `admin-dashboard.html`;
     }
     else{
@@ -43,3 +44,10 @@ async function login(orgnr, passw){
     const jsonResult = await response.json();
     return jsonResult;
 }
+
+function display_loadingscreen(){
+    document.getElementById('loading_screen').style.display = 'flex';
+  }
+function remove_loadingscreen(){
+    document.getElementById('loading_screen').style.display = 'none';
+  }
