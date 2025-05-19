@@ -114,6 +114,19 @@ document.getElementById('extend-button').addEventListener('click', async() => {
     }
 });
 
+async function extend_subscription(email){
+    data = {'email': email}
+    let response = await fetch('https://bergstrom.pythonanywhere.com/extend_subscription', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({data})
+    });
+    let jsonResult = await response.json();
+    return jsonResult;
+}
 
 //Ladda in befintliga uppgifter om användaren
 window.addEventListener('load', async () => {
@@ -136,19 +149,6 @@ window.addEventListener('load', async () => {
     }
 });
 
-async function extend_subscription(email){
-    data = {'email': email}
-    let response = await fetch('https://bergstrom.pythonanywhere.com/extend_subscription', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-        body: JSON.stringify({data})
-    });
-    let jsonResult = await response.json();
-    return jsonResult;
-}
 
 /*Function för att hämta användaren som är inloggad
 Ingen data behöver skickas in här utan det räcker att bara anropa funktionen */
