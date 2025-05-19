@@ -422,7 +422,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('subscribe-button').style.backgroundColor = result['Data']['primarycolor'];
   document.getElementById('login-button').style.backgroundColor = result['Data']['primarycolor'];
   document.body.style.backgroundColor = result['Data']['secondarycolor'];
-  document.body.color = result['Data']['secondarycolor'];
+  document.body.style.color = result['Data']['secondarycolor'];
   document.body.style.fontFamily = result['Data']['fontstyle'];
   document.body.style.fontSize = result['Data']['fontsize'] + 'px';
 });
