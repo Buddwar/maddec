@@ -68,7 +68,7 @@ document.getElementById('cancel-button').addEventListener('click', async() => {
     }
 });
 document.getElementById('delete-button').addEventListener('click', async() => {
-
+try{
     let dialog_window = 'Är du säker på att du vill radera ditt konto?';
 
     if (confirm(dialog_window)){
@@ -90,11 +90,19 @@ document.getElementById('delete-button').addEventListener('click', async() => {
         }
         else{
             console.log('Problem med att radera användaren...', result['Message']);
+            window.location.reload();
         }
     }
     else{
         console.log('Användaren tröck avbryt');
+        window.location.reload();
     }
+}
+catch (error){
+    console.log('Ett problem uppstod');
+    remove_loadingscreen();
+}
+
 });
 //Användaren klickar på förläng-knappen
 document.getElementById('extend-button').addEventListener('click', async() => {
