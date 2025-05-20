@@ -219,7 +219,7 @@ async function send_email(orgnr, email){
 }
 
 function display_loadingscreen(){
-    document.getElementById('loading_screen').style.display = 'block';
+    document.getElementById('loading_screen').style.display = 'flex';
   }
 function remove_loadingscreen(){
     document.getElementById('loading_screen').style.display = 'none';
