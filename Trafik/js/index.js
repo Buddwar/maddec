@@ -429,9 +429,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('checkout-button').style.color = result['Data']['secondarycolor'];
   document.getElementById('modal-title').style.color = result['Data']['secondarycolor'];
 
-  document.getElementById('weekly').textContent += result['Data']['weekly'];
-  document.getElementById('monthly').textContent += result['Data']['monthly'];
-  document.getElementById('yearly').textContent += result['Data']['yearly'];
+  document.getElementById('weekly').textContent += ' ' +  result['Data']['weekly'] + 'SEK';
+  document.getElementById('monthly').textContent += ' ' + result['Data']['monthly'] + 'SEK';
+  document.getElementById('yearly').textContent += ' ' + result['Data']['yearly'] + 'SEK';
+
+  document.getElementById('subscribe-modal').style.fontFamily = result['Data']['fontstyle'];
 });
 
 /*Denna funktion användes tidigare för att skapa en användare
