@@ -425,6 +425,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('login-button').style.color = result['Data']['secondarycolor'];
   document.body.style.fontFamily = result['Data']['fontstyle'];
   document.body.style.fontSize = result['Data']['fontsize'] + 'px';
+
+  document.getElementById('checkout-button').style.backgroundColor = result['Data']['primarycolor'];
+  document.getElementById('checkout-button').style.color = result['Data']['secondarycolor'];
+  document.getElementById('modal-title').style.color = result['Data']['secondarycolor'];
 });
 
 /*Denna funktion användes tidigare för att skapa en användare
