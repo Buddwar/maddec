@@ -417,23 +417,31 @@ document.addEventListener('DOMContentLoaded', async () => {
   let url_org = new URLSearchParams(window.location.search);
   let orgnr = url_org.get('orgnr');
   //Stoppa in orgnr i denna funktion när vi anropar
+  display_loadingscreen();
   let result = await load_organisation(orgnr);
-  //Använd resultatet som vi får tillbaka
-  document.getElementById('subscribe-button').style.backgroundColor = result['Data']['primarycolor'];
-  document.getElementById('login-button').style.backgroundColor = result['Data']['primarycolor'];
-  document.getElementById('subscribe-button').style.color = result['Data']['secondarycolor'];
-  document.getElementById('login-button').style.color = result['Data']['secondarycolor'];
-  document.body.style.fontFamily = result['Data']['fontstyle'];
-  document.body.style.fontSize = result['Data']['fontsize'] + 'px';
-  document.getElementById('checkout-button').style.backgroundColor = result['Data']['primarycolor'];
-  document.getElementById('checkout-button').style.color = result['Data']['secondarycolor'];
-  document.getElementById('modal-title').style.color = result['Data']['secondarycolor'];
+  if (result['Success']) {
+    //Använd resultatet som vi får tillbaka
+    document.getElementById('subscribe-button').style.backgroundColor = result['Data']['primarycolor'];
+    document.getElementById('login-button').style.backgroundColor = result['Data']['primarycolor'];
+    document.getElementById('subscribe-button').style.color = result['Data']['secondarycolor'];
+    document.getElementById('login-button').style.color = result['Data']['secondarycolor'];
+    document.body.style.fontFamily = result['Data']['fontstyle'];
+    document.body.style.fontSize = result['Data']['fontsize'] + 'px';
+    document.getElementById('checkout-button').style.backgroundColor = result['Data']['primarycolor'];
+    document.getElementById('checkout-button').style.color = result['Data']['secondarycolor'];
+    document.getElementById('checkout-button').style.fontFamily = result['Data']['fontstyle'];
+    document.getElementById('modal-title').style.color = result['Data']['secondarycolor'];
 
-  document.getElementById('weekly').textContent += ' ' +  result['Data']['weekly'] + 'SEK';
-  document.getElementById('monthly').textContent += ' ' + result['Data']['monthly'] + 'SEK';
-  document.getElementById('yearly').textContent += ' ' + result['Data']['yearly'] + 'SEK';
+    document.getElementById('weekly').textContent += ' ' +  result['Data']['weekly'] + 'SEK';
+    document.getElementById('monthly').textContent += ' ' + result['Data']['monthly'] + 'SEK';
+    document.getElementById('yearly').textContent += ' ' + result['Data']['yearly'] + 'SEK';
 
-  document.getElementById('subscribe-modal').style.fontFamily = result['Data']['fontstyle'];
+    document.getElementById('subscribe-modal').style.fontFamily = result['Data']['fontstyle'];
+  }
+  else{
+    remove_loadingscreen();
+    console.log('Problem med att hämta organisationen');
+  }
 });
 
 /*Denna funktion användes tidigare för att skapa en användare
