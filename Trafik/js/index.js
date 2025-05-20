@@ -417,31 +417,24 @@ document.addEventListener('DOMContentLoaded', async () => {
   let url_org = new URLSearchParams(window.location.search);
   let orgnr = url_org.get('orgnr');
   //Stoppa in orgnr i denna funktion när vi anropar
-  display_loadingscreen();
   let result = await load_organisation(orgnr);
-  if (result['Success']) {
-    //Använd resultatet som vi får tillbaka
-    document.getElementById('subscribe-button').style.backgroundColor = result['Data']['primarycolor'];
-    document.getElementById('login-button').style.backgroundColor = result['Data']['primarycolor'];
-    document.getElementById('subscribe-button').style.color = result['Data']['secondarycolor'];
-    document.getElementById('login-button').style.color = result['Data']['secondarycolor'];
-    document.body.style.fontFamily = result['Data']['fontstyle'];
-    document.body.style.fontSize = result['Data']['fontsize'] + 'px';
-    document.getElementById('checkout-button').style.backgroundColor = result['Data']['primarycolor'];
-    document.getElementById('checkout-button').style.color = result['Data']['secondarycolor'];
-    document.getElementById('checkout-button').style.fontFamily = result['Data']['fontstyle'];
-    document.getElementById('modal-title').style.color = result['Data']['secondarycolor'];
+  //Använd resultatet som vi får tillbaka
+  document.getElementById('subscribe-button').style.backgroundColor = result['Data']['primarycolor'];
+  document.getElementById('login-button').style.backgroundColor = result['Data']['primarycolor'];
+  document.getElementById('subscribe-button').style.color = result['Data']['secondarycolor'];
+  document.getElementById('login-button').style.color = result['Data']['secondarycolor'];
+  document.body.style.fontFamily = result['Data']['fontstyle'];
+  document.body.style.fontSize = result['Data']['fontsize'] + 'px';
+  document.getElementById('checkout-button').style.backgroundColor = result['Data']['primarycolor'];
+  document.getElementById('checkout-button').style.color = result['Data']['secondarycolor'];
+  document.getElementById('checkout-button').style.fontFamily = result['Data']['fontstyle'];
+  document.getElementById('modal-title').style.color = result['Data']['secondarycolor'];
 
-    document.getElementById('weekly').textContent += ' ' +  result['Data']['weekly'] + 'SEK';
-    document.getElementById('monthly').textContent += ' ' + result['Data']['monthly'] + 'SEK';
-    document.getElementById('yearly').textContent += ' ' + result['Data']['yearly'] + 'SEK';
+  document.getElementById('weekly').textContent += ' ' +  result['Data']['weekly'] + 'SEK';
+  document.getElementById('monthly').textContent += ' ' + result['Data']['monthly'] + 'SEK';
+  document.getElementById('yearly').textContent += ' ' + result['Data']['yearly'] + 'SEK';
 
-    document.getElementById('subscribe-modal').style.fontFamily = result['Data']['fontstyle'];
-  }
-  else{
-    remove_loadingscreen();
-    console.log('Problem med att hämta organisationen');
-  }
+  document.getElementById('subscribe-modal').style.fontFamily = result['Data']['fontstyle'];
 });
 
 /*Denna funktion användes tidigare för att skapa en användare
@@ -465,15 +458,24 @@ dock så måste en betalning ske innan detta*/
 //Ladda organisationen ifråga och hämta dess värden
   async function load_organisation(orgnr){
     let data = {'orgnr': orgnr};
-        let response = await fetch('https://bergstrom.pythonanywhere.com/get_organisation', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data)
+    display_loadingscreen();
+      let response = await fetch('https://bergstrom.pythonanywhere.com/get_organisation', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
       });
       let jsonResult = await response.json();
-      return jsonResult;
+      if(jsonResult['Success']){
+        remove_loadingscreen();
+        return jsonResult;
+      }
+      else{
+        remove_loadingscreen();
+        alert('Det gick inte att hämta organisationen.');
+        console.log(jsonResult['Message']);
+      }
   }
 
   /*Här hämtar vi ut orgnr ifrån URL */
