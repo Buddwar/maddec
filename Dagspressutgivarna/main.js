@@ -87,6 +87,7 @@ function displaySuccessMessage(message) {
 }
 
 async function writeOrganisation(company_profile) {
+    display_loadingscreen();
     let response = await fetch('https://bergstrom.pythonanywhere.com/create_organisation', {
         method: 'POST',
         headers: {
@@ -98,9 +99,11 @@ async function writeOrganisation(company_profile) {
     let jsonResult = await response.json();
     if (!jsonResult['Success']) {
         if (jsonResult['Message']) {
-            displayErrorMessage(jsonResult['Message']);
+            displayErrorMessage('Gick inte att spara undan organisationen\nKontrollera att den inte redan finns.');
+            remove_loadingscreen();
         }
     } else {
+        remove_loadingscreen();
         location.reload();
     }
 }
@@ -161,6 +164,7 @@ async function getExistingOrganisations() {
 
 async function delete_organisation(orgnr) {
     let organisation = { orgnr };
+    display_loadingscreen();
     let response = await fetch('https://bergstrom.pythonanywhere.com/delete_organisation', {
         method: 'POST',
         headers: {
@@ -170,9 +174,11 @@ async function delete_organisation(orgnr) {
     });
     let jsonResult = await response.json();
     if (jsonResult['Success']) {
+        remove_loadingscreen();
         location.reload();
     } else {
         displayErrorMessage("Kunde inte radera organisationen.");
+        remove_loadingscreen();
     }
 }
 
@@ -190,6 +196,7 @@ async function send_email(orgnr, email){
     data = {'orgnr': orgnr, 'email': email};
     console.log(orgnr);
     //Anropet till routen
+    display_loadingscreen();
     let response = await fetch ('https://bergstrom.pythonanywhere.com/resend_email',{
         method: 'POST',
         headers: {
@@ -202,6 +209,18 @@ async function send_email(orgnr, email){
     if(jsonResult['Success']){
         //Om det gick bra så visar vi ett meddelande
         alert('Ett e-postmeddelande har skickats till ' + email + '\nDet kan ta några minuter innan mejlet kommer fram.');
-
+        remove_loadingscreen();
+    }
+    else{
+        //Om det inte gick bra så visar vi ett meddelande
+        alert('Det gick inge bra att skicka e-postmeddelande. Testa igen om en liten stund.');
+        remove_loadingscreen();
     }
 }
+
+function display_loadingscreen(){
+    document.getElementById('loading_screen').style.display = 'block';
+  }
+function remove_loadingscreen(){
+    document.getElementById('loading_screen').style.display = 'none';
+  }
