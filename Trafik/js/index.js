@@ -430,9 +430,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('checkout-button').style.fontFamily = result['Data']['fontstyle'];
   document.getElementById('modal-title').style.color = result['Data']['secondarycolor'];
 
-  document.getElementById('weekly').textContent += ' ' +  result['Data']['weekly'] + 'SEK';
-  document.getElementById('monthly').textContent += ' ' + result['Data']['monthly'] + 'SEK';
-  document.getElementById('yearly').textContent += ' ' + result['Data']['yearly'] + 'SEK';
+  document.getElementById('weekly').textContent += ' ' +  result['Data']['weekly'] + ' SEK';
+  document.getElementById('monthly').textContent += ' ' + result['Data']['monthly'] + ' SEK';
+  document.getElementById('yearly').textContent += ' ' + result['Data']['yearly'] + ' SEK';
 
   document.getElementById('subscribe-modal').style.fontFamily = result['Data']['fontstyle'];
 });
