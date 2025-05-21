@@ -201,8 +201,11 @@ async function update_organisation(email, orgnr) {
     });
     let jsonResult = await response.json();
     if (jsonResult['Success']) {
+        console.log(jsonResult);
         remove_loadingscreen();
+        console.log('Reload körs....');
         location.reload();
+        console.log('Reload har körts');
     } else {
         displayErrorMessage("Kunde inte uppdata e-post för organisationen.");
         remove_loadingscreen();
