@@ -428,7 +428,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('checkout-button').style.backgroundColor = result['Data']['primarycolor'];
   document.getElementById('checkout-button').style.color = result['Data']['secondarycolor'];
   document.getElementById('checkout-button').style.fontFamily = result['Data']['fontstyle'];
-  document.getElementById('modal-title').style.color = result['Data']['secondarycolor'];
+  document.getElementById('modal-title').style.color = result['Data']['primarycolor'];
 
   document.getElementById('weekly').textContent += ' ' +  result['Data']['weekly'] + ' SEK';
   document.getElementById('monthly').textContent += ' ' + result['Data']['monthly'] + ' SEK';
