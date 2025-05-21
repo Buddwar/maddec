@@ -190,25 +190,32 @@ let currentSettings = {
 
   //Anropa funktionen och skicka in den data som behövs(dict)
   async function update_organisation(data){
-    //Det här är den typen av data som kan uppdateras för organisationer
-    console.log(data);
+    try {
       let response = await fetch('https://bergstrom.pythonanywhere.com/update_organisation', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
+          'Content-Type': 'application/json',
         },
         credentials: 'include',
         body: JSON.stringify(data)
-    });
+      });
 
-    if (response.ok){
-      let jsonResult = await response.json();
-      if (jsonResult['Success']){
-        console.log('Organisationen har uppdaterats: ', jsonResult);
+      if (response.ok){
+        let jsonResult = await response.json();
+        if (jsonResult['Success']){
+          console.log('Organisationen har uppdaterats: ', jsonResult);
+        }
+        else{
+          showErrorModal('Problem med att uppdatera organisationen: ' + (jsonResult['Message'] || 'Okänt fel.'));
+          console.log('Problem med att uppdatera organisationen: ', jsonResult['Message']);
+        }
+      } else {
+        showErrorModal('Kunde inte uppdatera organisationen. Serverfel eller nätverksproblem.');
       }
-      else{
-        console.log('Problem med att uppdatera organisationen: ', jsonResult['Message']);
-      }
+    //errorhanterare  
+    } catch (error) {
+      showErrorModal('Nätverksfel eller CORS-problem. Vänligen försök igen senare.');
+      console.error('Nätverksfel/CORS:', error);
     }
   }
 
@@ -231,5 +238,34 @@ let currentSettings = {
     console.log(jsonResult);
     if (jsonResult['Success']){//Kontroll att vi lyckades logga ut
       window.location.href = `admin-login.html`;//Dirigera om användaren till login-sidan
+    }
+  }
+
+  window.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('errorModal');
+    const closeBtn = document.getElementById('closeErrorModal');
+    if (closeBtn && modal) {
+      closeBtn.onclick = function() {
+        modal.style.display = 'none';
+        modal.classList.remove('show');
+      };
+    }
+    window.onclick = function(event) {
+      if (event.target === modal) {
+        modal.style.display = 'none';
+        modal.classList.remove('show');
+      }
+    };
+  });
+
+  function showErrorModal(message) {
+    const modal = document.getElementById('errorModal');
+    const modalContent = document.getElementById('errorMessage');
+    if (modal && modalContent) {
+      modalContent.textContent = message;
+      modal.style.display = 'block';
+      modal.classList.add('show');
+    } else {
+      alert(message);
     }
   }
