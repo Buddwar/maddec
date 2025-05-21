@@ -200,6 +200,7 @@ async function update_organisation(email, orgnr) {
         body: JSON.stringify(data)
     });
     let jsonResult = await response.json();
+    console.log(jsonResult);
     if (jsonResult['Success']) {
         console.log(jsonResult);
         remove_loadingscreen();
