@@ -14,6 +14,7 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
         window.location.href = `admin-dashboard.html`;
     }
     else{
+        remove_loadingscreen();
         console.log(result['Message']);
     }
 

@@ -369,6 +369,7 @@ checkoutButton.addEventListener('click', async (e) => {
       {
       remove_loadingscreen();
       alert('Fakturan har skapats och skickas till din e-postadress!')
+      clearModalFields();
     }
     else{
       remove_loadingscreen();
@@ -387,6 +388,16 @@ checkoutButton.addEventListener('click', async (e) => {
   }
 });
 
+function clearModalFields(){
+  document.getElementById('subscriber-fname').value = '';
+  document.getElementById('subscriber-lname').value = '';
+  document.getElementById('subscriber-email').value = '';
+  document.getElementById('subscriber-passw').value = '';
+  document.getElementById('subscriber-phone').value = '';
+  document.getElementById('subscriber-frequency').selectedIndex = 0;
+  document.getElementById('payment-method').selectedIndex = 0;
+  document.getElementById('subscriber-state').selectedIndex = 0;
+}
 
   //document.getElementById(payment-button)
 
