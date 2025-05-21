@@ -135,6 +135,9 @@ async function getExistingOrganisations() {
                 <button class="no_border_button email-btn" title="Skicka e-post">
                     <i class="bi bi-envelope"></i>
                 </button>
+                <button class="no_border_button change-email-btn" title="Ändra e-postadress">
+                    <i class="bi bi-envelope"></i>
+                </button>
                 <button class="no_border_button delete-btn" title="Radera organisation">
                     <i class="bi bi-trash"></i>
                 </button>
@@ -152,6 +155,11 @@ async function getExistingOrganisations() {
                 if (confirm('Är du säker på att du vill radera denna organisation?')) {
                     delete_organisation(value['orgnr']);
                 }
+            });
+
+            list_element.querySelector('.change-email-btn').addEventListener('click', () => {
+                test_email = 'asd234234@gmail.com'
+                update_organisation(test_email, value['orgnr']);
             });
 
             company_list.appendChild(list_element);
@@ -178,6 +186,25 @@ async function delete_organisation(orgnr) {
         location.reload();
     } else {
         displayErrorMessage("Kunde inte radera organisationen.");
+        remove_loadingscreen();
+    }
+}
+async function update_organisation(email, orgnr) {
+    let data = {'orgnr': orgnr, 'email': email};
+    display_loadingscreen();
+    let response = await fetch('https://bergstrom.pythonanywhere.com/update_org_email', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+    let jsonResult = await response.json();
+    if (jsonResult['Success']) {
+        remove_loadingscreen();
+        location.reload();
+    } else {
+        displayErrorMessage("Kunde inte uppdata e-post för organisationen.");
         remove_loadingscreen();
     }
 }
