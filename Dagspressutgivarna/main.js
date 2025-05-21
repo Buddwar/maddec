@@ -139,7 +139,7 @@ async function getExistingOrganisations() {
                     </div>
 
                     <div class="email-edit" style="display: none;">
-                        <input type="email" value="${value['email']} id="email-id">
+                        <input type="email" value="${value['email']}" id="email-id-${value['orgnr']}">
                         <button class="save-email">Spara</button>
                         <button class="cancel-email">Avbryt</button>
                     </div>
@@ -194,9 +194,9 @@ async function getExistingOrganisations() {
             });
             
             //Spara ner e-post till databasen
-            list_element.querySelector('.save-email').addEventListener('click', () => {
+            list_element.querySelector('.save-email').addEventListener('click', async () => {
                 //Hämta värdet ifrån input samt orgnr och anropa funktionen
-                result = update_organisation(document.getElementById('email-id').value, value['orgnr']);
+                result = await update_organisation(document.getElementById(`email-id-${value['orgnr']}`).value, value['orgnr']);
                 
                 if (result['Success']) {
                     let emailText = list_element.querySelector('.email-display');
