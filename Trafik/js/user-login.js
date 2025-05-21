@@ -73,24 +73,31 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 
-  async function load_organisation(orgnr){
-    let data = {'orgnr': orgnr};
-    display_loadingscreen();
-      let response = await fetch('https://bergstrom.pythonanywhere.com/get_organisation', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data)
-      });
-      let jsonResult = await response.json();
-      if(jsonResult['Success']){
+async function load_organisation(orgnr){
+let data = {'orgnr': orgnr};
+display_loadingscreen();
+    let response = await fetch('https://bergstrom.pythonanywhere.com/get_organisation', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data)
+    });
+    let jsonResult = await response.json();
+    if(jsonResult['Success']){
         remove_loadingscreen();
         return jsonResult;
-      }
-      else{
+    }
+    else{
         remove_loadingscreen();
         alert('Det gick inte att hämta organisationen.');
         console.log(jsonResult['Message']);
-      }
+    }
+}
+
+function display_loadingscreen(){
+    document.getElementById('loading_screen').style.display = 'flex';
+  }
+function remove_loadingscreen(){
+    document.getElementById('loading_screen').style.display = 'none';
   }
