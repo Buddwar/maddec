@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   let result = await load_organisation(orgnr);
   //Använd resultatet som vi får tillbaka
   document.getElementById('back-button').style.border = '1px solid' + result['Data']['primarycolor'];
-  document.getElementById('back-button').style.color = result['Data']['secondarycolor'];  
+  document.getElementById('back-button').style.color = result['Data']['primarycolor'];  
   document.getElementById('back-button').style.backgroundColor = '#FFFFFF'; 
 
 
