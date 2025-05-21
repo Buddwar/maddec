@@ -139,7 +139,7 @@ async function getExistingOrganisations() {
                     </div>
 
                     <div class="email-edit" style="display: none;">
-                        <input type="email">${value['email']}
+                        <input type="email" value="${value['email']}">
                         <button class="save-email">Spara</button>
                         <button class="cancel-email">Avbryt</button>
                     </div>
@@ -179,6 +179,14 @@ async function getExistingOrganisations() {
                 //update_organisation(test_email, value['orgnr']);
             });
 
+            list_element.querySelector('.cancel-email').addEventListener('click', () => {
+                let emailText = list_element.querySelector('.email-display');
+                let emailEdit = list_element.querySelector('.email-edit');
+
+                emailText.style.display = 'block';
+                emailEdit.style.display = 'none';
+                
+            });
             company_list.appendChild(list_element);
         }
     } catch (err) {
