@@ -134,6 +134,14 @@ button {
     cursor: pointer;
     transition: background-color 0.2s;
 }
+.save-email,
+.cancel-email{
+    padding: 0.4rem;
+}
+.cancel-email{
+    border-style: 1px solid var(--primary);
+    background-color: var(--bg-color);
+}
 
 button:disabled {
     background-color: #ccc;
