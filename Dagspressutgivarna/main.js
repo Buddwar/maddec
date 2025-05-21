@@ -130,12 +130,13 @@ async function getExistingOrganisations() {
                 <div class="org-details">
                     <div><strong>Org.nr:</strong> ${value['orgnr']}</div>
                     <div><strong>Org.namn:</strong> ${value['orgname']}</div>
-                    <div><strong>Email:</strong> ${value['email']}</div>
+                    <div><strong>Email:</strong> ${value['email']} 
+                        <button class="no_border_button change-email-btn" title="Ändra e-postadress">
+                            <i class="bi bi-envelope"></i>
+                        </button>
+                    </div>
                 </div>
                 <button class="no_border_button email-btn" title="Skicka e-post">
-                    <i class="bi bi-envelope"></i>
-                </button>
-                <button class="no_border_button change-email-btn" title="Ändra e-postadress">
                     <i class="bi bi-envelope"></i>
                 </button>
                 <button class="no_border_button delete-btn" title="Radera organisation">
@@ -204,9 +205,7 @@ async function update_organisation(email, orgnr) {
     if (jsonResult['Success']) {
         console.log(jsonResult);
         remove_loadingscreen();
-        console.log('Reload körs....');
         location.reload();
-        console.log('Reload har körts');
     } else {
         displayErrorMessage("Kunde inte uppdata e-post för organisationen.");
         remove_loadingscreen();
