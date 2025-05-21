@@ -131,13 +131,17 @@ async function getExistingOrganisations() {
                     <div><strong>Org.nr:</strong> ${value['orgnr']}</div>
                     <div><strong>Org.namn:</strong> ${value['orgname']}</div>
 
-                    <div><strong>Email:</strong> ${value['email']} 
+                    <div class="email-display">
+                        <strong>Email:</strong> ${value['email']} 
                         <button class="no_border_button change-email-btn" title="Ändra e-postadress">
                             <i class="bi bi-pen"></i>
                         </button>
                     </div>
 
-                    <div>strong>Email:</strong><input type="email">${value['email']}
+                    <div class="email-edit" style="display: none;">
+                        <input type="email">${value['email']}
+                        <button class="save-email">Spara</button>
+                        <button class="cancel-email">Avbryt</button>
                     </div>
 
                 </div>
@@ -164,8 +168,15 @@ async function getExistingOrganisations() {
             });
 
             list_element.querySelector('.change-email-btn').addEventListener('click', () => {
-                test_email = 'asd234234@gmail.com'
-                update_organisation(test_email, value['orgnr']);
+                let emailText = list_element.querySelector('.email-display');
+                let emailEdit = list_element.querySelector('.email-edit');
+
+                emailText.style.display = 'none';
+                emailEdit.style.display = 'block';
+                
+                
+                //test_email = 'asd234234@gmail.com'
+                //update_organisation(test_email, value['orgnr']);
             });
 
             company_list.appendChild(list_element);
