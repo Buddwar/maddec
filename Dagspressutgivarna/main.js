@@ -172,7 +172,7 @@ async function getExistingOrganisations() {
                 let emailEdit = list_element.querySelector('.email-edit');
                 
                 //Sätter inputfältet till den aktuella e-postadressen
-                document.getElementById('email-id').value = value['email'];
+                //document.getElementById('email-id').value = value['email'];
 
                 emailText.style.display = 'none';
                 emailEdit.style.display = 'block';
