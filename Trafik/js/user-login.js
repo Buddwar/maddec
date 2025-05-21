@@ -55,3 +55,42 @@ function getUrl(){
     return url_org.get('orgnr');
   }
 
+document.addEventListener('DOMContentLoaded', async () => {
+  //Hämta orgnr ifrån URL
+  let url_org = new URLSearchParams(window.location.search);
+  let orgnr = url_org.get('orgnr');
+  //Stoppa in orgnr i denna funktion när vi anropar
+  let result = await load_organisation(orgnr);
+  //Använd resultatet som vi får tillbaka
+  document.getElementById('back-button').style.borderColor = result['Data']['primarycolor'];
+  document.getElementById('back-button').style.color = result['Data']['secondarycolor'];  
+
+  document.getElementById('login-button').style.backgroundColor = result['Data']['primarycolor'];
+  document.getElementById('login-button').style.color = result['Data']['secondarycolor'];
+  document.body.style.fontFamily = result['Data']['fontstyle'];
+  document.body.style.fontSize = result['Data']['fontsize'] + 'px';
+  
+});
+
+
+  async function load_organisation(orgnr){
+    let data = {'orgnr': orgnr};
+    display_loadingscreen();
+      let response = await fetch('https://bergstrom.pythonanywhere.com/get_organisation', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      });
+      let jsonResult = await response.json();
+      if(jsonResult['Success']){
+        remove_loadingscreen();
+        return jsonResult;
+      }
+      else{
+        remove_loadingscreen();
+        alert('Det gick inte att hämta organisationen.');
+        console.log(jsonResult['Message']);
+      }
+  }
