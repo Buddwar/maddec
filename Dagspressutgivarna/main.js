@@ -139,7 +139,7 @@ async function getExistingOrganisations() {
                     </div>
 
                     <div class="email-edit" style="display: none;">
-                        <input type="email" value="${value['email']}">
+                        <input type="email" value="${value['email']} id="email-id">
                         <button class="save-email">Spara</button>
                         <button class="cancel-email">Avbryt</button>
                     </div>
@@ -170,6 +170,9 @@ async function getExistingOrganisations() {
             list_element.querySelector('.change-email-btn').addEventListener('click', () => {
                 let emailText = list_element.querySelector('.email-display');
                 let emailEdit = list_element.querySelector('.email-edit');
+                
+                //Sätter inputfältet till den aktuella e-postadressen
+                document.getElementById('email-id').value = value['email'];
 
                 emailText.style.display = 'none';
                 emailEdit.style.display = 'block';
@@ -182,11 +185,34 @@ async function getExistingOrganisations() {
             list_element.querySelector('.cancel-email').addEventListener('click', () => {
                 let emailText = list_element.querySelector('.email-display');
                 let emailEdit = list_element.querySelector('.email-edit');
+                
+
 
                 emailText.style.display = 'block';
                 emailEdit.style.display = 'none';
                 
             });
+            
+            //Spara ner e-post till databasen
+            list_element.querySelector('.save-email').addEventListener('click', () => {
+                //Hämta värdet ifrån input samt orgnr och anropa funktionen
+                result = update_organisation(document.getElementById('email-id').value, value['orgnr']);
+                
+                if (result['Success']) {
+                    let emailText = list_element.querySelector('.email-display');
+                    let emailEdit = list_element.querySelector('.email-edit');
+                    emailText.style.display = 'block';
+                    emailEdit.style.display = 'none';
+                    console.log(result);
+                    remove_loadingscreen();
+                    location.reload();
+                } else {
+                    displayErrorMessage("Kunde inte uppdata e-post för organisationen.");
+                    remove_loadingscreen();
+                }
+                
+            });
+
             company_list.appendChild(list_element);
         }
     } catch (err) {
@@ -225,15 +251,7 @@ async function update_organisation(email, orgnr) {
         body: JSON.stringify(data)
     });
     let jsonResult = await response.json();
-    console.log(jsonResult);
-    if (jsonResult['Success']) {
-        console.log(jsonResult);
-        remove_loadingscreen();
-        location.reload();
-    } else {
-        displayErrorMessage("Kunde inte uppdata e-post för organisationen.");
-        remove_loadingscreen();
-    }
+    return jsonResult;
 }
 
 // Add event listener for form submission
