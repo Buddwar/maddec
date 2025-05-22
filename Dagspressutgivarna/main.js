@@ -321,6 +321,7 @@ async function check_login(){
     console.log('Resultatet', jsonResult);
     if (jsonResult['Success']){
         console.log(jsonResult['Message']);
+        getExistingOrganisations();
     }
     else{
         console.log(jsonResult['Message']);
