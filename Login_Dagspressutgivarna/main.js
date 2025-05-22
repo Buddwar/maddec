@@ -45,6 +45,7 @@ async function login_customer(email, passw) {
         headers: {
             'Content-Type': 'application/json'
         },
+        credentials: 'include',
         body: JSON.stringify(data)
     });
     let jsonResult = await response.json();
