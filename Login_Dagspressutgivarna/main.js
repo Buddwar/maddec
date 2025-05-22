@@ -45,11 +45,11 @@ function display_error_message(result){
     console.log(result);
     remove_error_message('error_message');
 
-    if (result['Message'] == 'Felaktigt användarnamn...'){
+    if (result['Message'] == 'E-postadress är ogiltigt.'){
         let email = document.getElementById('email');
         email.style.border = '1px solid #ff5a5a';
     }
-    else if (result['Message'] == 'Felaktigt lösenord...'){
+    else if (result['Message'] == 'Lösenord är ogiltigt.'){
         let passw = document.getElementById('passw');
         passw.style.border = '1px solid #ff5a5a';
     }
