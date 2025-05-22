@@ -152,15 +152,21 @@ async function getExistingOrganisations() {
                     <i class="bi bi-trash"></i>
                 </button>
 
-                <button class="no_border_button messages_number" title="Visa antal meddelanden">
-                    <i class="bi bi-bar-chart-fill"></i>
-                </button>
+                <div>
+                    <strong>Antal utskick:</strong><p class="number_of_messages">X</p>
+                    <button class="no_border_button messages_number" title="Visa antal meddelanden">
+                        <i class="bi bi-bar-chart-fill"></i>
+                    </button>
+                </div>
             `;
             list_element.querySelector('.messages_number').addEventListener('click', async () => {
-            //Hämtar data ifrån daniels meddelandemodul baserat på de organisationer som finns
+            //Hämtar data ifrån daniels meddelandemodul baserat på den organisation som finns
                 let message_result = await fetch(`https://smsmodule.pythonanywhere.com/get_sms_stats/${value['orgnr']}`);
                 let message_data = await message_result.json();
                 console.log(message_data);
+                if(message_data.status == 'success'){
+                    list_element.querySelector('.number_of_messages').innerText = message_data['entries_found'];
+                }
             });
 
             //Utskick av e-postmeddelande
