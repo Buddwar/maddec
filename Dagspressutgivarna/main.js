@@ -143,9 +143,10 @@ async function getExistingOrganisations() {
                         <button class="save-email">Spara</button>
                         <button class="cancel-email">Avbryt</button>
                     </div>
-                    
+
                     <div>
-                        <strong>Antal utskick:</strong><p class="number_of_messages">X</p>
+                        <strong>Antal utskick:</strong>
+                        <span class="number_of_messages">X</span>
                         <button class="no_border_button messages_number" title="Visa antal meddelanden">
                             <i class="bi bi-bar-chart-fill"></i>
                         </button>
