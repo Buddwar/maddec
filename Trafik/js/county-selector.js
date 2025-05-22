@@ -53,8 +53,7 @@ const CountySelector = L.Control.extend({
     // Förval av län, baserat på länskoden för länet - det är detta länet som visas när kartan startas upp.
     // Om tidningsförlaget befinner sig i Varberg -> så visas hela Hallands läns trafikhändelser, men
     // koordinaterna i map-init.js bestämmer staden som ska visas. 
-    select.value = '01';
-    const { newSituationUrl, newCameraUrl, newRoadConditionUrl } = getUrlsForCounty('01');
+    const { newSituationUrl, newCameraUrl, newRoadConditionUrl } = getUrlsForCounty('13'); // Här ändrar tidningen till det län som ska visas på kartan.
     getSituations(newSituationUrl);
     getCameras(newCameraUrl);
     getRoadConditions(newRoadConditionUrl);

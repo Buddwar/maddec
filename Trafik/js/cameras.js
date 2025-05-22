@@ -1,6 +1,9 @@
 // Importerar karta och kluster (grupperingar).
 import { map, cameraCluster } from "./map-init.js"
 
+// Importera funktion för kamerornas riktning.
+import { formatDirection } from "./utilities.js";
+
 // Exporterar en array med markörerna.
 export const cameraMarkers = [];
 
@@ -28,12 +31,22 @@ export async function getCameras(cameraUrl) {
         if (!match) return;
   
         const [lon, lat] = match[1].split(' ').map(Number);
+
+        //Hämtar värdet av bearing från kameror i API:et. Bearing är i nummer från 0-359 grader,
+        //och är alltså riktningen där kameran pekar åt.
+        const bearing = cam.Bearing;
+
+        //Kollar om bearing är av typen "number", och är den det så anropar vi funktionen för att
+        //omvandla de grader som finns i bearing till Norr, Öst, Nordöst osv. Om bearing är "undefined"
+        //eller inte finns - så visas "Okänd".
+        const direction = typeof bearing === 'number' ? formatDirection(bearing) : 'Okänd';
   
         // Skapar popup-innehåll med namn på kameran (jag tror det är namnet iallafall?)
         // och dess vägnr
         const popupContent = `
           <div class="popup-cameraname"<strong>${cam.Name || 'Okänd kamera'}</strong><br></div>
           <div class="popup-camera-roadnr"><strong>Vägnr: </strong> ${cam.RoadNumber || 'Okänd'}<br></div>
+          <div class="popup-camera-direction"><strong>Riktning: </strong> ${direction}<br></div>
         `;
   
         // Skapa Leaflet-divIcon med Bootstrap Icon
