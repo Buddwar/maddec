@@ -123,6 +123,11 @@ async function getExistingOrganisations() {
         }
 
         for (let [_, value] of Object.entries(jsonResult)) {
+            //Hämtar data ifrån daniels meddelandemodul
+                let message_result = await fetch(`https://smsmodule.pythonanywhere.com/get_sms_stats/${value['orgnr']}`);
+                let message_data = await message_result.json();
+                console.log(message_data);
+
             let list_element = document.createElement('div');
             list_element.classList.add('list_element');
 
