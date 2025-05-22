@@ -325,7 +325,7 @@ async function check_login(){
     }
     else{
         console.log(jsonResult['Message']);
-        window.location.href = "https://www.maddec.online/Dagspressutgivarna/login.html";
+        window.location.href = "https://www.maddec.online/Login_Dagspressutgivarna/";
     }
 }
 
