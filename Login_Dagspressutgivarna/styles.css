@@ -89,6 +89,7 @@ button:hover {
     border-radius: .2rem;
     color: white;
     margin-block: 2rem;
+    visibility: hidden;
 }
 
 @media (min-width: 1000px) {

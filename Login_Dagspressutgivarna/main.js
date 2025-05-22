@@ -1,12 +1,5 @@
 
 
-
-
-
-
-
-
-
 //TA bort felmeddelandet efter 3 sekunder
 function remove_error_message(id, delay = 3000){
     setTimeout(function() {
@@ -14,10 +7,6 @@ function remove_error_message(id, delay = 3000){
         error_message.style.visibility = 'hidden';
     }, delay);
 }
-
-
-
-
 
 
 //Hämtar knappen som finns
@@ -56,13 +45,25 @@ function display_error_message(result){
     console.log(result);
     remove_error_message('error_message');
 
-    let email = document.getElementById('email');
-    let passw = document.getElementById('passw');
-    email.style.border = '1px solid #ff5a5a';
-    passw.style.border = '1px solid #ff5a5a';
-    
-    
+    if (result['Message'] == 'Felaktigt användarnamn...'){
+        let email = document.getElementById('email');
+        email.style.border = '1px solid #ff5a5a';
+    }
+    else if (result['Message'] == 'Felaktigt lösenord...'){
+        let passw = document.getElementById('passw');
+        passw.style.border = '1px solid #ff5a5a';
+    }
 }
+
+document.getElementById('email').addEventListener('input', function() {
+    let email = document.getElementById('email');
+    email.style.border = '';
+});
+document.getElementById('passw').addEventListener('input', function() {
+    let passw = document.getElementById('passw');
+    passw.style.border = '';
+});
+
 
 //Function för att genomföra anrop till en route hos databasen, skapande av kund
 async function login_customer(email, passw) {
