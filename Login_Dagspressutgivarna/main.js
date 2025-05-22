@@ -12,7 +12,6 @@ function remove_error_message(id, delay = 3000){
     setTimeout(function() {
         let error_message = document.getElementById(id);
         error_message.style.visibility = 'hidden';
-        error_message.innerHTML = '';
     }, delay);
 }
 
