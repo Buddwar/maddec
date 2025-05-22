@@ -139,8 +139,8 @@ button {
     padding: 0.4rem;
 }
 .cancel-email{
-    border-style: 1px solid var(--primary);
-    background-color: var(--bg-color);
+    border: 1px solid var(--primary);
+    background-color: var(--card-color);
 }
 
 button:disabled {
