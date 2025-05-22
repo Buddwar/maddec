@@ -13,7 +13,7 @@ const register_button = document.getElementById('register_button');
 //Lägger till en eventlistener på knappen
 register_button.addEventListener('click', async function() {
     let email = document.getElementById('email').value;
-    let passw = document.getElementById('password').value;
+    let passw = document.getElementById('passw').value;
     let api_key = document.getElementById('api_key').value;
     display_loadingscreen();
     result = await create_customer(email, passw, api_key);
