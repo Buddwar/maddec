@@ -8,7 +8,13 @@
 
 
 
-
+function remove_error_message(id, delay = 3000){
+    setTimeout(function() {
+        let error_message = document.getElementById(id);
+        error_message.style.visibility = 'hidden';
+        error_message.innerHTML = '';
+    }, delay);
+}
 
 
 
@@ -24,17 +30,23 @@ register_button.addEventListener('click', async function() {
     result = await login_customer(email, passw);
     if (result['Success']){
         remove_loadingscreen();
+        let error_message = document.getElementById('error_message');
+        error_message.style.backgroundColor = '#99ff5a';
+        error_message.innerHTML = result['Message'];
+        error_message.style.visibility = 'visible';
         console.log(result);
         window.location.href="https://www.maddec.online/Dagspressutgivarna/";
     }
     else{
         remove_loadingscreen();
+        let error_message = document.getElementById('error_message');
+        error_message.style.backgroundColor = '#ff5a5a';
+        error_message.innerHTML = result['Message'];
+        error_message.style.visibility = 'visible';
         console.log(result);
+        remove_error_message('error_message');
     }
 });
-
-
-
 
 //Function för att genomföra anrop till en route hos databasen, skapande av kund
 async function login_customer(email, passw) {
