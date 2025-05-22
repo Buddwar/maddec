@@ -10,20 +10,25 @@
 <body>
     <div class="outer-container">
     <h1>Dagspressutgivarna - Inloggning</h1>
-    <div class="container">
-            <div class="form-group">
-                <label for="username">E-postadress:</label><br>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Lösenord:</label><br>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit">Logga in</button>
-            <div>
-                <p>Har du inget konto? Skapa ett <a href="https://www.maddec.online/Registrering_Dagspressutgivarna/">här</a></p>
-            </div>
+        <div class="container">
+                <div class="form-group">
+                    <label for="email">E-postadress:</label><br>
+                    <input type="text" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Lösenord:</label><br>
+                    <input type="password" id="passw" name="password" required>
+                </div>
+                <button type="submit" id="login_button">Logga in</button>
+                <div>
+                    <p>Har du inget konto? Skapa ett <a href="https://www.maddec.online/Registrering_Dagspressutgivarna/">här</a></p>
+                </div>
+        </div>
     </div>
-    </div>
+    
+    <div id="loading_screen" style="display: none;">
+        <div class="loading_icon"><i class="bi bi-arrow-clockwise"></i></div>
+    </div>  
+
 </body>
 </html>
