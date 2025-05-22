@@ -307,6 +307,30 @@ async function send_email(orgnr, email){
     }
 }
 
+async function check_login(){
+    
+    let response = await fetch('https://bergstrom.pythonanywhere.com/customer_is_logged_in', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify({})
+    });
+    const jsonResult = await response.json();
+    console.log('Resultatet', jsonResult);
+    if (jsonResult['Success']){
+        console.log(jsonResult['Message']);
+    }
+    else{
+        console.log(jsonResult['Message']);
+        window.location.href = "https://www.maddec.online/Dagspressutgivarna/login.html";
+    }
+}
+
+
+
+
 function display_loadingscreen(){
     document.getElementById('loading_screen').style.display = 'flex';
   }
