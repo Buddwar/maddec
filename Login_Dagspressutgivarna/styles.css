@@ -35,7 +35,7 @@ p{
 label{
     font-weight: 600;
 }
-#username, #password{
+#email, #passw{
     margin-block: .5rem;
     font-size: 1.5rem;
     border-radius: .2rem;
