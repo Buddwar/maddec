@@ -143,6 +143,13 @@ async function getExistingOrganisations() {
                         <button class="save-email">Spara</button>
                         <button class="cancel-email">Avbryt</button>
                     </div>
+                    
+                    <div>
+                        <strong>Antal utskick:</strong><p class="number_of_messages">X</p>
+                        <button class="no_border_button messages_number" title="Visa antal meddelanden">
+                            <i class="bi bi-bar-chart-fill"></i>
+                        </button>
+                    </div>
 
                 </div>
                 <button class="no_border_button email-btn" title="Skicka e-post">
@@ -151,13 +158,6 @@ async function getExistingOrganisations() {
                 <button class="no_border_button delete-btn" title="Radera organisation">
                     <i class="bi bi-trash"></i>
                 </button>
-
-                <div>
-                    <strong>Antal utskick:</strong><p class="number_of_messages">X</p>
-                    <button class="no_border_button messages_number" title="Visa antal meddelanden">
-                        <i class="bi bi-bar-chart-fill"></i>
-                    </button>
-                </div>
             `;
             list_element.querySelector('.messages_number').addEventListener('click', async () => {
             //Hämtar data ifrån daniels meddelandemodul baserat på den organisation som finns
