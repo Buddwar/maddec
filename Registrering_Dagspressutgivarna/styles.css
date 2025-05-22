@@ -32,7 +32,7 @@ h1{
 label{
     font-weight: 600;
 }
-#username, #password{
+#email, #passw, #api_key{
     margin-block: .5rem;
     font-size: 1.5rem;
     border-radius: .2rem;

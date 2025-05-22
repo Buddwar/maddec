@@ -32,7 +32,7 @@ register_button.addEventListener('click', async function() {
 
 
 
-
+//Function för att genomföra anrop till en route hos databasen, skapande av kund
 async function create_customer(email, passw, api_key) {
     let data = {'email': email, 'passw': passw, 'api_key': api_key};
     display_loadingscreen();
