@@ -123,11 +123,6 @@ async function getExistingOrganisations() {
         }
 
         for (let [_, value] of Object.entries(jsonResult)) {
-            //Hämtar data ifrån daniels meddelandemodul
-                let message_result = await fetch(`https://smsmodule.pythonanywhere.com/get_sms_stats/${value['orgnr']}`);
-                let message_data = await message_result.json();
-                console.log(message_data);
-
             let list_element = document.createElement('div');
             list_element.classList.add('list_element');
 
@@ -156,7 +151,17 @@ async function getExistingOrganisations() {
                 <button class="no_border_button delete-btn" title="Radera organisation">
                     <i class="bi bi-trash"></i>
                 </button>
+
+                <button class="no_border_button messages_number" title="Visa antal meddelanden">
+                    <i class="bi bi-bar-chart-fill"></i>
+                </button>
             `;
+            list_element.querySelector('.messages_number').addEventListener('click', async () => {
+            //Hämtar data ifrån daniels meddelandemodul baserat på de organisationer som finns
+                let message_result = await fetch(`https://smsmodule.pythonanywhere.com/get_sms_stats/${value['orgnr']}`);
+                let message_data = await message_result.json();
+                console.log(message_data);
+            });
 
             //Utskick av e-postmeddelande
             list_element.querySelector('.email-btn').addEventListener('click', () => {
