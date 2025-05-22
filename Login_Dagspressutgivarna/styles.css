@@ -38,6 +38,12 @@ label{
     font-size: 1.5rem;
     border-radius: .2rem;
 }
+#email:focus, #passw:focus{
+    border: 2px solid rgb(168, 101, 255);
+    outline: none;
+    box-shadow: 0 0 5px rgb(168, 101, 255);
+}
+
 button{
     margin-top: 2rem;
     text-align: center;
