@@ -132,7 +132,7 @@ async function getExistingOrganisations() {
                     <div><strong>Org.namn:</strong> ${value['orgname']}</div>
 
                     <div class="email-display">
-                        <strong>Email:</strong> ${value['email']} 
+                        <strong>E-post:</strong> ${value['email']} 
                         <button class="no_border_button change-email-btn" title="Ändra e-postadress">
                             <i class="bi bi-pen"></i>
                         </button>
