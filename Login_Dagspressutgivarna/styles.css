@@ -80,7 +80,7 @@ button:hover {
 
 #error_message{
     text-align: center;
-    width: 50%;
+    width: 80%;
     margin: 0 auto;
     padding: 1.5rem;
     font-weight: 600;
@@ -89,5 +89,10 @@ button:hover {
     border-radius: .2rem;
     color: white;
     margin-block: 2rem;
-    visibility: hidden;
+}
+
+@media (min-width: 1000px) {
+    #error_message{
+        width: 50%;
+    }
 }
