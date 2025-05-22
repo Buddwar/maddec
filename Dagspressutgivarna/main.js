@@ -328,7 +328,29 @@ async function check_login(){
         window.location.href = "https://www.maddec.online/Login_Dagspressutgivarna/";
     }
 }
-
+document.querySelector('.logout_button').addEventListener('click', async () => {
+    result = await logout();
+    if (result['Success']){
+        console.log(result);
+        window.location.href = "https://www.maddec.online/Login_Dagspressutgivarna/";
+    }
+    else{
+        console.log(result);
+    }
+});
+async function logout(){
+    
+    let response = await fetch('https://bergstrom.pythonanywhere.com/logout_customer', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify({})
+    });
+    const jsonResult = await response.json();
+    return jsonResult;
+}
 
 
 

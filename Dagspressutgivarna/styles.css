@@ -138,7 +138,8 @@ button {
 .cancel-email{
     padding: 0.4rem;
 }
-.cancel-email{
+.cancel-email,
+.logout_button{
     border: 1px solid var(--primary);
     background-color: var(--card-color);
     color: var(--primary);
