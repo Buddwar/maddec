@@ -25,6 +25,7 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
             window.location.href = `admin-dashboard.html`;
         }
         else{
+            display_error_message(result['Message']);
             remove_loadingscreen();
             console.log(result['Message']);
         }
@@ -45,8 +46,8 @@ function display_error_message(message){
     remove_error_message('error_message');
 
     if (message == 'Organisationsnummer är ogiltigt.'){
-        let email = document.getElementById('orgnr');
-        email.style.border = '1px solid #ff5a5a';
+        let orgnr = document.getElementById('orgnr');
+        orgnr.style.border = '1px solid #ff5a5a';
     }
     else if (message == 'Lösenordet är ogiltigt.'){
         let passw = document.getElementById('passw');
