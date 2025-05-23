@@ -1,7 +1,10 @@
 :root {
     --bg-color: #f0f0f0;
-    --button-color: rgb(168, 101, 255);
+    --button-color: #4834d4;
     --font-family: Arial, sans-serif;
+
+    --main-color: #4834d4;
+    --secondary: #686de0;
 }
 * {
     box-sizing: border-box;

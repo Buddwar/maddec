@@ -176,7 +176,7 @@ async function getExistingOrganisations() {
                     list_element.querySelector('.number_of_messages').innerText = message_data['stats']['sms'];
                 }
                 else if (message_data['status'] == 'error') {
-                    list_element.querySelector('.number_of_messages').innerText = '0';
+                    list_element.querySelector('.number_of_messages').innerText = 'X';
                     alert('Det gick inte att hämta statistik för meddelanden.');
                 }
             }
