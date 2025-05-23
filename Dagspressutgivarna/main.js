@@ -168,13 +168,13 @@ async function getExistingOrganisations() {
 
                 
 
-                let message_data = await message_result.json();
+                let message_data = await message_result.text();
                 console.log(message_data);
 
-                if (message_data[orgnr]){
+                /*if (message_data[orgnr]){
                     let antal_sms = message_data[orgnr].sms
                     list_element.querySelector('.number_of_messages').innerText = antal_sms;
-                }
+                }*/
             });
 
             //Utskick av e-postmeddelande
