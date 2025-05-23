@@ -42,7 +42,6 @@ function display_error_message(message){
     error_message.style.backgroundColor = '#ff5a5a';
     error_message.innerHTML = message;
     error_message.style.visibility = 'visible';
-    console.log(message);
     remove_error_message('error_message');
 
     if (message == 'Organisationsnummer är ogiltigt.'){
@@ -54,6 +53,19 @@ function display_error_message(message){
         passw.style.border = '1px solid #ff5a5a';
     }
 }
+
+//Rensa fälten för att undvika att den här röda kanten fortfarande visas
+//så fort användaren börjar skriva
+document.getElementById('orgnr').addEventListener('input', function() {
+    let orgnr = document.getElementById('orgnr');
+    orgnr.style.border = '';
+});
+document.getElementById('passw').addEventListener('input', function() {
+    let passw = document.getElementById('passw');
+    passw.style.border = '';
+});
+
+
 
 /*Anropa denna funktion och stoppa in 10 siffrigt org nr
 Lösenordet behöver endast var 8 karaktärer långt för tillfället 
