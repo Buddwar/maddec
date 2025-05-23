@@ -162,11 +162,18 @@ async function getExistingOrganisations() {
             `;
             list_element.querySelector('.messages_number').addEventListener('click', async () => {
             //Hämtar data ifrån daniels meddelandemodul baserat på den organisation som finns
-                let message_result = await fetch(`https://smsmodule.pythonanywhere.com/get_sms_stats/${value['orgnr']}`);
+                let orgnr = value['orgnr'];
+            
+                let message_result = await fetch(`https://smsmodule.pythonanywhere.com/get_sms_stats/${orgnr}`);
+
+                
+
                 let message_data = await message_result.json();
                 console.log(message_data);
-                if(message_data.status == 'success'){
-                    list_element.querySelector('.number_of_messages').innerText = message_data['entries_found'];
+
+                if (message_data[orgnr]){
+                    let antal_sms = message_data[orgnr].sms
+                    list_element.querySelector('.number_of_messages').innerText = antal_sms;
                 }
             });
 
