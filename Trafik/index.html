@@ -45,7 +45,7 @@
         <input type="password" id="subscriber-passw" required>
         
         <label for="subscriber-phone">Telefonnummer:</label>
-        <input type="tel" id="subscriber-phone" required>
+        <input type="tel" id="subscriber-phone" required placeholder="+46..." onfocus="this.placeholder=''" onblur="if(this.value===''){this.placeholder='+46...'}">
         
         <label for="subscriber-state">Län:</label>
         <select id="subscriber-state" required>
@@ -87,7 +87,6 @@
           <option value="">Välj betalningsmetod</option>
           <option value="credit-card">Kreditkort</option>
           <option value="invoice">Faktura</option>
-          <option value="swish">Swish</option>
         </select>
                 <!--BETALA KNAPP-->
         <button id="checkout-button">Betala</button>
