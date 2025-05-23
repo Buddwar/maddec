@@ -13,7 +13,7 @@ function remove_error_message(id, delay = 3000){
 document.getElementById('login-form').addEventListener('submit', async (e) => {
     e.preventDefault();
     const orgnr = document.getElementById('orgnr').value;
-    const password = document.getElementById('password').value;
+    const password = document.getElementById('passw').value;
     
     try{
         display_loadingscreen();

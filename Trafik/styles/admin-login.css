@@ -1,6 +1,6 @@
 :root {
-    --bg-color: #ffffff;
-    --button-color: #007bff;
+    --bg-color: #f0f0f0;
+    --button-color: rgb(168, 101, 255);
     --font-family: Arial, sans-serif;
 }
 * {
@@ -15,20 +15,6 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-}
-header {
-    padding: 1rem;
-    text-align: center;
-    background-color: var(--button-color);
-    color: #fff;
-}
-header a {
-    color: #fff;
-    text-decoration: none;
-    position: absolute;
-    left: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
 }
 main {
     flex: 1;
