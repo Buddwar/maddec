@@ -1,6 +1,6 @@
 :root{
-    --main-color: #9638ee;
-    --secondary-color: #4a4a4a;
+    --main-color: #4834d4;
+    --secondary: #686de0;
     --background-color: #f0f0f0;
     --text-color: #333;
 }
@@ -38,6 +38,13 @@ label{
     font-size: 1.5rem;
     border-radius: .2rem;
 }
+#email:focus, #passw:focus, #api_key:focus{
+    border: 2px solid rgb(168, 101, 255);
+    outline: none;
+    box-shadow: 0 0 5px rgb(168, 101, 255);
+}
+
+
 button{
     margin-top: 2rem;
     text-align: center;
@@ -90,4 +97,10 @@ button:hover {
     color: white;
     margin-block: 2rem;
     visibility: hidden;
+}
+
+@media (min-width: 1000px) {
+    #error_message{
+        width: 50%;
+    }
 }

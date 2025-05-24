@@ -1,7 +1,10 @@
 :root {
-    --bg-color: #ffffff;
-    --button-color: #007bff;
+    --bg-color: #f0f0f0;
+    --button-color: #4834d4;
     --font-family: Arial, sans-serif;
+
+    --main-color: #4834d4;
+    --secondary: #686de0;
 }
 * {
     box-sizing: border-box;
@@ -16,26 +19,12 @@ body {
     display: flex;
     flex-direction: column;
 }
-header {
-    padding: 1rem;
-    text-align: center;
-    background-color: var(--button-color);
-    color: #fff;
-}
-header a {
-    color: #fff;
-    text-decoration: none;
-    position: absolute;
-    left: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-}
 main {
     flex: 1;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    padding: 2rem;
+    margin: 0;
 }
 .login-container {
     background-color: #fff;
@@ -75,10 +64,17 @@ button:hover {
     opacity: 0.9;
 }
 .error-message {
-    color: #dc3545;
-    font-size: 0.875rem;
-    margin-top: 0.5rem;
-    display: none;
+    text-align: center;
+    width: 80%;
+    margin: 0 auto;
+    padding: 1.5rem;
+    font-weight: 600;
+    font-size: 1.5rem;
+    background-color: rgb(255, 111, 111);
+    border-radius: .2rem;
+    color: white;
+    margin-block: 5rem;
+    visibility: hidden;
 }
 #loading_screen{
     background-color: rgba(255, 255, 255, 0.151);
@@ -100,4 +96,9 @@ button:hover {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+@media (min-width: 1000px) {
+    #error_message{
+        width: 50%;
+    }
 }

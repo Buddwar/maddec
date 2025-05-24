@@ -8,19 +8,15 @@
     <link rel="stylesheet" href="styles/admin-login.css">
 </head>
 <body>
-    <header>
-        <a href="index.html">← Tillbaka</a>
-        <h1>Trafikservice</h1>
-    </header>
-
+    
     <main>
+        <div id="error_message" class="message error-message">Error</div>
         <div class="login-container">
-            <h2>Inloggning företag</h2>
+            <h2>Företag - inloggning</h2>
             <form id="login-form" class="form-container">
-                <input type="text" id="username" placeholder="Adminanvändare">
-                <input type="password" id="password" placeholder="Lösenord">
+                <input type="text" id="orgnr" placeholder="Organisationsnummer" >
+                <input type="password" id="passw" placeholder="Lösenord">
                 <button type="submit">Logga in</button>
-                <p class="error-message" id="error-message">Felaktigt användarnamn eller lösenord</p>
             </form>
         </div>
     </main>

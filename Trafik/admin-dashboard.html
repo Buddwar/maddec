@@ -4,22 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trafikservice - Företagspanel</title>
-    <link rel="stylesheet" href="styles/admin-dashboard.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/admin-dashboard.css">
+
 
 </head>
 <body>
     <header>
-        
+        <h2 id="company_name">Företagsnamn <i class="bi bi-building"></i></h2>
     </header>
-
+    <div id="error_message" class="message error-message">Error</div>
     <main>
         <div class="dashboard-container">
             <div class="settings-panel">
-                <div class="panel-header">
-                    <h2 id="company_name">Företagsnamn</h2>
-                </div>
-
                 <form id="customization-form">
                       <div class="form-group">
                         <label for="weekly">Pris - Veckovis:</label>
@@ -32,11 +30,10 @@
                     <div class="form-group">
                         <label for="font-family">Typsnitt:</label>
                         <select id="font-family">
-                            <option value="Arial, sans-serif">Arial</option>
-                            <option value="'Helvetica Neue', Helvetica, Arial, sans-serif">Helvetica</option>
-                            <option value="'Times New Roman', Times, serif">Times New Roman</option>
-                            <option value="'Open Sans', sans-serif">Open Sans</option>
-                            <option value="'Roboto', sans-serif">Roboto</option>
+                              <option value="Times New Roman">Times New Roman</option>
+                              <option value="Arial">Arial</option>
+                              <option value="Calibri">Calibri</option>
+                              <option value="Helvetica">Helvetica</option>
                         </select>
                     </div>
                       <div class="form-group">
@@ -70,15 +67,6 @@
         
       </div>
     </main>
-    
-    <!-- Error Modal  -->
-    <div id="errorModal" class="modal">
-      <div class="modal-content">
-        <span class="close" id="closeErrorModal">&times;</span>
-        <h2>Ett fel har inträffat</h2>
-        <p id="errorMessage">Ett oväntat fel uppstod. Försök igen senare.</p>
-      </div>
-    </div>
 
     <script src="js/admin-dashboard.js"></script>
    

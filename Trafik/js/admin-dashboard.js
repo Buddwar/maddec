@@ -1,103 +1,13 @@
-/* Current settings */
-let currentSettings = {
-    state: '01',
-    fontFamily: 'Arial, sans-serif',
-    bgColor: '#ffffff',
-    textColor: '#333333',
-    buttonColor: '#007bff',
-    buttonTextColor: '#ffffff',
-  };
-  
-  /**
-   * Show a temporary success message
-   */
-  function showSuccessMessage() {
-    const successMessage = document.getElementById('success-message');
-    if (!successMessage) return;
-    successMessage.style.display = 'block';
-    setTimeout(() => {
-      successMessage.style.display = 'none';
-    }, 3000);
-  }
-  
-  /**
-   * Update the displayed hex code next to a color input
-   */
-  function updateColorName(inputId, nameId) {
-    const input = document.getElementById(inputId);
-    const name  = document.getElementById(nameId);
-    if (!input || !name) return;
-    input.addEventListener('input', () => {
-      name.textContent = input.value.toUpperCase();
-    });
-  }
-  
-  /**
-   * Setup preset-color swatches to update a linked input + preview
-   */
-  function setupPresetColors(presetContainerId, colorInputId) {
-    const container = document.getElementById(presetContainerId);
-    const input     = document.getElementById(colorInputId);
-    if (!container || !input) return;
-  
-    container.querySelectorAll('.preset-color').forEach(preset => {
-      preset.addEventListener('click', () => {
-        // toggle selected borders
-        container.querySelectorAll('.preset-color').forEach(p => p.classList.remove('selected'));
-        preset.classList.add('selected');
-  
-        // write into the <input type="color"> and its label
-        const color = preset.dataset.color;
-        input.value = color;
-        const nameSpan = document.getElementById(`${colorInputId}-name`);
-        if (nameSpan) nameSpan.textContent = color.toUpperCase();
-  
-        updatePreview();
-      });
-    });
-  }
-  
-  /**
-   * Read all form controls, store them, and reload the iframe
-   */
-  function updatePreview() {
-    const iframe     = document.getElementById('preview-iframe');
-    const state      = document.getElementById('state-selector')?.value;
-    const fontFamily = document.getElementById('font-family')?.value;
-    const bgColor    = document.getElementById('bg-color')?.value;
-    const textColor  = document.getElementById('text-color')?.value;
-    const buttonColor      = document.getElementById('button-color')?.value;
-    const buttonTextColor  = document.getElementById('button-text-color')?.value;
-  
-    // Update our settings object
-    currentSettings = {
-      state,
-      fontFamily,
-      bgColor,
-      textColor,
-      buttonColor,
-      buttonTextColor,
-    };
-  
-    console.log('Preview settings:', currentSettings);
-  
-    // Rebuild iframe URL with query-string params (slice off the leading "#")
-    if (iframe) {
-      const qs = [
-        `state=${state}`,
-        `font=${encodeURIComponent(fontFamily)}`,
-        `bg=${bgColor.slice(1)}`,
-        `text=${textColor.slice(1)}`,
-        `button=${buttonColor.slice(1)}`,
-        `buttontext=${buttonTextColor.slice(1)}`
-      ].join('&');
-      iframe.src = `index.html?${qs}`;
-    }
-  }
-  
-  /**
-   * “Apply” button just shows the green flash and logs the settings
-   */
+
+
+function remove_error_message(id, delay = 3000){
+    setTimeout(function() {
+        let error_message = document.getElementById(id);
+        error_message.style.visibility = 'hidden';
+    }, delay);
+}
+
+
   function applySettings() {
     console.log('Applying settings to backend…', currentSettings);
 
@@ -114,36 +24,7 @@ let currentSettings = {
     showSuccessMessage();
   }
   
-  // === Initialize color-name labels ===
-  updateColorName('bg-color',         'bg-color-name');
-  updateColorName('text-color',       'text-color-name');
-  updateColorName('button-color',     'button-color-name');
-  updateColorName('button-text-color','button-text-color-name');
-  
-  // === Hook up the preset-swatches ===
-  setupPresetColors('bg-presets',         'bg-color');
-  setupPresetColors('text-presets',       'text-color');
-  setupPresetColors('button-presets',     'button-color');
-  setupPresetColors('button-text-presets','button-text-color');
-  
-  // === Live-preview listeners ===
-  [
-    { id: 'state-selector',    type: 'change' },
-    { id: 'font-family',       type: 'change' },
-    { id: 'bg-color',          type: 'input'  },
-    { id: 'text-color',        type: 'input'  },
-    { id: 'button-color',      type: 'input'  },
-    { id: 'button-text-color', type: 'input'  }
-  ].forEach(({id, type}) => {
-    document.getElementById(id)?.addEventListener(type, updatePreview);
-  });
-  
-  // === Apply button & initial load ===
-  document.getElementById('apply-button')?.addEventListener('click', applySettings);
-  //window.addEventListener('load', updatePreview);
-
   window.addEventListener('load', () => {
-    updatePreview();
     //Exempelvis ladda organisationen ifråga när sidan laddas och sätt alla färger
     load_organisation();
   });
@@ -210,14 +91,37 @@ let currentSettings = {
           console.log('Problem med att uppdatera organisationen: ', jsonResult['Message']);
         }
       } else {
-        showErrorModal('Kunde inte uppdatera organisationen. Serverfel eller nätverksproblem.');
+        console.log('Det gick inte att uppdatera orgranisationen...');
       }
     //errorhanterare  
     } catch (error) {
-      showErrorModal('Nätverksfel eller CORS-problem. Vänligen försök igen senare.');
       console.error('Nätverksfel/CORS:', error);
     }
   }
+
+//Denna anropas när något har gått tokigt
+function display_error_message(message){
+    let error_message = document.getElementById('error_message');
+    error_message.style.backgroundColor = '#ff5a5a';
+    error_message.innerHTML = message;
+    error_message.style.visibility = 'visible';
+    console.log(message);
+    remove_error_message('error_message');
+
+    if (message == 'E-postadress är ogiltigt.'){
+        let email = document.getElementById('email');
+        email.style.border = '1px solid #ff5a5a';
+    }
+    else if (message == 'Lösenordet är ogiltigt.'){
+        let passw = document.getElementById('passw');
+        passw.style.border = '1px solid #ff5a5a';
+    }
+    else if (message == 'Kontrollera API-nyckeln.'){
+        let api_key = document.getElementById('api_key');
+        api_key.style.border = '1px solid #ff5a5a';
+    }
+}
+
 
   //Avbryt knapp, anropar log-out functionen
   document.getElementById('cancel-button').addEventListener('click', logout_organisation);
@@ -241,31 +145,10 @@ let currentSettings = {
     }
   }
 
-  window.addEventListener('DOMContentLoaded', function() {
-    const modal = document.getElementById('errorModal');
-    const closeBtn = document.getElementById('closeErrorModal');
-    if (closeBtn && modal) {
-      closeBtn.onclick = function() {
-        modal.style.display = 'none';
-        modal.classList.remove('show');
-      };
-    }
-    window.onclick = function(event) {
-      if (event.target === modal) {
-        modal.style.display = 'none';
-        modal.classList.remove('show');
-      }
-    };
-  });
 
-  function showErrorModal(message) {
-    const modal = document.getElementById('errorModal');
-    const modalContent = document.getElementById('errorMessage');
-    if (modal && modalContent) {
-      modalContent.textContent = message;
-      modal.style.display = 'block';
-      modal.classList.add('show');
-    } else {
-      alert(message);
-    }
+  function display_loadingscreen(){
+    document.getElementById('loading_screen').style.display = 'flex';
+  }
+  function remove_loadingscreen(){
+    document.getElementById('loading_screen').style.display = 'none';
   }

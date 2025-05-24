@@ -145,7 +145,7 @@ async function getExistingOrganisations() {
                     </div>
 
                     <div>
-                        <strong>Antal utskick:</strong>
+                        <strong>Antal SMS utskick:</strong>
                         <span class="number_of_messages">X</span>
                         <button class="no_border_button messages_number" title="Visa antal meddelanden">
                             <i class="bi bi-bar-chart-fill"></i>
@@ -162,12 +162,28 @@ async function getExistingOrganisations() {
             `;
             list_element.querySelector('.messages_number').addEventListener('click', async () => {
             //Hämtar data ifrån daniels meddelandemodul baserat på den organisation som finns
-                let message_result = await fetch(`https://smsmodule.pythonanywhere.com/get_sms_stats/${value['orgnr']}`);
+            try{
+                let orgnr = value['orgnr'];
+            
+                let message_result = await fetch(`https://smsmodule.pythonanywhere.com/get_sms_stats/${orgnr}`);
+
+                //{"orgnr":"5555555551","stats":{"email":8,"sms":0},"status":"success"}
+
                 let message_data = await message_result.json();
                 console.log(message_data);
-                if(message_data.status == 'success'){
-                    list_element.querySelector('.number_of_messages').innerText = message_data['entries_found'];
+
+                if (message_data['status'] == 'success') {
+                    list_element.querySelector('.number_of_messages').innerText = message_data['stats']['sms'];
                 }
+                else if (message_data['status'] == 'error') {
+                    list_element.querySelector('.number_of_messages').innerText = 'X';
+                    alert('Det gick inte att hämta statistik för meddelanden.');
+                }
+            }
+            catch (error){
+                console.log('Fel vid hämtning av meddelande statistik');
+                console.log(error);
+            }
             });
 
             //Utskick av e-postmeddelande
