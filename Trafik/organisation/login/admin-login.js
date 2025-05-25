@@ -22,7 +22,7 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
         if (result['Success']){
             // Redirect to admin dashboard after successful login
             remove_loadingscreen();
-            window.location.href = `admin-dashboard.html`;
+            window.location.href = `../dashboard`;
         }
         else{
             display_error_message(result['Message']);
