@@ -126,6 +126,7 @@ function display_error_message(message){
   //Avbryt knapp, anropar log-out functionen
   document.getElementById('cancel-button').addEventListener('click', logout_organisation);
   
+  document.getElementById('apply-button').addEventListener('click', applySettings);
 
   /*Utloggning för organisationer, en egen route där vi rensar
   sessionsvariabeln hos Flask */
