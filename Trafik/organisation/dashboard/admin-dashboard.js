@@ -103,7 +103,7 @@ function remove_error_message(id, delay = 3000){
     //errorhanterare  
     } catch (error) {
       remove_loadingscreen();
-      console.error('Nätverksfel/CORS:', error);
+      console.error('Det gick inte att anropa databasen...', error);
     }
   }
 
@@ -121,6 +121,8 @@ function display_error_message(message){
         let monthly = document.getElementById('monthly');
         let yearly = document.getElementById('yearly');
 
+        /*Här kontrollerar vi respektive fält ifall det är ett nummer och som är 
+        om dom är felaktiga så sätter vi en röd kant runt dessa*/
         if (isNaN(parseFloat(weekly.value)) || weekly.value.trim() === '') {
             weekly.style.border = '1px solid #ff5a5a';
         }
@@ -133,6 +135,12 @@ function display_error_message(message){
             yearly.style.border = '1px solid #ff5a5a';
         }
     }
+    else if (message == 'Teckenstorlek är ogiltigt.'){
+      let fontsize = document.getElementById('fontsize');
+        if (isNaN(parseFloat(fontsize.value)) || fontsize.value.trim() === '') {
+            fontsize.style.border = '1px solid #ff5a5a';
+        }
+    }
 }
 
 
@@ -141,6 +149,25 @@ function display_error_message(message){
   
   document.getElementById('apply-button').addEventListener('click', applySettings);
 
+
+  document.getElementById('weekly').addEventListener('input', function() {
+      let weekly = document.getElementById('weekly');
+      weekly.style.border = '';
+  });
+  document.getElementById('monthly').addEventListener('input', function() {
+      let monthly = document.getElementById('monthly');
+      monthly.style.border = '';
+  });
+
+  document.getElementById('yearly').addEventListener('input', function() {
+      let yearly = document.getElementById('yearly');
+      yearly.style.border = '';
+  });
+
+  document.getElementById('fontsize').addEventListener('input', function() {
+      let fontsize = document.getElementById('fontsize');
+      fontsize.style.border = '';
+  });
   /*Utloggning för organisationer, en egen route där vi rensar
   sessionsvariabeln hos Flask */
   async function logout_organisation(){
