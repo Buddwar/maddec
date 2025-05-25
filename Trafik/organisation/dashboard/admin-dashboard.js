@@ -84,6 +84,11 @@ function remove_error_message(id, delay = 3000){
         if (jsonResult['Success']){
           remove_loadingscreen();
           console.log('Organisationen har uppdaterats: ', jsonResult);
+          //återanvänder vårt "error meddelanden" och anger annan färg osv
+          let error_message = document.getElementById('error_message');
+          error_message.style.backgroundColor = '#99ff5a';
+          error_message.innerHTML = jsonResult['Message'];
+          error_message.style.visibility = 'visible';
         }
         else{
           remove_loadingscreen();
