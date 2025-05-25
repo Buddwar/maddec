@@ -153,7 +153,27 @@ select{
     visibility: hidden;
     margin-top: 1rem;
 }
-
+#loading_screen{
+    background-color: rgba(255, 255, 255, 0.151);
+    z-index: 1000;
+    display: none;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    text-align: center;
+}
+.loading_icon{
+    font-size: 2rem;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 
 @media (min-width: 600px) {
   .dashboard-container {

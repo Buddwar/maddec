@@ -18,6 +18,7 @@ function remove_error_message(id, delay = 3000){
       'fontstyle': document.getElementById('font-family').value,
       'fontsize': document.getElementById('fontsize').value
   }
+  display_loadingscreen();
     update_organisation(data);
   }
   
@@ -81,17 +82,20 @@ function remove_error_message(id, delay = 3000){
       if (response.ok){
         let jsonResult = await response.json();
         if (jsonResult['Success']){
+          remove_loadingscreen();
           console.log('Organisationen har uppdaterats: ', jsonResult);
         }
         else{
-          showErrorModal('Problem med att uppdatera organisationen: ' + (jsonResult['Message'] || 'Okänt fel.'));
+          remove_loadingscreen();
           console.log('Problem med att uppdatera organisationen: ', jsonResult['Message']);
         }
       } else {
+        remove_loadingscreen();
         console.log('Det gick inte att uppdatera orgranisationen...');
       }
     //errorhanterare  
     } catch (error) {
+      remove_loadingscreen();
       console.error('Nätverksfel/CORS:', error);
     }
   }
@@ -109,14 +113,6 @@ function display_error_message(message){
         let email = document.getElementById('email');
         email.style.border = '1px solid #ff5a5a';
     }
-    else if (message == 'Lösenordet är ogiltigt.'){
-        let passw = document.getElementById('passw');
-        passw.style.border = '1px solid #ff5a5a';
-    }
-    else if (message == 'Kontrollera API-nyckeln.'){
-        let api_key = document.getElementById('api_key');
-        api_key.style.border = '1px solid #ff5a5a';
-    }
 }
 
 
@@ -128,18 +124,29 @@ function display_error_message(message){
   /*Utloggning för organisationer, en egen route där vi rensar
   sessionsvariabeln hos Flask */
   async function logout_organisation(){
-
-    let response = await fetch('https://bergstrom.pythonanywhere.com/logout_organisation', {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      credentials: 'include'
-  });
-    let jsonResult = await response.json();
-    console.log(jsonResult);
-    if (jsonResult['Success']){//Kontroll att vi lyckades logga ut
-      window.location.href = `../login/`;//Dirigera om användaren till login-sidan
+    try{
+      display_loadingscreen();
+      let response = await fetch('https://bergstrom.pythonanywhere.com/logout_organisation', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+    });
+      let jsonResult = await response.json();
+      console.log(jsonResult);
+      if (jsonResult['Success']){//Kontroll att vi lyckades logga ut
+        window.location.href = `../login/`;//Dirigera om användaren till login-sidan
+        remove_loadingscreen();
+      }
+      else{
+        remove_loadingscreen();
+        console.log('Problem med att logga ut organisationen.');
+      }
+    }
+    catch (error){
+      remove_loadingscreen();
+      console.log('Problem med att anropa databasen...', error);
     }
   }
 
