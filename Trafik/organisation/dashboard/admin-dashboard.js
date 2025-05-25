@@ -19,7 +19,6 @@ function remove_error_message(id, delay = 3000){
       'fontsize': document.getElementById('fontsize').value
   }
     update_organisation(data);
-    showSuccessMessage();
   }
   
   window.addEventListener('load', () => {
