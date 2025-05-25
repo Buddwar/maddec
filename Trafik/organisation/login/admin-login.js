@@ -1,4 +1,4 @@
-
+console.log('Admin login script loaded');
 function remove_error_message(id, delay = 3000){
     setTimeout(function() {
         let error_message = document.getElementById(id);
