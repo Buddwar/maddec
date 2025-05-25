@@ -141,7 +141,7 @@ function display_error_message(message){
     let jsonResult = await response.json();
     console.log(jsonResult);
     if (jsonResult['Success']){//Kontroll att vi lyckades logga ut
-      window.location.href = `../login`;//Dirigera om användaren till login-sidan
+      window.location.href = `../login/`;//Dirigera om användaren till login-sidan
     }
   }
 
