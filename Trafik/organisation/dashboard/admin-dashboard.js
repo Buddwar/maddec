@@ -89,10 +89,12 @@ function remove_error_message(id, delay = 3000){
           error_message.style.backgroundColor = '#99ff5a';
           error_message.innerHTML = jsonResult['Message'];
           error_message.style.visibility = 'visible';
+          remove_error_message('error_message');
         }
         else{
           remove_loadingscreen();
           console.log('Problem med att uppdatera organisationen: ', jsonResult['Message']);
+          display_error_message(jsonResult['Message']);
         }
       } else {
         remove_loadingscreen();
@@ -114,9 +116,22 @@ function display_error_message(message){
     console.log(message);
     remove_error_message('error_message');
 
-    if (message == 'E-postadress är ogiltigt.'){
-        let email = document.getElementById('email');
-        email.style.border = '1px solid #ff5a5a';
+    if (message == 'Priser är ogiltigt.'){
+        let weekly = document.getElementById('weekly');
+        let monthly = document.getElementById('monthly');
+        let yearly = document.getElementById('yearly');
+
+        if (isNaN(parseFloat(weekly.value)) || weekly.value.trim() === '') {
+            weekly.style.border = '1px solid #ff5a5a';
+        }
+
+        if (isNaN(parseFloat(monthly.value)) || monthly.value.trim() === '') {
+            monthly.style.border = '1px solid #ff5a5a';
+        }
+
+        if (isNaN(parseFloat(yearly.value)) || yearly.value.trim() === '') {
+            yearly.style.border = '1px solid #ff5a5a';
+        }
     }
 }
 
