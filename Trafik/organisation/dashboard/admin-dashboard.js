@@ -9,8 +9,6 @@ function remove_error_message(id, delay = 3000){
 
 
   function applySettings() {
-    console.log('Applying settings to backend…', currentSettings);
-
     data = {
       'weekly': document.getElementById('weekly').value,
       'monthly': document.getElementById('monthly').value,
