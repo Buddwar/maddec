@@ -116,7 +116,7 @@ function display_error_message(message){
     console.log(message);
     remove_error_message('error_message');
 
-    if (message == 'Priser är ogiltigt.'){
+    if (message == 'Priset är ogiltigt.'){
         let weekly = document.getElementById('weekly');
         let monthly = document.getElementById('monthly');
         let yearly = document.getElementById('yearly');
