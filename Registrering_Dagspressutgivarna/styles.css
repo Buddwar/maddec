@@ -19,6 +19,10 @@ h1{
     background-color: var(--background-color);
     border-radius: .2rem;
 }
+.form-group{
+    width: 100%;
+    max-width: 300px;
+}
 .container{
     display: flex;
     flex-direction: column;
@@ -34,16 +38,18 @@ label{
     font-weight: 600;
 }
 #email, #passw, #api_key{
-    margin-block: .5rem;
-    font-size: 1.5rem;
-    border-radius: .2rem;
+    border: 1px solid #e1e1e1;
+    border-radius: var(--radius);
+    padding: 0.8rem 1rem;
+    font-size: 0.95rem;
+    width: 100%;
+    margin-bottom: 1rem;
 }
 #email:focus, #passw:focus, #api_key:focus{
-    border: 2px solid rgb(168, 101, 255);
+    border: 1px solid rgb(168, 101, 255);
     outline: none;
     box-shadow: 0 0 5px rgb(168, 101, 255);
 }
-
 
 button{
     margin-top: 2rem;
