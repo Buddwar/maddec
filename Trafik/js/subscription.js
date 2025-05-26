@@ -135,6 +135,48 @@ async function extend_subscription(email){
     return jsonResult;
 }
 
+function setColors(result){
+    let saveBtn = document.getElementById('save-button');
+    let extendBtn = document.getElementById('extend-button');
+    let deleteBtn = document.getElementById('delete-button');  
+    let logoutBtn = document.getElementById('cancel-button'); 
+
+    //Sparningsknappen
+    saveBtn.style.backgroundColor = result['Data']['primarycolor'];
+    saveBtn.style.color = result['Data']['secondarycolor'];
+
+    //Förlängningsknappen
+    extendBtn.style.backgroundColor = '#f0f0f0';
+    extendBtn.style.color = result['Data']['primarycolor'];
+    extendBtn.style.border = '1px solid ' + result['Data']['primarycolor'];
+
+    //Raderaknappen
+    deleteBtn.style.backgroundColor = '#f0f0f0';
+    deleteBtn.style.color = result['Data']['primarycolor'];
+
+    //Logga ut knappen
+    logoutBtn.style.backgroundColor = '#f0f0f0';
+    logoutBtn.style.color = result['Data']['primarycolor'];
+    logoutBtn.style.border = '1px solid ' + result['Data']['primarycolor'];
+
+    //Titeln på sidan
+    document.getElementById('prenumeration_title').style.color = result['Data']['primarycolor'];
+
+    let strongElements = document.querySelectorAll('.subscription-info strong');
+    strongElements.forEach((element) => {
+        element.style.color = result['Data']['primarycolor'];
+    });
+
+    //Sätter hela sidans teckensnitt
+    document.body.style.fontFamily = result['Data']['fontstyle'];
+
+    //Sätter fontsize på diverse knappar och text
+    let px = parseFloat(result['Data']['fontsize']);
+    let rem = px / 16;
+    document.body.style.fontSize = rem + 'rem';
+    document.getElementById('prenumeration_title').style.fontSize = 1.5 + 'rem';
+}
+
 //Ladda in befintliga uppgifter om användaren
 window.addEventListener('load', async () => {
     //Hämta organisation och ladda in de färger som finns
@@ -142,6 +184,8 @@ window.addEventListener('load', async () => {
     result = await load_organisation(orgnr);
     if(result['Success']){
         console.log(result['Data']);
+        //Sätt färgerna baserat på organisationens data
+        setColors(result);
     }
     else{
         console.log(jsonResult['Message']);
