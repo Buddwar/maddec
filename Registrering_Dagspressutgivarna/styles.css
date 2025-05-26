@@ -83,7 +83,10 @@ button:hover {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
-
+[title] {
+    position: relative;
+    cursor: help;
+}
 
 #error_message{
     text-align: center;

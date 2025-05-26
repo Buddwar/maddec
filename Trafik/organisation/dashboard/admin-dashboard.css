@@ -140,6 +140,10 @@ select{
   padding-block: .2rem;
   border-radius: .2rem;
 }
+[title] {
+    position: relative;
+    cursor: help;
+}
 #error_message{
     text-align: center;
     width: 80%;

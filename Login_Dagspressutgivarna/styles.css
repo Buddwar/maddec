@@ -43,6 +43,13 @@ label{
     outline: none;
     box-shadow: 0 0 5px rgb(168, 101, 255);
 }
+[title] {
+    position: relative;
+    cursor: help;
+}
+
+
+
 
 button{
     margin-top: 2rem;

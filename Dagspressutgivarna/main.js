@@ -35,7 +35,6 @@ async function createOrganisation(event) {
 
     try {
         await writeOrganisation(company_profile);
-        displaySuccessMessage("Organisation skapad!");
     } catch (err) {
         displayErrorMessage("Ett oväntat fel inträffade.");
         console.error(err);
@@ -49,6 +48,11 @@ function validateForm() {
     const orgnr = document.getElementById('orgnr').value;
     const email = document.getElementById('email').value;
     const passw = document.getElementById('passw').value;
+    const orgname = document.getElementById('orgname').value;
+    const weekly = document.getElementById('weekly').value;
+    const monthly = document.getElementById('monthly').value;
+    const yearly = document.getElementById('yearly').value;
+    const fontsize = document.getElementById('fontsize').value;
 
     if (!/^\d{10}$/.test(orgnr)) {
         displayErrorMessage("Organisationsnummer måste vara 10 siffror");
@@ -60,10 +64,31 @@ function validateForm() {
         return false;
     }
 
-    if (passw.length < 6) {
-        displayErrorMessage("Lösenordet måste vara minst 6 tecken");
+    if (passw.length < 8) {
+        displayErrorMessage("Lösenordet måste vara minst 8 tecken");
         return false;
     }
+    if (orgname.trim() === "") {
+        displayErrorMessage("Organisationsnamn måste anges");
+        return false;
+    }
+    if (weekly.trim() === "" || isNaN(weekly) || parseFloat(weekly) < 0) {
+        displayErrorMessage("Pris för veckovis måste anges och vara ett positivt tal");
+        return false;
+    }
+    if (monthly.trim() === "" || isNaN(monthly) || parseFloat(monthly) < 0) {
+        displayErrorMessage("Pris för månadsvis måste anges och vara ett positivt tal");
+        return false;
+    }
+    if (yearly.trim() === "" || isNaN(yearly) || parseFloat(yearly) < 0) {
+        displayErrorMessage("Pris för årsvis måste anges och vara ett positivt tal");
+        return false;
+    }
+    if (fontsize.trim() === "" || isNaN(fontsize) || parseFloat(fontsize) <= 0) {
+        displayErrorMessage("Teckenstorlek måste anges och vara ett positivt tal");
+        return false;
+    }
+    
 
     return true;
 }
@@ -87,24 +112,32 @@ function displaySuccessMessage(message) {
 }
 
 async function writeOrganisation(company_profile) {
-    display_loadingscreen();
-    let response = await fetch('https://bergstrom.pythonanywhere.com/create_organisation', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(company_profile)
-    });
+    try{
+        display_loadingscreen();
+        let response = await fetch('https://bergstrom.pythonanywhere.com/create_organisation', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(company_profile)
+        });
 
-    let jsonResult = await response.json();
-    if (!jsonResult['Success']) {
-        if (jsonResult['Message']) {
-            displayErrorMessage('Gick inte att spara undan organisationen\nKontrollera att den inte redan finns.');
+        let jsonResult = await response.json();
+        if (!jsonResult['Success']) {
+            if (jsonResult['Message']) {
+                displayErrorMessage('Gick inte att spara undan organisationen\nKontrollera att den inte redan finns.');
+                remove_loadingscreen();
+            }
+        } else {
+            displaySuccessMessage('Organisationen har skapats!');
             remove_loadingscreen();
+            location.reload();
         }
-    } else {
+    }
+    catch (error) {
+        console.error('Fel vid skapande av organsiation', error);
+        displayErrorMessage("Ett oväntat fel inträffade.");
         remove_loadingscreen();
-        location.reload();
     }
 }
 
