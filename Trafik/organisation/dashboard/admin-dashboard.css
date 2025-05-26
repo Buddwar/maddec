@@ -137,7 +137,6 @@ input::placeholder {
 }
 input, select{
     border: 1px solid #e1e1e1;
-    border-radius: var(--radius);
     padding: 0.8rem 1rem;
     font-size: 0.95rem;
     width: 100%;

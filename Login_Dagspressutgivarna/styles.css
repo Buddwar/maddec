@@ -33,10 +33,16 @@ p{
 label{
     font-weight: 600;
 }
+.form-group{
+    width: 100%;
+    max-width: 300px;
+}
 #email, #passw{
-    margin-block: .5rem;
-    font-size: 1.5rem;
-    border-radius: .2rem;
+    border: 1px solid #e1e1e1;
+    padding: 0.8rem 1rem;
+    font-size: 0.95rem;
+    width: 100%;
+    margin-bottom: 1rem;
 }
 #email:focus, #passw:focus{
     border: 2px solid rgb(168, 101, 255);
