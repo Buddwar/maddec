@@ -3,6 +3,7 @@
     --secondary: #686de0;
     --background-color: #f0f0f0;
     --text-color: #333;
+    --radius: 8px;
 }
 body{
   background-color: var(--background-color);
@@ -108,7 +109,7 @@ select {
 
 input:focus,
 select:focus {
-    border: 2px solid var(--main-color);
+    border: 1px solid var(--main-color);
     outline: none;
     box-shadow: var(--secondary) 0 0 5px;
 }
@@ -134,11 +135,13 @@ input::placeholder {
     border-radius: .5rem;
     padding: 1rem;
 }
-input,
-select{
-  font-size: 1.2rem;
-  padding-block: .2rem;
-  border-radius: .2rem;
+input, select{
+    border: 1px solid #e1e1e1;
+    border-radius: var(--radius);
+    padding: 0.8rem 1rem;
+    font-size: 0.95rem;
+    width: 100%;
+    margin-bottom: 1rem;
 }
 [title] {
     position: relative;

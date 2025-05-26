@@ -98,9 +98,9 @@ display_loadingscreen();
     }
 }
 
-function display_loadingscreen(){
+  function display_loadingscreen(){
     document.getElementById('loading_screen').style.display = 'flex';
   }
-function remove_loadingscreen(){
+  function remove_loadingscreen(){
     document.getElementById('loading_screen').style.display = 'none';
   }
