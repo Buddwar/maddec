@@ -44,6 +44,9 @@ label{
     width: 100%;
     margin-bottom: 1rem;
 }
+#api_key{
+    margin-bottom: 0;
+}
 #email:focus, #passw:focus, #api_key:focus{
     border: 1px solid rgb(168, 101, 255);
     outline: none;
