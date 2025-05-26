@@ -172,7 +172,7 @@ function setColors(result){
 
     //Sätter fontsize på diverse knappar och text
     let px = parseFloat(result['Data']['fontsize']);
-    let rem = px / 16;
+    let rem = px / 14;
     document.body.style.fontSize = rem + 'rem';
     document.getElementById('prenumeration_title').style.fontSize = 1.5 + 'rem';
 }
