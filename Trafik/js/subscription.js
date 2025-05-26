@@ -200,7 +200,7 @@ window.addEventListener('load', async () => {
         document.getElementById('subscriber-email').textContent = subscriber_data['Data']['email'];
         document.getElementById('subscriber-phone').textContent = subscriber_data['Data']['phone'];
         document.getElementById('subscriber-state').textContent = countrycodes[subscriber_data['Data']['countrycode']];
-        document.getElementById('update-frequency').value = subscriber_data['Data']['subtype'];  
+        //document.getElementById('update-frequency').value = subscriber_data['Data']['subtype'];  
     }
     else{//Något gick tokigt med hämtningen av data, t. ex. användaren är inte inloggad?
         remove_loadingscreen();
