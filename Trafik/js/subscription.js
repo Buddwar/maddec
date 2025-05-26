@@ -137,6 +137,16 @@ async function extend_subscription(email){
 
 //Ladda in befintliga uppgifter om användaren
 window.addEventListener('load', async () => {
+    //Hämta organisation och ladda in de färger som finns
+    let orgnr = getUrl();
+    result = await load_organisation(orgnr);
+    if(result['Success']){
+        console.log(result['Data']);
+    }
+    else{
+        console.log(jsonResult['Message']);
+    }
+
     //Hämta användarens data
     display_loadingscreen();
     let subscriber_data = await get_user_details();
@@ -149,13 +159,41 @@ window.addEventListener('load', async () => {
         document.getElementById('update-frequency').value = subscriber_data['Data']['subtype'];  
     }
     else{//Något gick tokigt med hämtningen av data, t. ex. användaren är inte inloggad?
+        remove_loadingscreen();
         console.log(subscriber_data)
         let orgnr = getUrl();
         let index_url = `index.html?orgnr=${orgnr}`;
         window.location.href = index_url;
     }
 });
+async function get_user_details(){
+    let response = await fetch('https://bergstrom.pythonanywhere.com/get_user', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },//Här skickar med vår sessionscookie från serversidan
+        //o det är ju då för att kontrollera VEM det är som är inloggad
+        credentials: 'include',
+        body: JSON.stringify({})
+    });
+    let jsonResult = await response.json();
+    return jsonResult;
+}
 
+/*Vi hämtar organisationen som användaren är inloggad hos för att 
+sätta olika färger osv, hämta data*/
+async function load_organisation(orgnr){
+let data = {'orgnr': orgnr};
+    let response = await fetch('https://bergstrom.pythonanywhere.com/get_organisation', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data)
+    });
+    let jsonResult = await response.json();
+    return jsonResult;
+}
 
 /*Function för att hämta användaren som är inloggad
 Ingen data behöver skickas in här utan det räcker att bara anropa funktionen */

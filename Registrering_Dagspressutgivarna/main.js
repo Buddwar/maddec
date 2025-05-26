@@ -60,7 +60,7 @@ function display_error_message(message){
         let passw = document.getElementById('passw');
         passw.style.border = '1px solid #ff5a5a';
     }
-    else if (message == 'Kontrollera API-nyckeln.'){
+    else if (message == 'Kontrollera säkerhetsfrasen.'){
         let api_key = document.getElementById('api_key');
         api_key.style.border = '1px solid #ff5a5a';
     }

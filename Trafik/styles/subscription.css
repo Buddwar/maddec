@@ -151,6 +151,7 @@ button:hover {
     top: 0;
     left: 0;
     text-align: center;;
+    visibility: hidden;
   }
   .loading_icon{
     font-size: 2rem;
