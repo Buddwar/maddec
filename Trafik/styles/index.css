@@ -191,6 +191,7 @@
     max-width: 90%;
     border-radius: 0.25rem;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    min-width: 250px;
   }
   .modal-content h2 {
     font-size: 1rem;
@@ -217,7 +218,7 @@
     gap: 0.35rem;
   }
   .subscribe-form-changelayout{
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: auto auto auto;
   }
   .subscribe-form label {
     font-weight: bold;
