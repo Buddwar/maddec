@@ -446,6 +446,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('yearly').textContent += ' ' + result['Data']['yearly'] + ' SEK';
 
   document.getElementById('subscribe-modal').style.fontFamily = result['Data']['fontstyle'];
+
+  //Här kan vi använda staden för att göra något?
+  let city = result['Data']['city'];
+  console.log(city);
 });
 
 /*Denna funktion användes tidigare för att skapa en användare
