@@ -1,3 +1,4 @@
+import { geocodeCity } from "./utilities";
 
 // Initiera Leaflet-kartan, detta är taget från Leaflet direkt.
 // Vi exporterar kartan, sätter koordinaterna för vart kartan ska visas först, tillsammans med zoom-nivån.
