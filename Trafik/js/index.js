@@ -425,8 +425,8 @@ function clearModalFields(){
 
 /*Används för att hålla koll på hur stor iframen är och därmed
 styra hur modalen ska visas beroende på storleken */
-window.addEventListener('resize', () => {
-  let iframeWidth = window.innerWidth;
+window.addEventListener('load', () => {
+  //let iframeWidth = window.innerWidth;
   //Vi hämtar höjden på iframen
   let iframeHeight = window.innerHeight;
   let modal = document.querySelector('.modal-content');
