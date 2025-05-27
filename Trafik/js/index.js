@@ -6,7 +6,6 @@ import { counties } from './counties.js';
 import './county-selector.js'; // This automatically adds the dropdown to the map
 import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs';
 import { initializeMapWithCity } from './map-init.js'; //TEST//
-import { load_organisation } from './utilities.js'; //TEST//
 
 // Jag har testat att kommentera ut kartan här i index.js. Känns onödigt att ha en karta initialiserad här,
 // när den redan finns i de andra filerna jag skapade. /Ester

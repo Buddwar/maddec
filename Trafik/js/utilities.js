@@ -50,28 +50,6 @@ export function formatDirection(bearing) {
   }
 }
 
-// utilities.js
-
-export async function loadOrganisationSettings() {
-  try {
-    const response = await fetch('https://bergstrom.pythonanywhere.com/get_organisation', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include'
-    });
-    const json = await response.json();
-    if (json.Success) {
-      return json.Data;
-    } else {
-      console.error('Kunde inte hämta organisationens inställningar');
-      return null;
-    }
-  } catch (error) {
-    console.error('Fel vid hämtning av organisation:', error);
-    return null;
-  }
-}
-
 export async function geocodeCity(city) {
   const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(city)}&limit=1`;
   try {
