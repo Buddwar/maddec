@@ -1,3 +1,4 @@
+
 // Importerar kartan, kluster (grupperingar), län (counties) och funktioner.
 import { map, situationCluster, cameraCluster, roadConditionLines } from "./map-init.js";
 import { getSituations } from "./situations.js";

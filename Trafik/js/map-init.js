@@ -1,3 +1,4 @@
+
 import { geocodeCity } from './utilities.js';
 
 // Initiera Leaflet-kartan, detta är taget från Leaflet direkt.
@@ -38,3 +39,4 @@ export async function initializeMapWithCity(city) {
   }
   map.setView([57.10713, 12.25340], 13); // fallback
 }
+
