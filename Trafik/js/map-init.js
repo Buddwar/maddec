@@ -1,3 +1,5 @@
+import { geocodeCity } from './utilities.js';
+
 // Initiera Leaflet-kartan, detta är taget från Leaflet direkt.
 // Vi exporterar kartan, sätter koordinaterna för vart kartan ska visas först, tillsammans med zoom-nivån.
 export const map = L.map('map').setView([57.10713, 12.25340], 13); //Här kan tidningarna själva skriva in koordinaterna för staden de befinner sig i - staden som visas på kartan direkt.
@@ -25,3 +27,14 @@ window.addEventListener('resize', function() {
     map.invalidateSize(); // Tvinga Leaflet att uppdatera kartans storlek
   }
 });
+
+export async function initializeMapWithCity(city) {
+  if (city) {
+    const coords = await geocodeCity(city);
+    if (coords) {
+      map.setView(coords, 13);
+      return;
+    }
+  }
+  map.setView([57.10713, 12.25340], 13); // fallback
+}

@@ -49,3 +49,43 @@ export function formatDirection(bearing) {
     return "Okänd";
   }
 }
+
+// utilities.js
+
+export async function loadOrganisationSettings() {
+  try {
+    const response = await fetch('https://bergstrom.pythonanywhere.com/get_organisation', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include'
+    });
+    const json = await response.json();
+    if (json.Success) {
+      return json.Data;
+    } else {
+      console.error('Kunde inte hämta organisationens inställningar');
+      return null;
+    }
+  } catch (error) {
+    console.error('Fel vid hämtning av organisation:', error);
+    return null;
+  }
+}
+
+export async function geocodeCity(city) {
+  const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(city)}&limit=1`;
+  try {
+    const response = await fetch(url);
+    const results = await response.json();
+    if (results && results.length > 0) {
+      const { lat, lon } = results[0];
+      return [parseFloat(lat), parseFloat(lon)];
+    } else {
+      console.warn('Inga koordinater hittades för stad:', city);
+      return null;
+    }
+  } catch (error) {
+    console.error('Fel vid geokodning:', error);
+    return null;
+  }
+}
