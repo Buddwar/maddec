@@ -425,12 +425,13 @@ function clearModalFields(){
 
 /*Används för att hålla koll på hur stor iframen är och därmed
 styra hur modalen ska visas beroende på storleken */
-window.addEventListener('load', () => {
+window.addEventListener('resize', () => {
   //let iframeWidth = window.innerWidth;
   //Vi hämtar höjden på iframen
   let iframeHeight = window.innerHeight;
   let modal = document.querySelector('.modal-content');
   let form = document.querySelector('.subscribe-form');
+  let div = document.querySelector('.third_div');
   //console.log(iframeWidth);
   console.log(iframeHeight);
   //Om höjden är mindre än 400px (vilket är minimumhöjden för modalen)
@@ -439,9 +440,11 @@ window.addEventListener('load', () => {
     modal.style.maxWidth = '80%'; // Minimum height
     //T.ex. layouten slås om till 3 kolumner
     form.classList.add('subscribe-form-changelayout');
+    div.classList.add('third_div_changelayout');
   }
   else{
     form.classList.remove('subscribe-form-changelayout');
+    div.classList.remove('third_div_changelayout');
     modal.style.maxWidth = '300px'; // Default width
   }
 });

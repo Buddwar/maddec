@@ -213,7 +213,7 @@
   }
   .subscribe-form {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 0.35rem;
   }
   .subscribe-form-changelayout{
@@ -250,8 +250,8 @@
   }
 
   #checkout-button {
-    grid-column: 1 / -1;
-    justify-self: center;
+    grid-column: 2 / 2;
+    justify-self: end;
     width: 5rem;
     padding: 0.5rem;
     background-color: var(--button-color);
@@ -262,6 +262,15 @@
     cursor: pointer;
     transition: opacity 0.3s;
     margin-top: .5rem;
+  }
+  .button-container{
+    text-align: right;
+  }
+  .third_div{
+    grid-column: 2/2;
+  }
+  .third_div_changelayout{
+    grid-column: 3/3;
   }
 
   #subscriber-fname,
