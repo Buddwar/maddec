@@ -1,7 +1,4 @@
 
-import { geocodeCityWithCounty, getCountyCodeFromCountyName } from './utilities.js';
-import { countySelector } from "./county-selector.js"
-
 // Initiera Leaflet-kartan, detta är taget från Leaflet direkt.
 // Vi exporterar kartan, sätter koordinaterna för vart kartan ska visas först, tillsammans med zoom-nivån.
 export const map = L.map('map').setView([57.10713, 12.25340], 13); //Här kan tidningarna själva skriva in koordinaterna för staden de befinner sig i - staden som visas på kartan direkt.
