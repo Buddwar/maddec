@@ -31,29 +31,13 @@ window.addEventListener('resize', function() {
 });
 
 export async function initializeMapWithCity(city) {
-  if (!city) {
-    map.setView([57.10713, 12.25340], 13);
-    return null;
-  }
-
-  const result = await geocodeCityWithCounty(city);
-
-  if (result && result.coords && result.countyName) {
-    const { coords, countyName } = result;
-    map.setView(coords, 13);
-
-    const countyCode = getCountyCodeFromCountyName(countyName);
-    if (countyCode) {
-      // Programmatisk uppdatering av länsväljare och data
-      countySelector.setCountyCode(countyCode);
-      return countyCode;
-    } else {
-      console.warn('Kunde inte hitta länskod för länet:', countyName);
-      return null;
+  if (city) {
+    const coords = await geocodeCity(city);
+    if (coords) {
+      map.setView(coords, 13);
+      return;
     }
-  } else {
-    map.setView([57.10713, 12.25340], 13);
-    return null;
   }
+  map.setView([57.10713, 12.25340], 13); // fallback
 }
 
