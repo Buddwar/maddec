@@ -18,6 +18,7 @@ async function createOrganisation(event) {
     let fontsize = document.getElementById('fontsize').value;
     let primarycolor = document.getElementById('primarycolor').value;
     let secondarycolor = document.getElementById('secondarycolor').value;
+    let city = document.getElementById('city').value;
 
     let company_profile = {
         orgnr,
@@ -30,7 +31,8 @@ async function createOrganisation(event) {
         fontstyle,
         fontsize,
         primarycolor,
-        secondarycolor
+        secondarycolor,
+        city
     };
 
     try {

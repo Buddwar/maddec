@@ -16,7 +16,8 @@ function remove_error_message(id, delay = 3000){
       'primarycolor': document.getElementById('primarycolor').value,
       'secondarycolor': document.getElementById('secondarycolor').value,
       'fontstyle': document.getElementById('font-family').value,
-      'fontsize': document.getElementById('fontsize').value
+      'fontsize': document.getElementById('fontsize').value,
+      'city': document.getElementById('city').value
   }
   display_loadingscreen();
     update_organisation(data);

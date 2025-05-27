@@ -39,6 +39,15 @@
                                 <label for="orgname">Namn på organisation</label>
                                 <input type="text" id="orgname" title="Ange organisationens namn" placeholder="Expressen">
                             </div>
+
+                            <div class="input-group">
+                                <label for="city">Stad</label>
+                                <select id="city" title="Välj den stad som ska visas på kartan.">
+                                    <option value="Stockholm">Stockholm</option>
+                                    <option value="Malmö">Malmö</option>
+                                    <option value="Göteborg">Göteborg</option>
+                                </select>
+                            </div>
                         </div>
 
                         <div class="inner_container">
@@ -104,7 +113,7 @@
             </form>
 
             <aside class="company_container">
-                <h2><i class="bi bi-list-ul"></i> Organisationer</h2>
+                <h2>Organisationer</h2>
                 <div id="company_list" class="company-list"></div>
             </aside>
         </div>
