@@ -32,6 +32,7 @@
       <button class="modal-close" id="modal-close">&times;</button>
       <h2 id="modal-title">Prenumerera på trafikinformation</h2>
       <form class="subscribe-form" id="subscribe-form">
+        <div>
         <label for="subscriber-fname">Förnamn:</label>
         <input type="text" id="subscriber-fname" required>
 
@@ -40,13 +41,14 @@
         
         <label for="subscriber-email">E-post:</label>
         <input type="email" id="subscriber-email" required>
+        </div>
 
+        <div>
         <label for="subscriber-passw">Lösenord:</label>
         <input type="password" id="subscriber-passw" required>
         
         <label for="subscriber-phone">Telefonnummer:</label>
         <input type="tel" id="subscriber-phone" required placeholder="+46..." onfocus="this.placeholder=''" onblur="if(this.value===''){this.placeholder='+46...'}">
-        
         <label for="subscriber-state">Län:</label>
         <select id="subscriber-state" required>
           <option value="">Välj län</option>
@@ -72,15 +74,15 @@
             <option value="14">Västra Götalands län</option>
             <option value="17">Värmlands län</option>
           </select>
-
+          </div>
+          <div>
         <label for="subscriber-frequency">Prenumerationstid:</label>
         <select id="subscriber-frequency" required>
           <option value="">Välj alternativ</option>
           <option value="weekly", id="weekly">Veckovis</option>
           <option value="monthly" id="monthly">Månadsvis</option>
           <option value="yearly" id="yearly">Årligen</option>
-        </select>  
-        
+        </select>
         <!-- Betalning  -->
         <label for="payment-method">Betalningsmetod:</label>
         <select id="payment-method" name="payment-method" required>
@@ -88,13 +90,16 @@
           <option value="credit-card">Kreditkort</option>
           <option value="invoice">Faktura</option>
         </select>
+        
                 <!--BETALA KNAPP-->
         <button id="checkout-button">Betala</button>
+        </div>
       </form>
   </div>
   <div id="loading_screen" style="display: none;">
     <div class="loading_icon"><i class="bi bi-arrow-clockwise"></i></div>
-  </div>  
+  </div>
+</div>
 
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
