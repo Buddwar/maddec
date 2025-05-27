@@ -14,7 +14,7 @@ export const counties = {
     '10': { name: 'Blekinge län', coords: [56.16127, 15.58569] },
     '12': { name: 'Skåne län', coords: [55.60545, 13.00567] },
     '13': { name: 'Hallands län', coords: [56.67458, 12.85664] },
-    '14': { name: 'Västa götalands län', coords: [57.71114, 11.99366] },
+    '14': { name: 'Västra götalands län', coords: [57.71114, 11.99366] },
     '17': { name: 'Värmlands län', coords: [59.40188, 13.51206] },
     '18': { name: 'Örebro län', coords: [59.27489, 15.21310] },
     '19': { name: 'Västmanlands län', coords: [59.60876, 16.54474] },

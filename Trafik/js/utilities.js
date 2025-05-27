@@ -50,14 +50,19 @@ export function formatDirection(bearing) {
   }
 }
 
-export async function geocodeCity(city) {
-  const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(city)}&limit=1`;
+// Hämta koordinater och länsnamn från stad med Nominatim
+export async function geocodeCityWithCounty(city) {
+  const url = `https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&q=${encodeURIComponent(city)}&limit=1`;
   try {
     const response = await fetch(url);
     const results = await response.json();
     if (results && results.length > 0) {
-      const { lat, lon } = results[0];
-      return [parseFloat(lat), parseFloat(lon)];
+      const place = results[0];
+      const lat = parseFloat(place.lat);
+      const lon = parseFloat(place.lon);
+      // Hämta län från address-details (kan heta county eller state beroende på område)
+      const countyName = place.address.county || place.address.state || null;
+      return { coords: [lat, lon], countyName };
     } else {
       console.warn('Inga koordinater hittades för stad:', city);
       return null;
@@ -66,4 +71,21 @@ export async function geocodeCity(city) {
     console.error('Fel vid geokodning:', error);
     return null;
   }
+}
+
+// Matcha länets namn mot länskoden i counties.js
+import { counties } from './counties.js';
+
+export function getCountyCodeFromCountyName(countyName) {
+  if (!countyName) return null;
+  // Normalisera lännamn (ta bort mellanslag och case-insensitive)
+  const normalizedCounty = countyName.toLowerCase().replace(/\s/g, '');
+
+  for (const [code, data] of Object.entries(counties)) {
+    const normalizedName = data.name.toLowerCase().replace(/\s/g, '');
+    if (normalizedCounty.includes(normalizedName) || normalizedName.includes(normalizedCounty)) {
+      return code;
+    }
+  }
+  return null;
 }
