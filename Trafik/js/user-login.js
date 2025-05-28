@@ -49,6 +49,29 @@ async function login(email, passw){
     return jsonResult;
 }
 
+
+window.addEventListener('load', () => {
+  //let iframeWidth = window.innerWidth;
+  //Vi hämtar höjden på iframen
+  let iframeHeight = window.innerHeight;
+
+  let headline = document.getElementById('title');
+  let loginBtn = document.getElementById('login-button');
+  let container = document.getElementById('login-container');
+
+  console.log(iframeHeight);
+  //Om höjden är mindre än 400px (vilket är minimumhöjden för modalen)
+  if (iframeHeight < 400){
+    headline.style.display = 'none';
+    container.style.padding = '0.5rem';
+  }
+});
+
+
+
+
+
+
   /*Här hämtar vi ut orgnr ifrån URL */
 function getUrl(){
     let url_org = new URLSearchParams(window.location.search);

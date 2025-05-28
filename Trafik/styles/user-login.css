@@ -35,7 +35,7 @@ main {
     align-items: center;
     padding: .2rem;
 }
-.login-container {
+#login-container {
     background-color: #fff;
     padding: 2rem;
     border-radius: 0.5rem;
@@ -44,7 +44,7 @@ main {
     max-width: 400px;
     text-align: center;
 }
-.login-container h2 {
+#login-container h2 {
     margin-bottom: 1.5rem;
     color: var(--button-color);
     text-align: center;
@@ -90,12 +90,6 @@ button:hover {
     background-color: var(--button-color);
     color: #fff;
 }
-.error-message {
-    color: #dc3545;
-    font-size: 0.875rem;
-    margin-top: 0.5rem;
-    display: none;
-}
  #loading_screen{
     background-color: rgba(255, 255, 255, 0.151);
     z-index: 1000;
@@ -107,7 +101,8 @@ button:hover {
     position: fixed;
     top: 0;
     left: 0;
-    text-align: center;;
+    text-align: center;
+    visibility: hidden;
   }
   .loading_icon{
     font-size: 2rem;
