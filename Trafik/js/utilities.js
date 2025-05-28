@@ -1,4 +1,4 @@
-import { counties } from "./counties";
+import { counties } from "./counties.js";
 
 // Funktion för att formatera datum och tid från ISO-format 
 // till ett mer förståeligt och läsbart format.
