@@ -218,13 +218,17 @@
     gap: 0.35rem;
   }
   .subscribe-form-changelayout{
-    grid-template-columns: auto auto auto;
+    grid-template-columns: repeat(3, 1fr);
   }
   .subscribe-form label {
     font-weight: bold;
     color: #333;
     font-size: 0.75rem;
     text-align: left;
+    white-space: normal;
+    word-break: break-word;
+    min-width: 0;
+    font-size: 0.7rem;
   }
   .subscribe-form input,
   .subscribe-form select {
@@ -245,6 +249,8 @@
     cursor: pointer;
     font-size: 0.8rem;
     font-weight: bold;
+    width: 100%;
+    box-sizing: border-box;
   }
   .subscribe-form button[type="submit"]:hover {
     opacity: 0.9;
@@ -273,6 +279,9 @@
   .third_div_changelayout{
     grid-column: 3/3;
   }
+  .subscribe-form > div{
+    width: 100%;
+  }
 
   #subscriber-fname,
   #subscriber-lname,
@@ -299,6 +308,7 @@
     top: 0;
     left: 0;
     text-align: center;;
+    visibility: hidden;/*ta bort sedan*/
   }
   .loading_icon{
     font-size: 2rem;

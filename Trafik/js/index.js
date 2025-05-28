@@ -437,7 +437,7 @@ window.addEventListener('load', () => {
   //Om höjden är mindre än 400px (vilket är minimumhöjden för modalen)
   if (iframeHeight < 400){
     //Så ändrar vi lite saker här
-    modal.style.maxWidth = '80%'; // Minimum height
+    modal.style.maxWidth = '50%';
     //T.ex. layouten slås om till 3 kolumner
     form.classList.add('subscribe-form-changelayout');
     div.classList.add('third_div_changelayout');
