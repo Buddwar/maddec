@@ -30,12 +30,22 @@ window.addEventListener('resize', function() {
 
 export async function initializeMapWithCity(city) {
   if (city) {
-    const coords = await geocodeCity(city);
-    if (coords) {
-      map.setView(coords, 13);
+    const result = await geocodeCity(city);
+    if (result && result.coords) {
+      map.setView(result.coords, 13);
+
+      if (result.countyCode) {
+        // Ladda trafikdata för länet
+        loadSituations(result.countyCode);
+        loadCameras(result.countyCode);
+        loadRoadConditions(result.countyCode);
+      }
+
       return;
     }
   }
-  map.setView([57.10713, 12.25340], 13); // fallback
+
+  // fallback
+  map.setView([57.10713, 12.25340], 13);
 }
 

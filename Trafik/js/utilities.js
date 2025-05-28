@@ -1,6 +1,7 @@
+import { counties } from "./counties";
+
 // Funktion för att formatera datum och tid från ISO-format 
 // till ett mer förståeligt och läsbart format.
-
 export function formatDateTime(isoString) {
     const date = new Date(isoString);
     const year = date.getFullYear();
@@ -51,13 +52,35 @@ export function formatDirection(bearing) {
 }
 
 export async function geocodeCity(city) {
-  const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(city)}&limit=1`;
+  const searchUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(city)}&limit=1`;
+
   try {
-    const response = await fetch(url);
-    const results = await response.json();
-    if (results && results.length > 0) {
-      const { lat, lon } = results[0];
-      return [parseFloat(lat), parseFloat(lon)];
+    const searchResponse = await fetch(searchUrl);
+    const searchResults = await searchResponse.json();
+
+    if (searchResults && searchResults.length > 0) {
+      const { lat, lon } = searchResults[0];
+
+      // Gör reverse geocoding för att få länet (county)
+      const reverseUrl = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=6&addressdetails=1`;
+      const reverseResponse = await fetch(reverseUrl);
+      const reverseData = await reverseResponse.json();
+
+      const countyName = reverseData.address?.state || null;
+
+      // Hitta länskod genom att matcha länets namn mot counties
+      let countyCode = null;
+      for (const [code, data] of Object.entries(counties)) {
+        if (data.name.includes(countyName)) {
+          countyCode = code;
+          break;
+        }
+      }
+
+      return {
+        coords: [parseFloat(lat), parseFloat(lon)],
+        countyCode: countyCode
+      };
     } else {
       console.warn('Inga koordinater hittades för stad:', city);
       return null;
