@@ -30,7 +30,7 @@
   <div class="modal" id="subscribe-modal">
     <div class="modal-content">
       <button class="modal-close" id="modal-close">&times;</button>
-      <h2 id="modal-title">Prenumerera på trafikinformation</h2>
+      <h2 id="modal-title">Prenumerera</h2>
       <form class="subscribe-form" id="subscribe-form">
         <div>
         <label for="subscriber-fname">Förnamn:</label>
@@ -47,7 +47,7 @@
         <label for="subscriber-passw">Lösenord:</label>
         <input type="password" id="subscriber-passw" required>
         
-        <label for="subscriber-phone">Telefonnummer:</label>
+        <label for="subscriber-phone">Telenr:</label>
         <input type="tel" id="subscriber-phone" required placeholder="+46..." onfocus="this.placeholder=''" onblur="if(this.value===''){this.placeholder='+46...'}">
         <label for="subscriber-state">Län:</label>
         <select id="subscriber-state" required>
@@ -76,7 +76,7 @@
           </select>
           </div>
           <div class="third_div">
-        <label for="subscriber-frequency">Prenumerationstid:</label>
+        <label for="subscriber-frequency">Period:</label>
         <select id="subscriber-frequency" required>
           <option value="">Välj alternativ</option>
           <option value="weekly", id="weekly">Veckovis</option>
@@ -84,7 +84,7 @@
           <option value="yearly" id="yearly">Årligen</option>
         </select>
         <!-- Betalning  -->
-        <label for="payment-method">Betalningsmetod:</label>
+        <label for="payment-method">Betalsätt:</label>
         <select id="payment-method" name="payment-method" required>
           <option value="">Välj betalningsmetod</option>
           <option value="credit-card">Kreditkort</option>
