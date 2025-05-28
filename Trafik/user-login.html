@@ -9,15 +9,17 @@
 <body>
 
     <main>
-        <div class="login-container">
+        <div id="login-container">
             <h2 id="title">Inloggning Användare</h2>
             <form id="login-form" class="form-container">
                 <input type="text" id="username" placeholder="Användarnamn" title="Ange din e-postadress">
                 <input type="password" id="password" placeholder="Lösenord" title="Ange ditt lösenord">
+                <div>
+                <button id="back-button">Tillbaka</button>
                 <button type="submit" id="login-button">Logga in</button>
-                <p class="error-message" id="error-message">Felaktigt användarnamn eller lösenord</p>
-            </form><br>
-            <button id="back-button">Tillbaka</button>
+                </div>
+            </form>
+            
         </div>
     </main>
     <div id="loading_screen" style="display: none;">

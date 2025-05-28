@@ -176,9 +176,9 @@ function setColors(result){
     document.body.style.fontSize = rem + 'rem';
     document.getElementById('prenumeration_title').style.fontSize = 1.5 + 'rem';
 }
-
 //Ladda in befintliga uppgifter om användaren
 window.addEventListener('load', async () => {
+
     //Hämta organisation och ladda in de färger som finns
     let orgnr = getUrl();
     result = await load_organisation(orgnr);
