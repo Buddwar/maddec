@@ -52,35 +52,13 @@ export function formatDirection(bearing) {
 }
 
 export async function geocodeCity(city) {
-  const searchUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(city)}&limit=1`;
-
+  const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(city)}&limit=1`;
   try {
-    const searchResponse = await fetch(searchUrl);
-    const searchResults = await searchResponse.json();
-
-    if (searchResults && searchResults.length > 0) {
-      const { lat, lon } = searchResults[0];
-
-      // Gör reverse geocoding för att få länet (county)
-      const reverseUrl = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=6&addressdetails=1`;
-      const reverseResponse = await fetch(reverseUrl);
-      const reverseData = await reverseResponse.json();
-
-      const countyName = reverseData.address?.state || null;
-
-      // Hitta länskod genom att matcha länets namn mot counties
-      let countyCode = null;
-      for (const [code, data] of Object.entries(counties)) {
-        if (data.name.includes(countyName)) {
-          countyCode = code;
-          break;
-        }
-      }
-
-      return {
-        coords: [parseFloat(lat), parseFloat(lon)],
-        countyCode: countyCode
-      };
+    const response = await fetch(url);
+    const results = await response.json();
+    if (results && results.length > 0) {
+      const { lat, lon } = results[0];
+      return [parseFloat(lat), parseFloat(lon)];
     } else {
       console.warn('Inga koordinater hittades för stad:', city);
       return null;
@@ -89,4 +67,22 @@ export async function geocodeCity(city) {
     console.error('Fel vid geokodning:', error);
     return null;
   }
+}
+
+export function getCountyCodeFromCoords(coords) {
+  let closestCounty = null;
+  let shortestDistance = Infinity;
+
+  for (const [code, county] of Object.entries(counties)) {
+    const [lat1, lon1] = coords;
+    const [lat2, lon2] = county.coords;
+    const distance = Math.hypot(lat2 - lat1, lon2 - lon1); // enkel distans
+
+    if (distance < shortestDistance) {
+      shortestDistance = distance;
+      closestCounty = code;
+    }
+  }
+
+  return closestCounty;
 }

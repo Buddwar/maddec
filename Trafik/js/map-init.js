@@ -28,24 +28,24 @@ window.addEventListener('resize', function() {
   }
 });
 
-export async function initializeMapWithCity(city) {
-  if (city) {
-    const result = await geocodeCity(city);
-    if (result && result.coords) {
-      map.setView(result.coords, 13);
+//export async function initializeMapWithCity(city) {
+  //if (city) {
+    //const result = await geocodeCity(city);
+    //if (result && result.coords) {
+      //map.setView(result.coords, 13);
 
-      if (result.countyCode) {
+      //if (result.countyCode) {
         // Ladda trafikdata för länet
-        loadSituations(result.countyCode);
-        loadCameras(result.countyCode);
-        loadRoadConditions(result.countyCode);
-      }
+        //loadSituations(result.countyCode);
+        //loadCameras(result.countyCode);
+        //loadRoadConditions(result.countyCode);
+      //}
 
-      return;
-    }
-  }
+      //return;
+    //}
+  //}
 
   // fallback
-  map.setView([57.10713, 12.25340], 13);
-}
+  //map.setView([57.10713, 12.25340], 13);
+//}
 
