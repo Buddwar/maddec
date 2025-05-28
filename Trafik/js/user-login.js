@@ -61,7 +61,7 @@ window.addEventListener('load', () => {
   let container = document.getElementById('login-container');
 
   console.log(iframeHeight);
-  //Om höjden är mindre än 400px (vilket är minimumhöjden för modalen)
+  //Om höjden är mindre än 400px
   if (iframeHeight < 400){
     headline.style.display = 'none';
     container.style.padding = '0.2rem';
