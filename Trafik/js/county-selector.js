@@ -9,6 +9,7 @@ import { geocodeCity, getCountyCodeFromCoords } from "./utilities.js";
 
 // Exportera funktion för att hämta URL:erna för det valda länet, baserat på länskoden
 export function getUrlsForCounty(selectedCode) {
+  console.log("getUrlsForCounty called with:", selectedCode);
   const countyData = counties[selectedCode];
 
   if (!countyData) {
@@ -20,6 +21,7 @@ export function getUrlsForCounty(selectedCode) {
   const newCameraUrl = `https://trafikverket.onrender.com/traffic/group3/cameras?county=${selectedCode}`;
   const newRoadConditionUrl = `https://trafikverket.onrender.com/traffic/group3/roadcondition?county=${selectedCode}`;
 
+  console.log("URLs:", { newSituationUrl, newCameraUrl, newRoadConditionUrl });
   return { newSituationUrl, newCameraUrl, newRoadConditionUrl };
 }
 
