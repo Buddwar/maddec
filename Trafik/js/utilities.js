@@ -36,6 +36,8 @@ export function formatDirection(bearing) {
   }
 }
 
+// En funktion som tar stadsnamn som input, sedan anropas geokodningstjänsten Nominatim OpenStreetMap för att
+// hämta koordinaterna för den staden och returnera koordinaterna (latitud och longitud).
 export async function geocodeCity(city) {
 
   // Skapar en URL till OpenStreetMap Nominatim API för att söka efter staden.
@@ -72,6 +74,8 @@ export async function geocodeCity(city) {
   }
 }
 
+// En funktion som tar emot tidningsföretagets stads koordinater, där vi avgör vilket län som ligger närmast
+// det geografiska koordinatparet. Sedan returneras länskoden för staden.
 export function getCountyCodeFromCoords(coords) {
 
   // Här kommer vi spara den närmaste länskoden - baserat på den stad som företagen skriver in

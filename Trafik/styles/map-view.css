@@ -9,6 +9,11 @@
     margin: 0;
   }
 
+  .leaflet-popup-content {
+  max-height: 60vh; /* popupen tar max 60% av synlig höjd */
+  overflow-y: auto; /* scroll om innehållet blir för högt */
+}
+
   /* Test för stil på popup gällade situationer, detta är fortfarande under test och utveckling */
 
   /* Här gäller endast severitytext, alltså påverkan, av situationer */
