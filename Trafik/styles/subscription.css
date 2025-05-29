@@ -84,8 +84,8 @@ select {
     display: grid;
     grid-template-columns: auto;
     gap: .5rem;
-    margin-top: 1rem;
     grid-column: 2/2;
+    padding-block: .2rem;
 }
 
 .button-group button {
