@@ -182,6 +182,8 @@ window.addEventListener('load', async () => {
     och om den är lägre än 400 så plockar vi bort vissa av elementen för att
     kunna presentera allt de nödvändiga */
     let innerHeight = window.innerHeight;
+    let innerWidth = window.innerWidth;
+
     let headerContainer = document.querySelector('.subscription-header');
     let header = document.getElementById('prenumeration_title');
 
@@ -196,17 +198,33 @@ window.addEventListener('load', async () => {
         headerContainer.style.borderBottom = 'none';
         headerContainer.style.marginBottom = '0';
 
-        saveBtn.innerHTML = '';
-        let saveIcon = document.createElement('i');
-        saveIcon.className = 'bi bi-floppy';
-        saveBtn.appendChild(saveIcon);
-        saveBtn.style.width = '80%';
+        /*Om bredden är mindre än 350
+        så byter vi ut varje text på knapparna till ikoner istället */
+        if(innerWidth < 350){
+            saveBtn.innerHTML = '';
+            let saveIcon = document.createElement('i');
+            saveIcon.className = 'bi bi-floppy';
+            saveBtn.appendChild(saveIcon);
+            saveBtn.style.width = '80%';
 
-        extendBtn.innerHTML = '';
-        let extendIcon = document.createElement('i');
-        extendIcon.className = 'bi-calendar-event';
-        extendBtn.appendChild(extendIcon);
-        extendBtn.style.width = '80%';
+            extendBtn.innerHTML = '';
+            let extendIcon = document.createElement('i');
+            extendIcon.className = 'bi-calendar-event';
+            extendBtn.appendChild(extendIcon);
+            extendBtn.style.width = '80%';
+
+            deleteBtn.innerHTML = '';
+            let deleteIcon = document.createElement('i');
+            deleteIcon.className = 'bi bi-trash3';
+            deleteBtn.appendChild(deleteIcon);
+            deleteBtn.style.width = '80%';
+
+            logoutBtn.innerHTML = '';
+            let logoutIcon = document.createElement('i');
+            logoutIcon.className = 'bi bi-box-arrow-left';
+            logoutBtn.appendChild(logoutIcon);
+            logoutBtn.style.width = '80%';
+        }
     }
 
 
