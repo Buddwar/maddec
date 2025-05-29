@@ -13,8 +13,6 @@ body {
     background-color: var(--bg-color);
     color: #333;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
 }
 header {
     padding: 1rem;
@@ -32,17 +30,15 @@ header a {
     transform: translateY(-50%);
 }
 main {
-    flex: 1;
-    padding: 1rem;
     max-width: 600px;
     margin: 0 auto;
     width: 100%;
 }
 .subscription-container {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
     background-color: #fff;
-    padding: 1.5rem;
     border-radius: 0.5rem;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 .subscription-header {
     display: flex;
@@ -60,16 +56,16 @@ main {
     margin-bottom: 0.5rem;
 }
 .subscription-info {
-    margin-bottom: 1.5rem;
+    grid-column: 1/2;
 }
 .subscription-info p {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.2rem;
 }
 .subscription-info strong {
     color: var(--button-color);
 }
 .frequency-selector {
-    margin-bottom: 1.5rem;
+    grid-column: 2/1;
 }
 .frequency-selector label {
     display: block;
@@ -85,11 +81,11 @@ select {
     margin-bottom: 1rem;
 }
 .button-group {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
+    display: grid;
+    grid-template-columns: auto;
+    gap: .5rem;
     margin-top: 1rem;
+    grid-column: 2/2;
 }
 
 .button-group button {
@@ -98,12 +94,15 @@ select {
 }
 
 button {
-    padding: 0.75rem 1.5rem;
+    padding-inline: .2rem;
+    padding-block: .2rem;;
     border: none;
     border-radius: 0.25rem;
     font-size: 1rem;
     cursor: pointer;
     transition: opacity 0.3s;
+    width: 50%;
+    margin: 0 auto;;
 }
 .save-button {
     background-color: var(--button-color);
@@ -116,12 +115,6 @@ button {
 .cancel-button {
     background-color: #6c757d;
     color: #fff;
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 0.25rem;
-    cursor: pointer;
-    transition: opacity 0.3s;
-    margin-top: 0.5rem;
 }
 button:hover {
     opacity: 0.9;

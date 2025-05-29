@@ -178,10 +178,24 @@ function setColors(result){
 }
 //Ladda in befintliga uppgifter om användaren
 window.addEventListener('load', async () => {
+    /*Först och främst så kontrollerar vi storleken på iframen i höjden
+    och om den är lägre än 400 så plockar vi bort vissa av elementen för att
+    kunna presentera allt de nödvändiga */
+    let innerHeight = window.innerHeight;
+    let headerContainer = document.querySelector('.subscription-header');
+    let header = document.getElementById('prenumeration_title');
+
+    if (innerHeight < 400) {
+        header.style.display = 'none';
+        headerContainer.style.borderBottom = 'none';
+        headerContainer.style.marginBottom = '0';
+    }
+
 
     //Hämta organisation och ladda in de färger som finns
     let orgnr = getUrl();
     result = await load_organisation(orgnr);
+    display_loadingscreen();
     if(result['Success']){
         console.log(result['Data']);
         //Sätt färgerna baserat på organisationens data
@@ -192,7 +206,6 @@ window.addEventListener('load', async () => {
     }
 
     //Hämta användarens data
-    display_loadingscreen();
     let subscriber_data = await get_user_details();
     if(subscriber_data['Success']){//Om vi lyckades hämta data, t. ex. om användaren är inloggad så ska det fungera
         remove_loadingscreen();

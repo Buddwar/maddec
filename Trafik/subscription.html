@@ -8,15 +8,11 @@
     <link rel="stylesheet" href="styles/subscription.css">
 </head>
 <body>
-    <!--<header>
-        <h1>Hantera Prenumeration</h1>
-    </header>-->
 
     <main>
         <div class="subscription-container">
             <div class="subscription-header">
                 <h2 id="prenumeration_title">Din Prenumeration</h2>
-                <button type="button" class="cancel-button" id="cancel-button">Logga ut</button>
             </div>
 
             <div class="success-message" id="success-message">
@@ -28,8 +24,6 @@
                 <p><strong>E-post:</strong> <span id="subscriber-email">test@example.com</span></p>
                 <p><strong>Telefon:</strong> <span id="subscriber-phone">070-123 45 67</span></p>
                 <p><strong>Nuvarande län:</strong> <span id="subscriber-state">Stockholms län</span></p>
-            </div>
-
             <div class="frequency-selector">
                 <label for="update-frequency">Ändra län:</label>
                 <select id="update-frequency">
@@ -56,12 +50,14 @@
                     <option value="17">Värmlands län</option>
                 </select>
             </div>
-
+            </div>
             <div class="button-group">
                 <button type="button" class="save-button" id="save-button">Spara</button>
                 <button type="button" class="extend-button" id="extend-button">Förläng</button>
                 <button type="button" class="delete-button" id="delete-button">Avsluta</button>
+                <button type="button" class="cancel-button" id="cancel-button">Logga ut</button>
             </div>
+
         </div>
     </main>
   <div id="loading_screen" style="display: none;">
