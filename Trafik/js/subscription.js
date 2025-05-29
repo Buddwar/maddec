@@ -185,10 +185,28 @@ window.addEventListener('load', async () => {
     let headerContainer = document.querySelector('.subscription-header');
     let header = document.getElementById('prenumeration_title');
 
+    let saveBtn = document.getElementById('save-button');
+    let extendBtn = document.getElementById('extend-button');
+    let deleteBtn = document.getElementById('delete-button');
+    let logoutBtn = document.getElementById('cancel-button');
+
+    //Är höjden mindre än 400
     if (innerHeight < 400) {
         header.style.display = 'none';
         headerContainer.style.borderBottom = 'none';
         headerContainer.style.marginBottom = '0';
+
+        saveBtn.innerHTML = '';
+        let saveIcon = document.createElement('i');
+        saveIcon.className = 'bi bi-floppy';
+        saveBtn.appendChild(saveIcon);
+        saveBtn.style.width = '20%';
+
+        extendBtn.innerHTML = '';
+        let extendIcon = document.createElement('i');
+        extendIcon.className = 'bi-calendar-event';
+        extendBtn.appendChild(extendIcon);
+        extendBtn.style.width = '20%';
     }
 
 
