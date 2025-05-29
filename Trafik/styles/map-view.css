@@ -9,6 +9,7 @@
     margin: 0;
   }
 
+  /* Lägger till en scrollbar för popupsen om höjden på iFramen är låg */
   .leaflet-popup-content {
   max-height: 60vh; /* popupen tar max 60% av synlig höjd */
   overflow-y: auto; /* scroll om innehållet blir för högt */
