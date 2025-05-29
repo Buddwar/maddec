@@ -200,13 +200,13 @@ window.addEventListener('load', async () => {
         let saveIcon = document.createElement('i');
         saveIcon.className = 'bi bi-floppy';
         saveBtn.appendChild(saveIcon);
-        saveBtn.style.width = '20%';
+        saveBtn.style.width = '80%';
 
         extendBtn.innerHTML = '';
         let extendIcon = document.createElement('i');
         extendIcon.className = 'bi-calendar-event';
         extendBtn.appendChild(extendIcon);
-        extendBtn.style.width = '20%';
+        extendBtn.style.width = '80%';
     }
 
 
