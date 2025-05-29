@@ -205,25 +205,25 @@ window.addEventListener('load', async () => {
             let saveIcon = document.createElement('i');
             saveIcon.className = 'bi bi-floppy';
             saveBtn.appendChild(saveIcon);
-            saveBtn.style.width = '80%';
+            saveBtn.style.width = '50%';
 
             extendBtn.innerHTML = '';
             let extendIcon = document.createElement('i');
             extendIcon.className = 'bi-calendar-event';
             extendBtn.appendChild(extendIcon);
-            extendBtn.style.width = '80%';
+            extendBtn.style.width = '50%';
 
             deleteBtn.innerHTML = '';
             let deleteIcon = document.createElement('i');
             deleteIcon.className = 'bi bi-trash3';
             deleteBtn.appendChild(deleteIcon);
-            deleteBtn.style.width = '80%';
+            deleteBtn.style.width = '50%';
 
             logoutBtn.innerHTML = '';
             let logoutIcon = document.createElement('i');
             logoutIcon.className = 'bi bi-box-arrow-left';
             logoutBtn.appendChild(logoutIcon);
-            logoutBtn.style.width = '80%';
+            logoutBtn.style.width = '50%';
         }
     }
 

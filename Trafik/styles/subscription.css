@@ -56,6 +56,7 @@ main {
     margin-bottom: 0.5rem;
 }
 .subscription-info {
+    margin-left: .5rem;
     grid-column: 1/2;
 }
 .subscription-info p {
