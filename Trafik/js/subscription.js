@@ -177,7 +177,7 @@ function setColors(result){
     document.getElementById('prenumeration_title').style.fontSize = 1.5 + 'rem';
 }
 //Ladda in befintliga uppgifter om användaren
-window.addEventListener('resize', async () => {
+window.addEventListener('load', async () => {
     /*Först och främst så kontrollerar vi storleken på iframen i höjden
     och om den är lägre än 400 så plockar vi bort vissa av elementen för att
     kunna presentera allt de nödvändiga */
