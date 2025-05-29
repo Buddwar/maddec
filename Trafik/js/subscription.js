@@ -177,7 +177,7 @@ function setColors(result){
     document.getElementById('prenumeration_title').style.fontSize = 1.5 + 'rem';
 }
 //Ladda in befintliga uppgifter om användaren
-window.addEventListener('load', async () => {
+window.addEventListener('resize', async () => {
     /*Först och främst så kontrollerar vi storleken på iframen i höjden
     och om den är lägre än 400 så plockar vi bort vissa av elementen för att
     kunna presentera allt de nödvändiga */
@@ -205,25 +205,25 @@ window.addEventListener('load', async () => {
             let saveIcon = document.createElement('i');
             saveIcon.className = 'bi bi-floppy';
             saveBtn.appendChild(saveIcon);
-            saveBtn.style.width = '100%';
+            saveBtn.style.width = '80%';
 
             extendBtn.innerHTML = '';
             let extendIcon = document.createElement('i');
             extendIcon.className = 'bi-calendar-event';
             extendBtn.appendChild(extendIcon);
-            extendBtn.style.width = '100%';
+            extendBtn.style.width = '80%';
 
             deleteBtn.innerHTML = '';
             let deleteIcon = document.createElement('i');
             deleteIcon.className = 'bi bi-trash3';
             deleteBtn.appendChild(deleteIcon);
-            deleteBtn.style.width = '100%';
+            deleteBtn.style.width = '80%';
 
             logoutBtn.innerHTML = '';
             let logoutIcon = document.createElement('i');
             logoutIcon.className = 'bi bi-box-arrow-left';
             logoutBtn.appendChild(logoutIcon);
-            logoutBtn.style.width = '100%';
+            logoutBtn.style.width = '80%';
         }
     }
 

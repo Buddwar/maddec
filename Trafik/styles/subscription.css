@@ -36,7 +36,7 @@ main {
 }
 .subscription-container {
     display: grid;
-    grid-template-columns: repeat(2, auto);
+    grid-template-columns: repeat(2, 1fr);
     background-color: #fff;
     border-radius: 0.5rem;
 }
