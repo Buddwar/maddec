@@ -21,16 +21,6 @@ let countrycodes = {
   "24": "Västerbottens län",
   "25": "Norrbottens län"
 };
-  
-  
-  // Function to show success message
-  function showSuccessMessage() {
-    const successMessage = document.getElementById('success-message');
-    successMessage.style.display = 'block';
-    setTimeout(() => {
-        successMessage.style.display = 'none';
-    }, 3000);
-}
 
 // Save button click handler
 document.getElementById('save-button').addEventListener('click', async () => {
@@ -41,8 +31,6 @@ document.getElementById('save-button').addEventListener('click', async () => {
     //Dicten kommer se ut likt följande > {'Success': 'True/False', 'Message': 'meddelande'}
     if(result['Success']){
         remove_loadingscreen();
-        // Show success message
-        showSuccessMessage();
         //Laddar om nuvarande fönstret så att uppdaterade uppgifter om användaren visas
         window.location.reload();
         console.log(result['Message']);

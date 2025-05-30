@@ -127,14 +127,7 @@ button:hover {
     background-color: var(--button-color);
     color: #fff;
 }
-.success-message {
-    color: #28a745;
-    background-color: #d4edda;
-    padding: 0.75rem;
-    border-radius: 0.25rem;
-    margin-bottom: 1rem;
-    display: none;
-}
+
  #loading_screen{
     background-color: rgba(255, 255, 255, 0.151);
     z-index: 1000;
