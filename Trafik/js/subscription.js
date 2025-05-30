@@ -184,6 +184,7 @@ window.addEventListener('load', async () => {
     let innerHeight = window.innerHeight;
     let innerWidth = window.innerWidth;
 
+    let mainContainer = document.querySelector('.subscription-container');
     let headerContainer = document.querySelector('.subscription-header');
     let header = document.getElementById('prenumeration_title');
 
@@ -201,33 +202,34 @@ window.addEventListener('load', async () => {
         /*Om bredden är mindre än 350
         så byter vi ut varje text på knapparna till ikoner istället */
         if(innerWidth < 350){
+
             saveBtn.innerHTML = '';
+            saveBtn.style.border = 'none';
+            saveBtn.style.backgroundColor = 'white';
             let saveIcon = document.createElement('i');
             saveIcon.className = 'bi bi-floppy';
             saveBtn.appendChild(saveIcon);
-            saveBtn.style.width = '50%';
-            saveBtn.style.padding = '0';
 
             extendBtn.innerHTML = '';
+            extendBtn.style.border = 'none';
+            extendBtn.style.backgroundColor = 'white';
             let extendIcon = document.createElement('i');
             extendIcon.className = 'bi-calendar-event';
             extendBtn.appendChild(extendIcon);
-            extendBtn.style.width = '50%';
-            saveBtn.style.padding = '0';
 
             deleteBtn.innerHTML = '';
+            deleteBtn.style.border = 'none';
+            deleteBtn.style.backgroundColor = 'white';
             let deleteIcon = document.createElement('i');
             deleteIcon.className = 'bi bi-trash3';
             deleteBtn.appendChild(deleteIcon);
-            deleteBtn.style.width = '50%';
-            saveBtn.style.padding = '0';
 
             logoutBtn.innerHTML = '';
+            logoutBtn.style.border = 'none';
+            logoutBtn.style.backgroundColor = 'white';
             let logoutIcon = document.createElement('i');
             logoutIcon.className = 'bi bi-box-arrow-left';
             logoutBtn.appendChild(logoutIcon);
-            logoutBtn.style.width = '50%';
-            saveBtn.style.padding = '0';
         }
     }
 
