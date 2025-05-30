@@ -89,6 +89,7 @@ try{
             }
         }
         else{
+            remove_loadingscreen();
             console.log('Problem med att radera användaren...', result['Message']);
             window.location.reload();
         }
@@ -204,29 +205,21 @@ window.addEventListener('load', async () => {
         if(innerWidth < 350){
 
             saveBtn.innerHTML = '';
-            saveBtn.style.border = 'none';
-            saveBtn.style.backgroundColor = 'white';
             let saveIcon = document.createElement('i');
             saveIcon.className = 'bi bi-floppy';
             saveBtn.appendChild(saveIcon);
 
             extendBtn.innerHTML = '';
-            extendBtn.style.border = 'none';
-            extendBtn.style.backgroundColor = 'white';
             let extendIcon = document.createElement('i');
             extendIcon.className = 'bi-calendar-event';
             extendBtn.appendChild(extendIcon);
 
             deleteBtn.innerHTML = '';
-            deleteBtn.style.border = 'none';
-            deleteBtn.style.backgroundColor = 'white';
             let deleteIcon = document.createElement('i');
             deleteIcon.className = 'bi bi-trash3';
             deleteBtn.appendChild(deleteIcon);
 
             logoutBtn.innerHTML = '';
-            logoutBtn.style.border = 'none';
-            logoutBtn.style.backgroundColor = 'white';
             let logoutIcon = document.createElement('i');
             logoutIcon.className = 'bi bi-box-arrow-left';
             logoutBtn.appendChild(logoutIcon);
