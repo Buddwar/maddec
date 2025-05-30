@@ -206,24 +206,28 @@ window.addEventListener('load', async () => {
             saveIcon.className = 'bi bi-floppy';
             saveBtn.appendChild(saveIcon);
             saveBtn.style.width = '50%';
+            saveBtn.style.padding = '0';
 
             extendBtn.innerHTML = '';
             let extendIcon = document.createElement('i');
             extendIcon.className = 'bi-calendar-event';
             extendBtn.appendChild(extendIcon);
             extendBtn.style.width = '50%';
+            saveBtn.style.padding = '0';
 
             deleteBtn.innerHTML = '';
             let deleteIcon = document.createElement('i');
             deleteIcon.className = 'bi bi-trash3';
             deleteBtn.appendChild(deleteIcon);
             deleteBtn.style.width = '50%';
+            saveBtn.style.padding = '0';
 
             logoutBtn.innerHTML = '';
             let logoutIcon = document.createElement('i');
             logoutIcon.className = 'bi bi-box-arrow-left';
             logoutBtn.appendChild(logoutIcon);
             logoutBtn.style.width = '50%';
+            saveBtn.style.padding = '0';
         }
     }
 
