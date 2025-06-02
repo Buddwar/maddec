@@ -6,8 +6,7 @@ import { getRoadConditions } from "./road-conditions.js";
 import { counties } from "./counties.js";
 import { geocodeCity, getCountyCodeFromCoords } from "./utilities.js";
 
-// Exportera funktion för att hämta URL:erna för det valda länet, baserat på länskoden (selectedCode) som finns för den stad
-// som tidningarna har valt.
+// Exportera funktion för att hämta URL:erna för det valda länet, baserat på länskoden (selectedCode) som finns för länet.
 export function getUrlsForCounty(selectedCode) {
   console.log("getUrlsForCounty called with:", selectedCode);
 
