@@ -307,8 +307,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    text-align: center;;
-    visibility: hidden;/*ta bort sedan*/
+    text-align: center;
   }
   .loading_icon{
     font-size: 2rem;
