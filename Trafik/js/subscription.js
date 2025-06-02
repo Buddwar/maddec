@@ -21,16 +21,6 @@ let countrycodes = {
   "24": "Västerbottens län",
   "25": "Norrbottens län"
 };
-  
-  
-  // Function to show success message
-  function showSuccessMessage() {
-    const successMessage = document.getElementById('success-message');
-    successMessage.style.display = 'block';
-    setTimeout(() => {
-        successMessage.style.display = 'none';
-    }, 3000);
-}
 
 // Save button click handler
 document.getElementById('save-button').addEventListener('click', async () => {
@@ -41,8 +31,6 @@ document.getElementById('save-button').addEventListener('click', async () => {
     //Dicten kommer se ut likt följande > {'Success': 'True/False', 'Message': 'meddelande'}
     if(result['Success']){
         remove_loadingscreen();
-        // Show success message
-        showSuccessMessage();
         //Laddar om nuvarande fönstret så att uppdaterade uppgifter om användaren visas
         window.location.reload();
         console.log(result['Message']);
@@ -89,6 +77,7 @@ try{
             }
         }
         else{
+            remove_loadingscreen();
             console.log('Problem med att radera användaren...', result['Message']);
             window.location.reload();
         }
@@ -178,10 +167,58 @@ function setColors(result){
 }
 //Ladda in befintliga uppgifter om användaren
 window.addEventListener('load', async () => {
+    /*Först och främst så kontrollerar vi storleken på iframen i höjden
+    och om den är lägre än 400 så plockar vi bort vissa av elementen för att
+    kunna presentera allt de nödvändiga */
+    let innerHeight = window.innerHeight;
+    let innerWidth = window.innerWidth;
+
+    let mainContainer = document.querySelector('.subscription-container');
+    let headerContainer = document.querySelector('.subscription-header');
+    let header = document.getElementById('prenumeration_title');
+
+    let saveBtn = document.getElementById('save-button');
+    let extendBtn = document.getElementById('extend-button');
+    let deleteBtn = document.getElementById('delete-button');
+    let logoutBtn = document.getElementById('cancel-button');
+
+    //Är höjden mindre än 400
+    if (innerHeight < 400) {
+        header.style.display = 'none';
+        headerContainer.style.borderBottom = 'none';
+        headerContainer.style.marginBottom = '0';
+
+        /*Om bredden är mindre än 350
+        så byter vi ut varje text på knapparna till ikoner istället */
+        if(innerWidth < 350){
+
+            saveBtn.innerHTML = '';
+            let saveIcon = document.createElement('i');
+            saveIcon.className = 'bi bi-floppy';
+            saveBtn.appendChild(saveIcon);
+
+            extendBtn.innerHTML = '';
+            let extendIcon = document.createElement('i');
+            extendIcon.className = 'bi-calendar-event';
+            extendBtn.appendChild(extendIcon);
+
+            deleteBtn.innerHTML = '';
+            let deleteIcon = document.createElement('i');
+            deleteIcon.className = 'bi bi-trash3';
+            deleteBtn.appendChild(deleteIcon);
+
+            logoutBtn.innerHTML = '';
+            let logoutIcon = document.createElement('i');
+            logoutIcon.className = 'bi bi-box-arrow-left';
+            logoutBtn.appendChild(logoutIcon);
+        }
+    }
+
 
     //Hämta organisation och ladda in de färger som finns
     let orgnr = getUrl();
     result = await load_organisation(orgnr);
+    display_loadingscreen();
     if(result['Success']){
         console.log(result['Data']);
         //Sätt färgerna baserat på organisationens data
@@ -192,7 +229,6 @@ window.addEventListener('load', async () => {
     }
 
     //Hämta användarens data
-    display_loadingscreen();
     let subscriber_data = await get_user_details();
     if(subscriber_data['Success']){//Om vi lyckades hämta data, t. ex. om användaren är inloggad så ska det fungera
         remove_loadingscreen();

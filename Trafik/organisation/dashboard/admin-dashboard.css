@@ -200,13 +200,15 @@ input, select{
   border: 1px solid #dee2e6;
   border-radius: 0.75rem;
   font-size: 0.95rem;
+  overflow-x: auto; 
+  max-width: 100%;
 }
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
 
-@media (min-width: 700px) {
+@media (min-width: 965px) {
   .dashboard-container {
     margin-left: auto;    
     margin-right: auto;

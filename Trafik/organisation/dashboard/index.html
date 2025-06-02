@@ -124,6 +124,18 @@
             <div id="installation-panel">
               <h2>Installationsguide:</h2>
               <p>Det är så här du gör för att installera denna tjänst på er hemsida.</p>
+              <ol>
+                <li>Öppna HTML-filen på er sida där ni vill att tjänsten ska finnas.</li>
+                <li>Klistra in följande kod där du vill att tjänsten ska visas:</li><br>
+<pre style="overflow-x: auto; max-width: 100%;">
+<code>&lt;div style=&quot;height: 200px; width: 260px;&quot;&gt;
+  &lt;iframe src=&quot;index.html?orgnr=555555555X&quot;
+          style=&quot;width: 100%; height: 100%; border: none;&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;</code></pre>
+                <li>Ändra storleken på div-elementet till det som önskas.</li>
+                <li>Den minsta storlek vi rekommenderar är 200px höjd(height) och 260px bredd(width). Mindre storlekar kan leda till att vissa funktioner inte går att använda.</li>
+                <li>Organisationsnumret i URL:et (index.html?orgnr=555555555X) behöver bytas ut mot ert eget och anges utan något bindesträck.</li>
+              </ol>
             </div>
     </div>
     </main>
