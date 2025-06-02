@@ -1,7 +1,9 @@
 # TRAFIKKARTA MED LEAFLET
-
 Detta projekt visualiserar pågående trafikhändelser - som olyckor, hinder och vägarbeten, vägkameror samt väglag i Sverige,
-med hjälp av Leaflet och Trafikverkets API:er.
+med hjälp av Leaflet och Trafikverkets API:er. Trafikhändelser visas med ikoner på kartan och väglagen visas med färgade väglagslinjer.
+
+# IKONER
+Ikoner på kartan har skapats i Figma. Dessa ligger under /Images. Ikoner finns för kameror, vägarbeten, olyckor och hinder. Om en trafikhändelse har "Stor påverkan" är ikonen orange och om trafikhändelsen har "Mycket stor påverkan" är ikonen röd. Ikoner för kamerorna är blå.
 
 # FILSTRUKTUR
 - main.js: Startpunkten där alla moduler importeras och allt initialiseras.
